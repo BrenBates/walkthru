@@ -17,7 +17,7 @@ function Signup(props) {
     //Below function needs some more work for catching error when two 
     //passwords do not match eachother
     function postSignUp() {
-        axios.post("https://www.somePlace.com/auth/signup", {
+        axios.post("/api/users/register", {
             userName,
             password
         }).then(result => {
@@ -33,7 +33,7 @@ function Signup(props) {
     }
 
     if (isLoggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to="/admin" />;
     }
 
   return (

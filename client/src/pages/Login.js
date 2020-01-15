@@ -21,12 +21,18 @@ function Login(props) {
     const referer = props.location.state.referer || '/';
 
     function postLogin() {
-        axios.post("https://www.somePlace.com/auth/login", {
+        axios.post("/api/users/login", {
             userName,
             password
-        }).then(result => {
+        })
+        // axios.get("/api/users/")
+        .then(result => {
             if (result.status === 200) {
+                console.log('this is the result')
+                console.log(result)
                 setAuthTokens(result.data)
+                console.log('this is the auth token')
+                console.log(result.data)
                 setLoggedIn(true);
             } else {
                 setIsError(true);
