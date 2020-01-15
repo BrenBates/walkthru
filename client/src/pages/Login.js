@@ -21,7 +21,7 @@ function Login(props) {
     const referer = props.location.state.referer || '/';
 
     function postLogin() {
-        axios.post("/api/users/register", {
+        axios.post("/api/users/login", {
             userName,
             password
         })

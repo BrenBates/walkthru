@@ -9,6 +9,10 @@ router.route("/")
 //Matches with /api/users/register
 router.route("/register")
     .post(usersController.register);
+
+    //Matches with /api/users/register
+router.route("/login")
+.post(usersController.logIn);
   
 
 module.exports = router;
