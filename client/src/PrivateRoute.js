@@ -7,6 +7,9 @@ function PrivateRoute({ component: Component, ...rest }) {
   const { authTokens } = useAuth();
   
   const validateToken = token => {
+
+    axios.get("/api/users/validatetoken", token)
+    
     console.log(token)
     if(token) {
       return true;
