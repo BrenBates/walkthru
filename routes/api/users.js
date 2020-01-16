@@ -14,6 +14,8 @@ router.route("/register")
 router.route("/login")
 .post(usersController.logIn);
   
+router.route("/validatetoken")
+.get(usersController.validateToken);
 
 module.exports = router;
 

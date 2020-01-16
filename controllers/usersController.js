@@ -81,6 +81,10 @@ module.exports = {
       .catch(err => {
         res.send('error: ' + err)
       })
+  },
+//Method for validating a user token to allow access to a private route.
+  validateToken: function(req,res) {
+    console.log('Meow')
   }
 
 };
