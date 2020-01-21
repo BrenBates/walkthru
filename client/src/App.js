@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import House from './pages/House';
 import Home from './pages/Home';
@@ -30,12 +30,14 @@ function App(props) {
               <Link to="/admin">Admin Page</Link>
             </li>
           </ul>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <PrivateRoute path="/admin" component={Admin} />
-          <Route path="/house/:id" component={House} />
-          <Route path="/houses" component={House} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <PrivateRoute path="/admin" component={Admin} />
+            <Route path="/house/:id" component={House} />
+            <Route path="/houses" component={House} />
+          </Switch>
         </div>
       </Router>
     </AuthContext.Provider>
