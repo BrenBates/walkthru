@@ -12,7 +12,6 @@ import { useAuth } from "../context/auth";
 
 function Signup(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
-    const [mismatchError,setMismatchError] = useState(false);
     const [isError,setIsError] = useState(false);
     const [errorText, setErrorText] = useState(true);
     const { setAuthTokens } = useAuth();
@@ -91,7 +90,7 @@ margin-top: 1rem;
         //   setSubmitting(false);  
         // }, 400);
          setErrorText();
-         setMismatchError(false);
+        
         
         let {username,email,password,repassword} = values
 

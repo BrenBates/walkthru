@@ -88,23 +88,34 @@ module.exports = {
     db.User.findOne({
         email: email
       })
-      .then(User => {
-        console.log(User)
-        if (bcrypt.compareSync(req.body.password, User.password)) {
-          let userData = {
-            email: User.email,
-            password: User.password
+      .then(      
+        User => {
+
+          if(!User) {
+            res.json({
+              error: 'There is no user with that email address'
+            })
+          } else {
+            if (bcrypt.compareSync(req.body.password, User.password)) {
+              let userData = {
+                email: User.email,
+                password: User.password
+              }
+              let token = jwt.sign(userData, process.env.REACT_APP_SECRET_KEY, {
+                expiresIn: 60000
+              })
+              console.log(token)
+              res.json({
+                token: token
+              })
+            } else {
+              res.json({
+                error: 'Password incorrect'
+              })
+            
+            }
           }
-          let token = jwt.sign(userData, process.env.REACT_APP_SECRET_KEY, {
-            expiresIn: 60000
-          })
-          console.log(token)
-          res.json({
-            token: token
-          })
-        } else {
-          res.send('User does not exist')
-        }
+           
       })
       .catch(err => {
         res.send('error: ' + err)

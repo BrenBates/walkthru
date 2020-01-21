@@ -13,6 +13,7 @@ import { useAuth } from "../context/auth";
 function Login(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError,setIsError] = useState(false)
+    const [errorText, setErrorText] = useState(true);
     const { setAuthTokens } = useAuth();
     
     //referer state will be used in the event that a user
@@ -65,11 +66,9 @@ margin-top: 1rem;
       };
 
 
-   
-
-    // if (isLoggedIn) {
-    //     return <Redirect to={referer} />;
-    // }
+    if (isLoggedIn) {
+        return <Redirect to={referer} />;
+    }
 
   return (
     <Card>
@@ -101,11 +100,18 @@ margin-top: 1rem;
       })
       .then(result => {
           if (result.status === 200) {
-              
+          
+            if (result.data.error) {
+              setErrorText(result.data.error)
+              setIsError(true)
+            } else {
+
               setAuthTokens(result.data)
-              console.log('Authorization Token:')
-              console.log(result.data)
               setLoggedIn(true);
+
+            }
+              
+            
           } else {
               setIsError(true);
           }
@@ -134,7 +140,7 @@ margin-top: 1rem;
     </Formik>
 
       <Link to="/signup">Don't have an account?</Link>
-        { isError &&<Error>The username or password provided were incorrect!</Error>}
+        { isError &&<Error>{errorText}</Error>}
     </Card>
   );
 }
