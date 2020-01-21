@@ -3,7 +3,16 @@ const Schema = mongoose.Schema;
 
 const schemaHouse = new Schema(
   {
-    name: { type: String }
+    headline: { type: String },
+    houseImage: { type: String },
+    price: { type: String },
+    beds: { type: String },
+    baths: { type: String },
+    squareFeet: { type: String },
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    zip: { type: Number, required: true }
   },
   {
     toJSON: { virtuals: true },
