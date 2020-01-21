@@ -10,10 +10,12 @@ router.route("/")
 router.route("/register")
     .post(usersController.register);
 
-    //Matches with /api/users/register
+    //Matches with /api/users/login
 router.route("/login")
 .post(usersController.logIn);
   
+router.route("/validatetoken")
+.get(usersController.validateToken);
 
 module.exports = router;
 
