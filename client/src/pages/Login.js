@@ -67,9 +67,9 @@ margin-top: 1rem;
 
    
 
-    if (isLoggedIn) {
-        return <Redirect to={referer} />;
-    }
+    // if (isLoggedIn) {
+    //     return <Redirect to={referer} />;
+    // }
 
   return (
     <Card>
