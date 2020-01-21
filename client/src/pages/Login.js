@@ -101,10 +101,9 @@ margin-top: 1rem;
       })
       .then(result => {
           if (result.status === 200) {
-              console.log('this is the result')
-              console.log(result)
+              
               setAuthTokens(result.data)
-              console.log('this is the auth token')
+              console.log('Authorization Token:')
               console.log(result.data)
               setLoggedIn(true);
           } else {
@@ -113,8 +112,6 @@ margin-top: 1rem;
       }).catch(e => {
           setIsError(true);
       });
-
-
 
       }}
       >

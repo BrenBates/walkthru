@@ -57,7 +57,7 @@ module.exports = {
   logIn: function(req,res) {
     console.log('JEEEEEEEEENKKIIIIIIIIIIIIIIIIIINS')
     console.log(req.body)
-    let name = req.body.userName.trim();
+    let name = req.body.email.trim();
     console.log(name)
     db.User.findOne({
         userName: name
