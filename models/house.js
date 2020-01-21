@@ -4,15 +4,13 @@ const Schema = mongoose.Schema;
 const schemaHouse = new Schema(
   {
     headline: { type: String },
-    houseImage: { type: String },
-    price: { type: String },
-    beds: { type: String },
-    baths: { type: String },
-    squareFeet: { type: String },
+    houseImageURL: { type: String },
     street: { type: String, required: true },
     city: { type: String, required: true },
     state: { type: String, required: true },
-    zip: { type: Number, required: true }
+    zip: { type: Number, required: true },
+    lat: { type: Number },
+    long: { type: Number }
   },
   {
     toJSON: { virtuals: true },
@@ -27,6 +25,6 @@ schemaHouse.virtual("comments", {
   localField: "_id"
 });
 
-const House = mongoose.model("House", houseSchema);
+const House = mongoose.model("House", schemaHouse);
 
 module.exports = House;
