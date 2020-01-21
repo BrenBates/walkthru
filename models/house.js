@@ -1,20 +1,30 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// title: headline, author: imageURL, synopsis: price, date: date
-const houseSchema = new Schema({
-  headline: { type: String, required: true },
-  imageURL: { type: String, required: true },
-  price: { type: Number, required: true },
-  beds: { type: Number, required: true },
-  baths: { type: Number, required: true },
-  sqft: { type: Number, required: true },
-  street: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  zip: { type: Number, required: true },
-  date: { type: Date, default: Date.now }
+
+const schemaHouse = new Schema(
+  {
+    headline: { type: String },
+    houseImageURL: { type: String },
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    zip: { type: Number, required: true },
+    lat: { type: Number },
+    long: { type: Number }
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  }
+);
+
+// Virtual populate
+schemaHouse.virtual("comments", {
+  ref: "Comment",
+  foreignField: "houseRef",
+  localField: "_id"
 });
 
-const House = mongoose.model("House", houseSchema);
+const House = mongoose.model("House", schemaHouse);
 
 module.exports = House;
