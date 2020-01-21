@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
+import House from './pages/House';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
@@ -33,6 +34,8 @@ function App(props) {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <PrivateRoute path="/admin" component={Admin} />
+          <Route path="/house/:id" component={House} />
+          <Route path="/houses" component={House} />
         </div>
       </Router>
     </AuthContext.Provider>
