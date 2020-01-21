@@ -22,7 +22,7 @@ function PrivateRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={props =>
-        validateToken(authTokens) ? (
+        authTokens ? (
           <Component {...props} />
         ) : (
           <Redirect 
