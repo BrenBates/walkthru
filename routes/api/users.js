@@ -10,10 +10,6 @@ router.route("/")
 router.route("/register")
     .post(usersController.register);
 
-//Matches with /api/users/register
-router.route("/login")
-.post(usersController.logIn);
-
 // router.get("/houses", async (req, res) => {
 //   console.log("req.user: ", req.user);
 //   //const loggedInUserId = req.user;
@@ -33,6 +29,13 @@ router.route("/login")
 
 //   res.send(result);
 // });
+
+    //Matches with /api/users/login
+router.route("/login")
+.post(usersController.logIn);
+  
+router.route("/validatetoken")
+.get(usersController.validateToken);
 
 module.exports = router;
 

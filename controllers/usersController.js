@@ -57,7 +57,7 @@ module.exports = {
   logIn: function(req,res) {
     console.log('JEEEEEEEEENKKIIIIIIIIIIIIIIIIIINS')
     console.log(req.body)
-    let name = req.body.userName.trim();
+    let name = req.body.email.trim();
     console.log(name)
     db.User.findOne({
         userName: name
@@ -81,6 +81,10 @@ module.exports = {
       .catch(err => {
         res.send('error: ' + err)
       })
+  },
+//Method for validating a user token to allow access to a private route.
+  validateToken: function(req,res) {
+    console.log('Meow')
   }
 
 };
