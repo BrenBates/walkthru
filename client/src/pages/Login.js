@@ -13,7 +13,7 @@ import { useAuth } from "../context/auth";
 function Login(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError,setIsError] = useState(false)
-    const [errorText, setErrorText] = useState(true);
+    const [errorText, setErrorText] = useState('');
     const { setAuthTokens } = useAuth();
     
     //referer state will be used in the event that a user
