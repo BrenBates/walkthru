@@ -1,5 +1,5 @@
 module.exports = {
-    Book: require("./Book"),
+    House: require("./House"),
     User: require("./User"),
     Comment: require("./Comment")
   };
