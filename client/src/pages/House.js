@@ -5,12 +5,15 @@ import API from "../utils/API";
 
 class House extends Component {
   state = {
-    house: [],
+    houseID: 0,
     comments: "",
   };
 
   componentDidMount() {
-    this.loadHouse();
+ 
+    this.setState({houseID: this.props.match.params.id})
+    // this.loadHouse();
+
   }
 
   loadHouse = id => {
@@ -28,12 +31,11 @@ class House extends Component {
     });
   };
 
-
-
   render() {
     return (
       <div>
-        House page
+        <p>House page</p>
+        <p>{this.state.houseID}</p>
       </div>
     );
   }
