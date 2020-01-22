@@ -55,7 +55,10 @@ module.exports = {
                 })
                 console.log(token)
                 res.json({
-                  token: token
+                  token: token,
+                  username: User.username,
+                  email: User.email,
+                  userImage: User.userImage
                 })
               }).catch(err => {
                 res.send('error: ' + err)
@@ -106,7 +109,10 @@ module.exports = {
               })
               console.log(token)
               res.json({
-                token: token
+                token: token,
+                username: User.username,
+                email: User.email,
+                userImage: User.userImage
               })
             } else {
               res.json({

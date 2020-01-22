@@ -5,7 +5,7 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  userImage: { type: String },
+  userImage: { type: String, default: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/secondary/Emilia-Clarke-Game-Of-Thrones-Instagram-pictures-new-dog-puppy-2270102.jpg?r=1579617194786'},
   date: { type: Date, default: Date.now },
   commentRef: {
     type: Schema.Types.ObjectId,
