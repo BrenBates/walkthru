@@ -8,18 +8,44 @@ mongoose.connect(
   "mongodb://localhost/walkthru"
 );
 
+
 const userSeed = [
   {
-    userName: "Billy Bob",
+    username: "Billy Bob",
+    email: "jimbob@farmersonly.com",
     password: "BobBob",
+    userImage: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/secondary/Emilia-Clarke-Game-Of-Thrones-Instagram-pictures-new-dog-puppy-2270102.jpg?r=1579617194786',
     date: new Date(Date.now())
   },
-  
   {
-    userName: "TrevorNoah",
-    password: "dailyshow123",
+    username: "Rick",
+    email: "rick@rickandmorty.com",
+    password: "abc123",
+    userImage: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/secondary/Emilia-Clarke-Game-Of-Thrones-Instagram-pictures-new-dog-puppy-2270102.jpg?r=1579617194786',
+    date: new Date(Date.now())
+  },
+  {
+    username: "Morty",
+    email: "rick@rickandmorty.com",
+    password: "abc123",
+    userImage: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/secondary/Emilia-Clarke-Game-Of-Thrones-Instagram-pictures-new-dog-puppy-2270102.jpg?r=1579617194786',
+    date: new Date(Date.now())
+  },
+  {
+    username: "Athena",
+    email: "athena@greekgoddess.com",
+    password: "thisismydogsname",
+    userImage: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/secondary/Emilia-Clarke-Game-Of-Thrones-Instagram-pictures-new-dog-puppy-2270102.jpg?r=1579617194786',
+    date: new Date(Date.now())
+  },
+  {
+    username: "Artemis",
+    email: "artemis@greekgoddess.com",
+    password: "thisismydogsname",
+    userImage: 'https://cdn.images.express.co.uk/img/dynamic/79/590x/secondary/Emilia-Clarke-Game-Of-Thrones-Instagram-pictures-new-dog-puppy-2270102.jpg?r=1579617194786',
     date: new Date(Date.now())
   }
+  
 ];
 
 db.User

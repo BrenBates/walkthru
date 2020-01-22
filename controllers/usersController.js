@@ -5,7 +5,6 @@ var jwt = require("jsonwebtoken");
 // Defining methods for the usersController
 module.exports = {
   findAll: function (req, res) {
-    console.log('made it here')
     db.User
       .find(req.query)
       .sort({
@@ -16,8 +15,6 @@ module.exports = {
   },
   //Method for a new user to register to the app.
   register: function (req, res) {
-    console.log('Leeeeerrrroooooooy')
-    console.log(req.body)
 
     const userData = {
       username: req.body.username,
@@ -53,7 +50,7 @@ module.exports = {
                 let token = jwt.sign(userData, process.env.REACT_APP_SECRET_KEY, {
                   expiresIn: 10000
                 })
-                console.log(token)
+          
                 res.json({
                   token: token,
                   username: User.username,
@@ -83,11 +80,7 @@ module.exports = {
   },
   //Method for an existing user to sign in to the app.
   logIn: function (req, res) {
-    console.log('JEEEEEEEEENKKIIIIIIIIIIIIIIIIIINS')
-    console.log(req.body)
     let email = req.body.email.trim();
-    console.log('this is the email')
-    console.log(email);
     db.User.findOne({
         email: email
       })
@@ -107,7 +100,7 @@ module.exports = {
               let token = jwt.sign(userData, process.env.REACT_APP_SECRET_KEY, {
                 expiresIn: 60000
               })
-              console.log(token)
+            
               res.json({
                 token: token,
                 username: User.username,

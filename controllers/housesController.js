@@ -12,10 +12,10 @@ module.exports = {
   },
   findById: function(req, res) {
     console.log('findById');
-    db.House
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    // db.House
+    //   .findById(req.params.id)
+    //   .then(dbModel => res.json(dbModel))
+    //   .catch(err => res.status(422).json(err));
   }
 //   create: function(req, res) {
 //     db.Book

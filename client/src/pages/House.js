@@ -1,31 +1,43 @@
 
-import React from "react";
-import { Button } from "../components/AuthForm";
-import { useAuth } from "../context/auth";
+import React, { Component } from "react";
+import API from "../utils/API";
+// const { setAuthTokens } = useAuth();
 
-function House(props) {
-  const { setAuthTokens } = useAuth();
+class House extends Component {
+  state = {
+    house: [],
+    comments: "",
+  };
 
-  function logOut() {
-    setAuthTokens();
+  componentDidMount() {
+    this.loadHouse();
   }
 
-  return (
-    <div>
-      <div>House Page</div>
-      <Button onClick={logOut}>Log out</Button>
-      
-    </div>
-  );
+  loadHouse = id => {
+    API.getHouse()
+      .then(res =>
+        this.setState({ house: res.data })
+      )
+      .catch(err => console.log(err));
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+
+
+  render() {
+    return (
+      <div>
+        House page
+      </div>
+    );
+  }
 }
 
-// headline: { type: String },
-//     houseImageURL: { type: String },
-//     street: { type: String, required: true },
-//     city: { type: String, required: true },
-//     state: { type: String, required: true },
-//     zip: { type: Number, required: true },
-//     lat: { type: Number },
-//     long: { type: Number }
 
 export default House;
