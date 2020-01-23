@@ -36,6 +36,10 @@ const NewHouseForm = () => {
                 st: Yup.string()
                     .max(2, "Please use the states abbreviation.")
                     .required('Required'),
+                ZIP: Yup.string()
+                    .min(5, "Zip Must be 5 digits.")
+                    .max(5, "Zip Must be 5 digits.")
+                    .required('Required'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
