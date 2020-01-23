@@ -13,14 +13,16 @@ import { useAuth } from "../context/auth";
 function Signup(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError,setIsError] = useState(false);
-    const [errorText, setErrorText] = useState(true);
+    const [errorText, setErrorText] = useState('');
     const { setAuthTokens } = useAuth();
 
     if (isLoggedIn) {
         return <Redirect to="/admin" />;
     }
 
-//     // Styled components ....
+
+    // Styled components ....
+
 // const StyledSelect = styled.select`
 // color: var(--blue);
 // `;

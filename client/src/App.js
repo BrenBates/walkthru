@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import House from './pages/House';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+
 import NewHouseForm from './pages/NewHouseForm';
 import HouseDetail from './pages/HouseDetail';
+
 import NoMatch from './pages/NoMatch';
 import { AuthContext } from "./context/auth";
 
@@ -26,7 +28,7 @@ function App(props) {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
-          <ul>
+        <ul>
             <li>
               <Link to="/">Home Page</Link>
             </li>
@@ -40,15 +42,18 @@ function App(props) {
               <Link to="/HouseDetail">House Detail Page Mockup</Link>
             </li>
           </ul>
+          <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <PrivateRoute path="/admin" component={Admin} />
           <Route path="/house/:id" component={House} />
+          <Route component={NoMatch} />
           <Route path="/houses" component={House} />
           <Route path="/newHouseForm" component={NewHouseForm} />
           <Route path="/HouseDetails" component={HouseDetail} />
-          <Route path="/404" component={NoMatch} />
+ 
+          </Switch>
         </div>
       </Router>
     </AuthContext.Provider>

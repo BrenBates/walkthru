@@ -10,10 +10,12 @@ import { Formik, Form, useField } from "formik";
 import { Card, Logo, Error } from '../components/AuthForm';
 import { useAuth } from "../context/auth";
 
+
+
 function Login(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError,setIsError] = useState(false)
-    const [errorText, setErrorText] = useState(true);
+    const [errorText, setErrorText] = useState('');
     const { setAuthTokens } = useAuth();
     
     //referer state will be used in the event that a user
@@ -105,7 +107,8 @@ function Login(props) {
               setIsError(true)
             } else {
 
-              setAuthTokens(result.data)
+              //Set the auth token along with the user data into the context
+              setAuthTokens(result.data)              
               setLoggedIn(true);
 
             }
