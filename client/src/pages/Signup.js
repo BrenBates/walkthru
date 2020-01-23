@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from "yup";
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import "../styles.css";
 import "../styles-custom.css";
 import logoImg from "../img/walkthru.JPG";
@@ -13,35 +13,37 @@ import { useAuth } from "../context/auth";
 function Signup(props) {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError,setIsError] = useState(false);
-    const [errorText, setErrorText] = useState(true);
+    const [errorText, setErrorText] = useState('');
     const { setAuthTokens } = useAuth();
 
     if (isLoggedIn) {
         return <Redirect to="/admin" />;
     }
 
+
     // Styled components ....
-const StyledSelect = styled.select`
-color: var(--blue);
-`;
 
-const StyledErrorMessage = styled.div`
-font-size: 12px;
-color: var(--red-600);
-width: 400px;
-margin-top: 0.25rem;
-&:before {
-  content: "❌ ";
-  font-size: 10px;
-}
-@media (prefers-color-scheme: dark) {
-  color: var(--red-300);
-}
-`;
+// const StyledSelect = styled.select`
+// color: var(--blue);
+// `;
 
-const StyledLabel = styled.label`
-margin-top: 1rem;
-`;
+// const StyledErrorMessage = styled.div`
+// font-size: 12px;
+// color: var(--red-600);
+// width: 400px;
+// margin-top: 0.25rem;
+// &:before {
+//   content: "❌ ";
+//   font-size: 10px;
+// }
+// @media (prefers-color-scheme: dark) {
+//   color: var(--red-300);
+// }
+// `;
+
+// const StyledLabel = styled.label`
+// margin-top: 1rem;
+// `;
 
     //text input for Formik form
 
