@@ -10,7 +10,9 @@ const schemaHouse = new Schema(
     state: { type: String, required: true },
     zip: { type: Number, required: true },
     lat: { type: Number },
-    long: { type: Number }
+    long: { type: Number },
+    forRent: { type: Boolean },
+    forSale: { type: Boolean }
   },
   {
     toJSON: { virtuals: true },

@@ -17,6 +17,14 @@ class House extends Component {
 
   }
 
+  // return (
+  //   <div>
+  //     <div>House Page</div>
+  //     <div>{props.}</div>
+  //     <Button onClick={logOut}>Log out</Button>
+  //   </div>
+  // );
+  
   loadHouse = id => {
     API.getHouse()
       .then(res =>

@@ -8,17 +8,6 @@ mongoose.connect(
   "mongodb://localhost/walkthru"
 );
 
-
-// headline: { type: String },
-// houseImageURL: { type: String },
-// street: { type: String, required: true },
-// city: { type: String, required: true },
-// state: { type: String, required: true },
-// zip: { type: Number, required: true },
-// lat: { type: Number },
-// long: { type: Number }
-
-
 const houseSeed = [
   {
     headline: "Two Row Brewery",
@@ -29,6 +18,8 @@ const houseSeed = [
     zip: 84047,
     lat: 40.626800,
     long: -111.900030,
+    forRent: false,
+    forSale: true,
     date: new Date(Date.now())
   },
   {
@@ -40,6 +31,8 @@ const houseSeed = [
     zip: 84115,
     lat: 40.723790,
     long: -111.894360,
+    forRent: false,
+    forSale: true,
     date: new Date(Date.now())
   },
   {
@@ -51,6 +44,8 @@ const houseSeed = [
     zip: 84041,
     lat: 41.083440,
     long: -111.978870,
+    forRent: false,
+    forSale: true,
     date: new Date(Date.now())
   }
   ,
@@ -63,6 +58,8 @@ const houseSeed = [
     zip: 84047,
     lat: 40.620320,
     long: -111.888270,
+    forRent: true,
+    forSale: false,
     date: new Date(Date.now())
   },
   {
@@ -74,6 +71,8 @@ const houseSeed = [
     zip: 84101,
     lat: 40.763650,
     long: -111.897240,
+    forRent: false,
+    forSale: true,
     date: new Date(Date.now())
   }
 ];
