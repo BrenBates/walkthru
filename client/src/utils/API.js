@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+
   // Gets all books
   getHouses: function() {
     return axios.get("/api/houses");
