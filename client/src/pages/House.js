@@ -13,8 +13,8 @@ function House(props) {
   return (
     <div>
       <div>House Page</div>
+      <div>{props.}</div>
       <Button onClick={logOut}>Log out</Button>
-      
     </div>
   );
 }
