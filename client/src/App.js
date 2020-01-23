@@ -52,7 +52,7 @@ function App(props) {
           <Route path="/houses" component={House} />
           <Route path="/newHouseForm" component={NewHouseForm} />
           <Route path="/HouseDetails" component={HouseDetail} />
- 
+
           </Switch>
         </div>
       </Router>
