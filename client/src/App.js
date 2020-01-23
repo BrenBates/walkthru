@@ -36,7 +36,7 @@ function App(props) {
               <Link to="/admin">Admin Page</Link>
             </li>
             <li>
-              <Link to="/newHouseForm">Add House Form/Page Mockup</Link>
+              <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
             </li>
             <li>
               <Link to="/HouseDetail">House Detail Page Mockup</Link>
