@@ -1,5 +1,5 @@
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { useAuth } from "../context/auth";
 import {
   Collapse,
@@ -12,15 +12,14 @@ import {
   Container,
   Row,
   Col,
-  Jumbotron,
   Button
 } from 'reactstrap';
 import MapContainer from "../components/MapContainer"
 
-
 function Landing(props) {
   const { setAuthTokens } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [mapInfo, setMapInfo] = useState([]);
 
   function logOut() {
     setAuthTokens();
@@ -34,8 +33,23 @@ function Landing(props) {
     }
   }
 
+  function loadMap() {
+    console.log('what up')
 
+    axios.get("/api/houses/", {
 
+  })
+  .then(result => {
+    console.log(result)
+    setMapInfo(result.data)
+
+  });
+  }
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    loadMap();
+  },[]);
 
   return (
     <div>
@@ -54,16 +68,23 @@ function Landing(props) {
                         </Nav>
                     </Collapse>
     </Navbar>
-
     <Container>
+    
         <Row>
+          <Col xs="12">
             <p>Row 1</p>
+          </Col>
         </Row>
 
         <Row>
-            <MapContainer/>
-           
+          <Col xs="6">
+            <MapContainer mapInfo = {mapInfo}/>     
+          </Col>
+          <Col xs="6">
+            <p>Column 2</p>    
+          </Col>
         </Row>
+
     </Container>
 
 

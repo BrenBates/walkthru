@@ -28,7 +28,7 @@ function App(props) {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
-          {/* <ul>
+          <ul>
             <li>
               <Link to="/">Home Page</Link>
             </li>
@@ -41,7 +41,7 @@ function App(props) {
             <li>
               <Link to="/HouseDetail">House Detail Page Mockup</Link>
             </li>
-          </ul> */}
+          </ul>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
