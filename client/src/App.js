@@ -48,10 +48,10 @@ function App(props) {
             <Route path="/signup" component={Signup} />
             <PrivateRoute path="/admin" component={Admin} />
             <Route path="/house/:id" component={House} />
-            <Route component={NoMatch} />
             <Route path="/houses" component={House} />
             <Route path="/newHouseForm" component={NewHouseForm} />
             <Route path="/HouseDetails" component={HouseDetail} />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
