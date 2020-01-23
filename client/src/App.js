@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 =======
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 >>>>>>> 1cdc4522c150b5e641cda86114653be042400f95
+=======
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+>>>>>>> 74f9bc46f1413c48dada3f778f73b3b70502f316
 import PrivateRoute from './PrivateRoute';
 import House from './pages/House';
 import Home from './pages/Home';
@@ -48,6 +52,7 @@ function App(props) {
           </ul>
           <Switch>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
@@ -55,6 +60,8 @@ function App(props) {
             <Route path="/house/:id" component={House} />
             <Route path="/houses" component={House} />
 =======
+=======
+>>>>>>> 74f9bc46f1413c48dada3f778f73b3b70502f316
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
@@ -64,8 +71,12 @@ function App(props) {
           <Route path="/houses" component={House} />
           <Route path="/newHouseForm" component={NewHouseForm} />
           <Route path="/HouseDetails" component={HouseDetail} />
+<<<<<<< HEAD
  
 >>>>>>> 1cdc4522c150b5e641cda86114653be042400f95
+=======
+
+>>>>>>> 74f9bc46f1413c48dada3f778f73b3b70502f316
           </Switch>
         </div>
       </Router>

@@ -17,7 +17,6 @@ class House extends Component {
 
   }
 
-<<<<<<< HEAD
   return (
     <div>
       <div>House Page</div>
@@ -25,7 +24,7 @@ class House extends Component {
       <Button onClick={logOut}>Log out</Button>
     </div>
   );
-=======
+  
   loadHouse = id => {
     API.getHouse()
       .then(res =>
@@ -49,7 +48,6 @@ class House extends Component {
       </div>
     );
   }
->>>>>>> 1cdc4522c150b5e641cda86114653be042400f95
 }
 
 
