@@ -21,25 +21,59 @@ mongoose.connect(
 
 const houseSeed = [
   {
-    headline: "The Dead Zone",
-    houseImageURL: "Stephen King",
-    street:"Vine",
-    city:"Kearns",
+    headline: "Two Row Brewery",
+    houseImageURL: "",
+    street:"6856 S 300 W",
+    city:"Midvale",
     state:"UT",
-    zip: 84118,
-    lat: 123,
-    long: 456,
+    zip: 84047,
+    lat: 40.626800,
+    long: -111.900030,
     date: new Date(Date.now())
   },
   {
-    headline: "The Hood",
-    houseImageURL: "Stephen King",
-    street:"Elm",
-    city:"Wazoo",
-    state:"TX",
-    zip: 84123,
-    lat: 789,
-    long: 890,
+    headline: "Shades Brewing",
+    houseImageURL: "",
+    street:"154 W Utopia Ave",
+    city:"South Salt Lake",
+    state:"UT",
+    zip: 84115,
+    lat: 40.723790,
+    long: -111.894360,
+    date: new Date(Date.now())
+  },
+  {
+    headline: "Roosters",
+    houseImageURL: "",
+    street:"748 Heritage Park Blvd",
+    city:"Layton",
+    state:"UT",
+    zip: 84041,
+    lat: 41.083440,
+    long: -111.978870,
+    date: new Date(Date.now())
+  }
+  ,
+  {
+    headline: "Bohemian Brewery",
+    houseImageURL: "",
+    street:"94 Fort Union Blvd",
+    city:"Midvale",
+    state:"UT",
+    zip: 84047,
+    lat: 40.620320,
+    long: -111.888270,
+    date: new Date(Date.now())
+  },
+  {
+    headline: "Red Rock Brewing",
+    houseImageURL: "",
+    street:"254 S 200 W",
+    city:"Salt Lake City",
+    state:"UT",
+    zip: 84101,
+    lat: 40.763650,
+    long: -111.897240,
     date: new Date(Date.now())
   }
 ];
