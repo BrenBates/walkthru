@@ -38,17 +38,14 @@ function App(props) {
             <li>
               <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
             </li>
-            <li>
-              <Link to="/HouseDetail">House Detail Page Mockup</Link>
-            </li>
+      
           </ul>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/house/:id" component={House} />
+            <Route path="/house/:id" component={HouseDetail} />
             <Route path="/houses" component={House} />
-            <Route path="/HouseDetails" component={HouseDetail} />
             <PrivateRoute path="/landing" component={Landing} />
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />
