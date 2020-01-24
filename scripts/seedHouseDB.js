@@ -11,7 +11,7 @@ mongoose.connect(
 const houseSeed = [
   {
     headline: "Two Row Brewery",
-    houseImageURL: "",
+    houseImageURL: "https://utahbeernews.com/wp-content/uploads/2018/08/2-Row-Brewing-Cold-Beer-Fridge.jpg",
     street:"6856 S 300 W",
     city:"Midvale",
     state:"UT",
@@ -24,7 +24,7 @@ const houseSeed = [
   },
   {
     headline: "Shades Brewing",
-    houseImageURL: "",
+    houseImageURL: "http://craftybeergirls.com/wp-content/uploads/2016/07/IMG_9408.jpg",
     street:"154 W Utopia Ave",
     city:"South Salt Lake",
     state:"UT",
@@ -37,7 +37,7 @@ const houseSeed = [
   },
   {
     headline: "Roosters",
-    houseImageURL: "",
+    houseImageURL: "https://s3-media0.fl.yelpcdn.com/bphoto/MlJLm2ycI7sghPmJbhRZjw/l.jpg",
     street:"748 Heritage Park Blvd",
     city:"Layton",
     state:"UT",
@@ -51,7 +51,7 @@ const houseSeed = [
   ,
   {
     headline: "Bohemian Brewery",
-    houseImageURL: "",
+    houseImageURL: "https://images.squarespace-cdn.com/content/v1/54db986de4b0936f278fbbe2/1430270162279-B5GNTSIID2G7K5RA05R1/ke17ZwdGBToddI8pDm48kIqRQ-d4uWamJ2VXs6EINVJ7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UW2VFxxdTm_s5vtOOMhwEXVaY8l0hOBIHC7AzZhBh58kEEaCUOPFMaQrUb6f8fLjUQ/Boho+Restaurant+interior_new.jpg?format=2500w",
     street:"94 Fort Union Blvd",
     city:"Midvale",
     state:"UT",
@@ -64,7 +64,7 @@ const houseSeed = [
   },
   {
     headline: "Red Rock Brewing",
-    houseImageURL: "",
+    houseImageURL: "http://redrockbrewing.com/wp-content/uploads/2013/08/Downtown-Slider.jpg",
     street:"254 S 200 W",
     city:"Salt Lake City",
     state:"UT",

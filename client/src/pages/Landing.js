@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {  Link } from "react-router-dom";
 import axios from 'axios';
 import { useAuth } from "../context/auth";
 import {
@@ -20,6 +21,8 @@ function Landing(props) {
   const { setAuthTokens } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [mapInfo, setMapInfo] = useState([]);
+  const [currentHouse, setCurrentHouse] = useState({});
+  const [houseSelected, setHouseSelected] = useState(false);
 
   function logOut() {
     setAuthTokens();
@@ -46,14 +49,49 @@ function Landing(props) {
   });
   }
 
+  const handleClick = houseID => {
+    
+    //filter the mapInfo array to isolate the house that was clicked
+    let house = mapInfo.filter(item => {
+      if(item._id === houseID) {
+        return true;
+      }
+    })
+
+    console.log('this is the house')
+    console.log(house)
+    //set the selected house into the state
+    setCurrentHouse(house[0]);
+    //toggle the flag that the house is selected.
+    setHouseSelected(true);
+
+  }
+
+
   useEffect(() => {
     // Update the document title using the browser API
     loadMap();
   },[]);
 
+  const renderHouse = () => {
+  if (houseSelected) { 
+    return ( 
+      <div>
+        <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link>
+        <p>{currentHouse._headline}</p>
+        <p>{currentHouse.street}</p>
+        <p>{currentHouse.city}</p>
+        <p>{currentHouse.state}</p>
+        <img src={currentHouse.houseImageURL} alt="house image"></img>
+      </div>
+      ) 
+  } else {
+    return <p></p>
+  }
+  }
+
   return (
     <div>
-
     <Navbar color="dark" light expand="md">
                     <NavbarBrand className="text-info" href="/">Walkthru</NavbarBrand>
                     <NavbarToggler onClick={toggle} />
@@ -78,10 +116,16 @@ function Landing(props) {
 
         <Row>
           <Col xs="6">
-            <MapContainer mapInfo = {mapInfo}/>     
+            <MapContainer mapInfo = {mapInfo} clickHouse={handleClick}/>     
           </Col>
           <Col xs="6">
-            <p>Column 2</p>    
+            
+            <p>Selected House:</p>
+            {renderHouse()}
+            {/* { houseSelected ? 
+              <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link> :
+            <p></p> } */}
+           
           </Col>
         </Row>
 

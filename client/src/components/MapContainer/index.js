@@ -1,5 +1,5 @@
 import React from "react";
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
 const mapStyles = {
   width: '100%',
@@ -14,14 +14,22 @@ export class MapContainer extends React.Component {
         stores: props.mapInfo
       }
     }
-  
+
     displayMarkers = () => {
       return this.state.stores.map((store, index) => {
         return <Marker key={index} id={index} position={{
          lat: store.lat,
          lng: store.long
        }}
-       onClick={() => console.log("You clicked me!")} />
+       onClick={() => {
+        //Run the click function back on the landing page to load the clicked house information
+        this.props.clickHouse(store._id)
+      }
+      
+      } />
+
+      
+
       })
     }
   
