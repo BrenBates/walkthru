@@ -122,9 +122,6 @@ function Landing(props) {
             
             <p>Selected House:</p>
             {renderHouse()}
-            {/* { houseSelected ? 
-              <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link> :
-            <p></p> } */}
            
           </Col>
         </Row>

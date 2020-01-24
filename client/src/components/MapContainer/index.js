@@ -9,14 +9,10 @@ const mapStyles = {
 export class MapContainer extends React.Component {
     constructor(props) {
       super(props);
-  
-      this.state = {
-        stores: props.mapInfo
-      }
     }
 
     displayMarkers = () => {
-      return this.state.stores.map((store, index) => {
+      return this.props.mapInfo.map((store, index) => {
         return <Marker key={index} id={index} position={{
          lat: store.lat,
          lng: store.long
