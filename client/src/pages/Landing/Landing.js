@@ -119,7 +119,7 @@ function Landing(props) {
   return (
     <div>
     <Navbar color="dark" light expand="md">
-                    <NavbarBrand className="text-info" href="/">Walkthru</NavbarBrand>
+                    <NavbarBrand tag={Link} to="/" className="text-info">Walkthru</NavbarBrand>
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
