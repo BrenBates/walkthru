@@ -171,45 +171,54 @@ function Landing(props) {
       }}
       >
         {/* splitting the form up into sub columns so it doesn't take up too much vertical space. */}
-            <Form>
-              <Row className="landSrchHouseRow">
+            <Form className="landSrchHouseFrm">
+              <Row>
 
+              {/* <Col xs="4">
                 <div className="landSrchHouseDiv"> 
                 <p>Search for a house:</p>
                 <button className="landSrchHouseBtn" type="submit">Submit</button>
                 </div>
+              </Col> */}
 
-                <Col xs="2">
+                <Col xs="5">
                   <MyTextInput
                       className="landSrchInput"
-                      label="Street Address"
+                      // label="Street"
                       name="street"
                       type="text"
                       placeholder="123 N 456 W"
                   />
                </Col>
 
-               <Col xs="2">
+               <Col xs="4">
                 <MyTextInput
                     className="landSrchInput"
-                    label="City"
+                    // label="City"
                     name="city"
                     type="text"
                     placeholder="City"
                 />
               </Col>
               
-              <Col xs="1">
+              <Col xs="3">
                 <MyTextInput
                     className="landSrchInput"
-                    label="State"
+                    // label="State"
                     name="st"
                     type="text"
                     placeholder="State"
                 />
               </Col>
 
-             
+              </Row>
+              <Row>
+                <Col xs="6" md="3">
+                <p>Search for a house:</p>
+                </Col>
+                <Col xs="2">
+                <button className="landSrchHouseBtn" type="submit">Submit</button>
+                </Col>
               </Row>
         
         </Form>

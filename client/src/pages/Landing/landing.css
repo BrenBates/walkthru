@@ -3,19 +3,16 @@
     width: 300px;
 }
 
-.landSrchHouseDiv {
-    float: left;
-    padding: 0;
-}
 
 .landSrchHouseBtn {
-    margin: 0;
+    margin: 0 !important;
+    
 }
 
-.landSrchHouseRow {
+.landSrchHouseFrm {
     border: 1px solid black;
 }
 
 .landSrchInput {
-    width: 100px;
+    width: 100% !important;
 }
