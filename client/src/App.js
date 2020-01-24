@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import House from './pages/House';
 import Home from './pages/Home';
-import Landing from './pages/Landing';
+import Landing from './pages/Landing/Landing';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
@@ -38,19 +38,16 @@ function App(props) {
             <li>
               <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
             </li>
-            <li>
-              <Link to="/HouseDetail">House Detail Page Mockup</Link>
-            </li>
+      
           </ul>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/landing" component={Landing} />
-            <Route path="/house/:id" component={House} />
+            <Route path="/house/:id" component={HouseDetail} />
             <Route path="/houses" component={House} />
-            <Route path="/newHouseForm" component={NewHouseForm} />
-            <Route path="/HouseDetails" component={HouseDetail} />
+            <PrivateRoute path="/landing" component={Landing} />
+            <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />
           </Switch>
         </div>
