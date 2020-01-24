@@ -2,7 +2,7 @@ import React from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
 const mapStyles = {
-  width: '100%',
+  width: '90%',
   height: '400px',
 };
 
