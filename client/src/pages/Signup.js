@@ -17,7 +17,7 @@ function Signup(props) {
     const { setAuthTokens } = useAuth();
 
     if (isLoggedIn) {
-        return <Redirect to="/admin" />;
+        return <Redirect to="/landing" />;
     }
 
 
