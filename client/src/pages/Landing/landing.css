@@ -1,0 +1,21 @@
+ .landingImg {
+    height: 300px;
+    width: 300px;
+}
+
+.landSrchHouseDiv {
+    float: left;
+    padding: 0;
+}
+
+.landSrchHouseBtn {
+    margin: 0;
+}
+
+.landSrchHouseRow {
+    border: 1px solid black;
+}
+
+.landSrchInput {
+    width: 100px;
+}
