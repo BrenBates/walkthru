@@ -78,7 +78,7 @@ function Landing(props) {
     return ( 
       <div>
         <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link>
-        <p>{currentHouse._headline}</p>
+        <p>{currentHouse.headline}</p>
         <p>{currentHouse.street}</p>
         <p>{currentHouse.city}</p>
         <p>{currentHouse.state}</p>
@@ -122,9 +122,6 @@ function Landing(props) {
             
             <p>Selected House:</p>
             {renderHouse()}
-            {/* { houseSelected ? 
-              <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link> :
-            <p></p> } */}
            
           </Col>
         </Row>
