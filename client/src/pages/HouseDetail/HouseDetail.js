@@ -21,30 +21,40 @@ import {
 
 function HouseDetail(props) {
 
-    const [houseID,setHouseID] = useState('hello')
+    const [houseURL,setHouseURL] = useState('')
+    const [houseInfoReceived,setHouseInfoReceived] = useState(false)
+    const [houseInfo,setHouseInfo] = useState('')
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
-    setHouseID(props.match.params.id)
-    populateHouseInfo();
-
+        setHouseURL('/api/houses/'+ props.match.params.id)
   },[]);
-  
 
+  useEffect(() => {
+    populateHouseInfo()
+  }, [houseURL])
+  
   const populateHouseInfo = () =>
   {
-    let queryURL = "//api/houses" + houseID
-      axios.get(queryURL).then(() => {
+    console.log('this is inside the populate house info function')
+    console.log(houseURL)
+      axios.get(houseURL).then(() => {
         console.log('retrieved house info')
       }) 
   }
   
+//   if(houseInfoReceived) {
+//       return (
+//           <div>res.data.street</div>
+//       )
+//   }
 
   return (
 
     <div>
-        <p>{houseID}</p>
+        <p>{houseURL}</p>
     </div>
+
 
   )
 
