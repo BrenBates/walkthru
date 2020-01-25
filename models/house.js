@@ -13,19 +13,8 @@ const schemaHouse = new Schema(
     long: { type: Number },
     forRent: { type: Boolean },
     forSale: { type: Boolean }
-  },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
   }
 );
-
-// Virtual populate
-schemaHouse.virtual("comments", {
-  ref: "Comment",
-  foreignField: "houseRef",
-  localField: "_id"
-});
 
 const House = mongoose.model("House", schemaHouse);
 
