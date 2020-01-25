@@ -26,10 +26,18 @@ function HouseDetail(props) {
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseID(props.match.params.id)
+    populateHouseInfo();
 
   },[]);
   
 
+  const populateHouseInfo = () =>
+  {
+    let queryURL = "//api/houses" + houseID
+      axios.get(queryURL).then(() => {
+        console.log('retrieved house info')
+      }) 
+  }
   
 
   return (
