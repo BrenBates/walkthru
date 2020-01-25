@@ -59,13 +59,13 @@ function Landing(props) {
   }
 
   function loadMap() {
-    console.log('what up')
+
 
     axios.get("/api/houses/", {
 
   })
   .then(result => {
-    console.log(result)
+    
     setMapInfo(result.data)
 
   });
@@ -82,8 +82,7 @@ function Landing(props) {
       }
     })
 
-    console.log('this is the house')
-    console.log(house)
+
     //set the selected house into the state
     setCurrentHouse(house[0]);
     //toggle the flag that the house is selected.

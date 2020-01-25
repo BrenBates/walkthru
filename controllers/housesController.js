@@ -12,6 +12,7 @@ module.exports = {
   },
   findById: function(req, res) {
     console.log('findById');
+    console.log(req.params.id)
     
     db.House
       .findById(req.params.id)
