@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
-import House from './pages/House';
 import Home from './pages/Home';
 import Landing from './pages/Landing/Landing';
+import HouseDetail from './pages/HouseDetail/HouseDetail';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 import NewHouseForm from './pages/NewHouseForm';
-import HouseDetail from './pages/HouseDetail';
+
 
 import NoMatch from './pages/NoMatch';
 import { AuthContext } from "./context/auth";
@@ -45,7 +45,6 @@ function App(props) {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/house/:id" component={HouseDetail} />
-            <Route path="/houses" component={House} />
             <PrivateRoute path="/landing" component={Landing} />
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />
