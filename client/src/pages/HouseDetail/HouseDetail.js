@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
-import { useAuth } from "../../context/auth";
+// import { useAuth } from "../../context/auth";
 import {
   Collapse,
   Navbar,
@@ -18,6 +18,7 @@ import {
   Col,
   Button
 } from 'reactstrap';
+import { AuthContext } from "../../context/auth";
 
 function HouseDetail(props) {
 
@@ -48,25 +49,28 @@ function HouseDetail(props) {
   const [houseZip, setHouseZip] = useState('')
   const [houseForRent, setHouseForRent] = useState('')
   const [houseForSale, setHouseForSale] = useState('')
-  const [userID, setUserID] = useState('');
+  
+  
+  
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseURL('/api/houses/' + props.match.params.id)
+    
+    
   }, []);
 
   useEffect(() => {
     populateHouseInfo()
+    
   }, [houseURL])
 
   const populateHouseInfo = () => {
-    console.log('this is inside the populate house info function')
-    console.log(houseURL)
+    
     axios.get(houseURL).then((res) => {
-      console.log('retrieved house info');
-
+    
       const data = res.data;
-      console.log(data);
+
       setHouseID(data._id);
       setHouseImageURL(data.houseImageURL);
       setHouseHeadline(data.headline);
@@ -80,6 +84,17 @@ function HouseDetail(props) {
     })
   }
 
+  //create a button with an id of the userid from the context.
+
+  // const AuthButton = () => (
+
+  //   return (
+     
+  //   )
+
+  //   )
+ 
+
   const renderPage = () => {
     if (houseInfoReceived) {
       return (
@@ -91,6 +106,9 @@ function HouseDetail(props) {
           <p>{houseZip}</p>
           <p>{houseForRent}</p>
           <p>{houseForSale}</p>
+
+          <AuthContext.Consumer>
+            {authValue => (
 
           <Formik
             initialValues={{
@@ -107,27 +125,29 @@ function HouseDetail(props) {
               //   setSubmitting(false);  
               // }, 400);
 
-              let { comment } = values
+              console.log(authValue.authTokens.username)
 
-              axios.post("/api/users/login", {
-                comment,
-                houseID,
-              })
-                .then(result => {
-                  // if (result.status === 200) {
+              // let { comment } = values
 
-                  //   if (result.data.error) {
-                  //     setErrorText(result.data.error)
-                  //     setIsError(true)
-                  //   } else {
-                  //     //Set the auth token along with the user data into the context
-                  //     setAuthTokens(result.data)
-                  //     setLoggedIn(true);
-                  //   }
-                  // } else {
-                  //   setIsError(true);
-                  // }
-                })
+              // axios.post("/api/users/login", {
+              //   comment,
+              //   houseID,
+              // })
+              //   .then(result => {
+              //     // if (result.status === 200) {
+
+              //     //   if (result.data.error) {
+              //     //     setErrorText(result.data.error)
+              //     //     setIsError(true)
+              //     //   } else {
+              //     //     //Set the auth token along with the user data into the context
+              //     //     setAuthTokens(result.data)
+              //     //     setLoggedIn(true);
+              //     //   }
+              //     // } else {
+              //     //   setIsError(true);
+              //     // }
+              //   })
                 // .catch(e => {
                 //   setIsError(true);
                 // });
@@ -143,15 +163,22 @@ function HouseDetail(props) {
                 placeholder="Enter new comment..."
               />
 
-              <button type="submit">Submit</button>
+            <button type="submit">Submit</button>
+         
+            
             </Form>
           </Formik>
+
+          )}         
+          </AuthContext.Consumer>
         </div>
       )
     }
   }
-  const globalState = useContext(useAuth);
-  console.log('globalState' + globalState);
+
+
+ 
+  
   return (
 
     <div>{renderPage()}</div>

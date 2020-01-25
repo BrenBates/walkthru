@@ -44,7 +44,7 @@ function App(props) {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/house/:id" component={HouseDetail} />
+            <PrivateRoute path="/house/:id" component={HouseDetail} />
             <PrivateRoute path="/landing" component={Landing} />
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />
