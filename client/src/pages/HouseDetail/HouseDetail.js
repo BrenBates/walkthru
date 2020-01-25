@@ -21,24 +21,27 @@ import {
 
 function HouseDetail(props) {
 
-    const [houseID,setHouseID] = useState('hello')
+    const [houseID, setHouseID] = useState('hello');
+    const [houseInfoReceived, setHouseInfoReceived] = useState(false);
+    const [houseInfo, setHouseInfoR] = useState('');
 
   useEffect(() => {
-    // When component mounts, load the house id from the props.params into the state
-    setHouseID(props.match.params.id)
-    populateHouseInfo();
-
+    async function popHouseID() {
+      // When component mounts, load the house id from the props.params into the state
+     await setHouseID(props.match.params.id);
+    }
+    popHouseID().then(populateHouseInfo());
   },[]);
-  
 
   const populateHouseInfo = () =>
   {
-    let queryURL = "//api/houses" + houseID
+    console.log(houseID);
+    let queryURL = "/api/houses/" + houseID;
+    console.log(queryURL);
       axios.get(queryURL).then(() => {
         console.log('retrieved house info')
       }) 
   }
-  
 
   return (
 
