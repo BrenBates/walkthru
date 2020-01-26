@@ -4,6 +4,7 @@ import PrivateRoute from './PrivateRoute';
 import Home from './pages/Home';
 import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
+import UserProfile from './pages/UserProfile/UserProfile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
@@ -25,6 +26,11 @@ function App(props) {
     setAuthTokens(data);
   }
 
+  
+  const logOut = () => {
+    setAuthTokens();
+  }
+
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
@@ -41,12 +47,13 @@ function App(props) {
             </li>
       
           </ul> */}
-          <NavbarComponent />
+          <NavbarComponent logOut={logOut}/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/user" component={UserProfile} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/landing" component={Landing} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
             <Route component={NoMatch} />

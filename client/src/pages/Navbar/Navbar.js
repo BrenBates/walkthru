@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {  Link } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -23,13 +24,17 @@ const NavbarPage = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="/">Home</NavLink>
+              <NavLink tag={Link} to="/" className="text-info">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/Landing">Landing</NavLink>
+              <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/Login">Sign Out</NavLink>
+              <NavLink tag={Link} to="/User" className="text-info">Your Profile</NavLink>
+            </NavItem>
+            <NavItem>
+              <button onClick={props.logOut}>Log Out</button>
+              {/* <NavLink tag={Link} to="/Login" className="text-info">Sign Out</NavLink> */}
             </NavItem>
           </Nav>
           <NavbarText>walkthru-ers are saying...</NavbarText>

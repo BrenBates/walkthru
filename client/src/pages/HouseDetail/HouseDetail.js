@@ -20,26 +20,7 @@ function HouseDetail(props) {
     const [field, meta] = useField(props);
     return (
       <>
-        <Row>
-          <Col>
-            <Container>
-              <Card>
-                <Row>
-                  <Col>
-                    <CardImg top width="100%" src="https://s3-media0.fl.yelpcdn.com/bphoto/MlJLm2ycI7sghPmJbhRZjw/l.jpg" alt="Card image cap" />
-                  </Col>
-                  <Col>
-                    <CardBody>
-                      <CardTitle>{houseHeadline}</CardTitle>
-                      <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
-                      <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
-                    </CardBody>
-                  </Col>
-                </Row>
-              </Card>
-            </Container>
-          </Col>
-        </Row>
+       
         <label htmlFor={props.id || props.name}>{label}</label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
@@ -62,6 +43,8 @@ function HouseDetail(props) {
   const [houseForSale, setHouseForSale] = useState(true)
   const [comments, setComments] = useState([])
   const [commentsReceived, setCommentsReceived] = useState(false)
+  const [newCommentSubmitted, setNewCommentSubmitted] = useState(0)
+
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state.
@@ -75,6 +58,10 @@ function HouseDetail(props) {
     populateHouseInfo()
 
   }, [houseURL])
+
+  useEffect(() => {
+    loadComments(props.match.params.id)
+  }, [newCommentSubmitted])
 
   const loadComments = (id) => {
 
@@ -109,6 +96,29 @@ function HouseDetail(props) {
     if (houseInfoReceived) {
       return (
         <div>
+
+        <Row>
+                  <Col>
+                    <Container>
+                      <Card>
+                        <Row>
+                          <Col>
+                            <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
+                          </Col>
+                          <Col>
+                            <CardBody>
+                              <CardTitle>{houseHeadline}</CardTitle>
+                              <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                              <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                            </CardBody>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </Container>
+                  </Col>
+                </Row>
+
+
           <AuthContext.Consumer>
             {authValue => (
 
@@ -142,6 +152,10 @@ function HouseDetail(props) {
                     .then(result => {
                       console.log('made it back')
                       console.log(result)
+                      //Increate the new comment submitted state value by one to trigger a re-render of the comments 
+                      setNewCommentSubmitted(newCommentSubmitted+1)
+                      //Set the value of the input field back to blank
+                      values.comment=''
                     })
 
                 }
@@ -168,17 +182,15 @@ function HouseDetail(props) {
   const renderComments = () => {
     if(commentsReceived) {
 
-      
       return (
-
         comments.map(item => 
           <Comment 
           name = {item.userName} 
           image = {item.userImage} 
           text = {item.comment}
+          key = {item._id}
           />
         )
-        
       ) 
     }
   }
