@@ -117,23 +117,6 @@ function Landing(props) {
 
   return (
     <div>
-    <Navbar color="dark" light expand="md">
-                    <NavbarBrand tag={Link} to="/" className="text-info">Walkthru</NavbarBrand>
-                    <NavbarToggler onClick={toggle} />
-                    <Collapse isOpen={isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink tag={Link} to="/newHouseForm" className="text-info">Submit New House</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink tag={Link} to="/" className="text-info">User Profile</NavLink>
-                            </NavItem>
-                            <NavItem>
-                              <Button color="info" onClick={logOut}>Log out</Button>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-    </Navbar>
     <Container>
     
         <Row>
