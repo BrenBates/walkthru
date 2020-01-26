@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
-import House from './pages/House';
 import Home from './pages/Home';
-import Landing from './pages/Landing';
+import Landing from './pages/Landing/Landing';
+import HouseDetail from './pages/HouseDetail/HouseDetail';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import NavbarComponent from "./pages/Navbar/Navbar"
 
 import NewHouseForm from './pages/NewHouseForm';
-import HouseDetail from './pages/HouseDetail';
+
 
 import NoMatch from './pages/NoMatch';
 import { AuthContext } from "./context/auth";
@@ -28,7 +29,7 @@ function App(props) {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
-          <ul>
+          {/* <ul>
             <li>
               <Link to="/">Home Page</Link>
             </li>
@@ -36,21 +37,18 @@ function App(props) {
               <Link to="/landing">Landing Page</Link>
             </li>
             <li>
-              <Link to="/newHouseForm">Add House Form/Page Mockup</Link>
+              <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
             </li>
-            <li>
-              <Link to="/HouseDetail">House Detail Page Mockup</Link>
-            </li>
-          </ul>
+      
+          </ul> */}
+          <NavbarComponent />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/landing" component={Landing} />
-            <Route path="/house/:id" component={House} />
-            <Route path="/houses" component={House} />
-            <Route path="/newHouseForm" component={NewHouseForm} />
-            <Route path="/HouseDetails" component={HouseDetail} />
+            <PrivateRoute path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/landing" component={Landing} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
             <Route component={NoMatch} />
           </Switch>
         </div>

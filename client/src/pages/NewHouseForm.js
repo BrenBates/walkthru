@@ -5,12 +5,15 @@ import { Card, Logo } from '../components/AuthForm';
 import logoImg from "../img/walkthru.JPG";
 import "../styles.css";
 import "../styles-custom.css";
+import Axios from 'axios';
 
 const NewHouseForm = () => {
 
-    const MyTextInput = ({ label, ...props}) => {
-        const[field, meta] = useField(props);
-        return(
+    const MyTextInput = ({ label, ...props }) => {
+        // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+        // which we can spread on <input> and also replace ErrorMessage entirely.
+        const [field, meta] = useField(props);
+        return (
             <>
                 <label htmlFor={props.id || props.name}>{label}</label>
                 <input className="text-input" {...field} {...props} />
@@ -27,22 +30,22 @@ const NewHouseForm = () => {
             <Formik
                 initialValues={{ street: "", city: "", st: "", zip: "" }}
                 validationSchema={Yup.object({
-                street: Yup.string()
-                    .min(1, 'Street Address must not be blank.')
-                    .required('Required'),
-                city: Yup.string()
-                    .min(1, "City must not be blank.")
-                    .required('Required'),
-                st: Yup.string()
-                    .max(2, "Please use the states abbreviation.")
-                    .required('Required'),
+                    street: Yup.string()
+                        .min(1, 'Street Address must not be blank.')
+                        .required('Required'),
+                    city: Yup.string()
+                        .min(1, "City must not be blank.")
+                        .required('Required'),
+                    st: Yup.string()
+                        .max(2, "Please use the states abbreviation.")
+                        .required('Required'),
+                    ZIP: Yup.string()
+                        .min(5, "Zip Must be 5 digits.")
+                        .max(5, "Zip Must be 5 digits.")
+                        .required('Required'),
                 })}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                    }, 400);
-                }}
+                onSubmit={(values, { setSubmitting }) => { }
+                }
             >
                 <Form>
                     <MyTextInput
@@ -78,7 +81,7 @@ const NewHouseForm = () => {
                         placeholder="Zip"
                     />
                     <button type="submit">Submit</button>
-                </Form>           
+                </Form>
             </Formik>
         </Card>
     );

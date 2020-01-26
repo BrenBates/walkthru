@@ -1,5 +1,4 @@
 
-
 import React, { Component } from "react";
 import API from "../utils/API";
 // const { setAuthTokens } = useAuth();
@@ -8,11 +7,13 @@ class House extends Component {
   state = {
     houseID: 0,
     comments: "",
+    userName: ""
   };
 
   componentDidMount() {
- 
-    this.setState({houseID: this.props.match.params.id})
+    const params = this.props.match.params;
+
+    this.setState({ houseID: params.id })
     // this.loadHouse();
 
   }
@@ -24,7 +25,7 @@ class House extends Component {
   //     <Button onClick={logOut}>Log out</Button>
   //   </div>
   // );
-  
+
   loadHouse = id => {
     API.getHouse()
       .then(res =>
@@ -40,11 +41,26 @@ class House extends Component {
     });
   };
 
+  // {
+  //   headline: { type: String },
+  //   houseImageURL: { type: String },
+  //   street: { type: String, required: true },
+  //   city: { type: String, required: true },
+  //   state: { type: String, required: true },
+  //   zip: { type: Number, required: true },
+  //   lat: { type: Number },
+  //   long: { type: Number },
+  //   forRent: { type: Boolean },
+  //   forSale: { type: Boolean }
+  // },
+
   render() {
     return (
       <div>
         <p>House page</p>
         <p>{this.state.houseID}</p>
+        <p>{this.state.comments}</p>
+        <p>{this.state.userName}</p>
       </div>
     );
   }
