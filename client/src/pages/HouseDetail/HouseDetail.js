@@ -8,6 +8,7 @@ import '../HouseDetail/housedetail.css'
 import {
   Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button
 } from 'reactstrap';
+import Comment from "../../components/Comment"
 import { AuthContext } from "../../context/auth";
 
 function HouseDetail(props) {
@@ -59,12 +60,14 @@ function HouseDetail(props) {
   const [houseZip, setHouseZip] = useState('')
   const [houseForRent, setHouseForRent] = useState(false)
   const [houseForSale, setHouseForSale] = useState(true)
+  const [comments, setComments] = useState([])
+  const [commentsReceived, setCommentsReceived] = useState(false)
 
   useEffect(() => {
-    // When component mounts, load the house id from the props.params into the state
+    // When component mounts, load the house id from the props.params into the state.
     setHouseURL('/api/houses/' + props.match.params.id)
-
-    console.log("houseImageURL: " + houseImageURL);
+    // Also, when the component mounts, send an axios get call with the house ID to get the comments.
+    loadComments(props.match.params.id)
 
   }, []);
 
@@ -73,12 +76,21 @@ function HouseDetail(props) {
 
   }, [houseURL])
 
+  const loadComments = (id) => {
+
+    let queryURL = "/api/comments/byhouse/" + id;
+    axios.get(queryURL).then( res => {
+      setComments(res.data)
+      setCommentsReceived(true)
+    })
+
+  }
+
   const populateHouseInfo = () => {
 
     axios.get(houseURL).then((res) => {
 
       const data = res.data;
-      console.log(data)
       setHouseID(data._id);
       setHouseHeadline(data.headline);
       setHouseImageURL(data.houseImageURL);
@@ -92,17 +104,8 @@ function HouseDetail(props) {
     })
   }
 
-  //create a button with an id of the userid from the context.
 
-  // const AuthButton = () => (
-
-  //   return (
-
-  //   )
-
-  //   )
-
-  const renderPage = () => {
+  const renderHouseInfo = () => {
     if (houseInfoReceived) {
       return (
         <div>
@@ -124,32 +127,22 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
-                  console.log(authValue);
+                  
+                  let userName = authValue.authTokens.username;
+                  let userImage = authValue.authTokens.userImage;
+                  let comment  = values.comment
+            
 
-                  // let { comment } = values
-
-                  // axios.post("/api/users/login", {
-                  //   comment,
-                  //   houseID,
-                  // })
-                  //   .then(result => {
-                  //     // if (result.status === 200) {
-
-                  //     //   if (result.data.error) {
-                  //     //     setErrorText(result.data.error)
-                  //     //     setIsError(true)
-                  //     //   } else {
-                  //     //     //Set the auth token along with the user data into the context
-                  //     //     setAuthTokens(result.data)
-                  //     //     setLoggedIn(true);
-                  //     //   }
-                  //     // } else {
-                  //     //   setIsError(true);
-                  //     // }
-                  //   })
-                  // .catch(e => {
-                  //   setIsError(true);
-                  // });
+                  axios.post("/api/comments/byhouse", {
+                    houseID,
+                    userName,
+                    userImage,
+                    comment
+                  })
+                    .then(result => {
+                      console.log('made it back')
+                      console.log(result)
+                    })
 
                 }
                 }
@@ -172,8 +165,32 @@ function HouseDetail(props) {
     }
   }
 
+  const renderComments = () => {
+    if(commentsReceived) {
+
+      
+      return (
+
+        comments.map(item => 
+          <Comment 
+          name = {item.userName} 
+          image = {item.userImage} 
+          text = {item.comment}
+          />
+        )
+        
+      ) 
+    }
+  }
+
   return (
-    <div>{renderPage()}</div>
+    <div>
+
+      {renderHouseInfo()}
+      {renderComments()}
+    
+    </div>
+    
   )
 }
 
