@@ -43,6 +43,8 @@ function HouseDetail(props) {
   const [houseForSale, setHouseForSale] = useState(true)
   const [comments, setComments] = useState([])
   const [commentsReceived, setCommentsReceived] = useState(false)
+  const [newCommentSubmitted, setNewCommentSubmitted] = useState(0)
+
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state.
@@ -56,6 +58,10 @@ function HouseDetail(props) {
     populateHouseInfo()
 
   }, [houseURL])
+
+  useEffect(() => {
+    loadComments(props.match.params.id)
+  }, [newCommentSubmitted])
 
   const loadComments = (id) => {
 
@@ -146,6 +152,10 @@ function HouseDetail(props) {
                     .then(result => {
                       console.log('made it back')
                       console.log(result)
+                      //Increate the new comment submitted state value by one to trigger a re-render of the comments 
+                      setNewCommentSubmitted(newCommentSubmitted+1)
+                      //Set the value of the input field back to blank
+                      values.comment=''
                     })
 
                 }

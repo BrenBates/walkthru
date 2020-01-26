@@ -30,6 +30,9 @@ const NavbarPage = (props) => {
               <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink tag={Link} to="/User" className="text-info">Your Profile</NavLink>
+            </NavItem>
+            <NavItem>
               <button onClick={props.logOut}>Log Out</button>
               {/* <NavLink tag={Link} to="/Login" className="text-info">Sign Out</NavLink> */}
             </NavItem>

@@ -4,6 +4,7 @@ import PrivateRoute from './PrivateRoute';
 import Home from './pages/Home';
 import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
+import UserProfile from './pages/UserProfile/UserProfile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
@@ -52,6 +53,7 @@ function App(props) {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/user" component={UserProfile} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/landing" component={Landing} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
             <Route component={NoMatch} />

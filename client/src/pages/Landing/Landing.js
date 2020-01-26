@@ -46,17 +46,7 @@ function Landing(props) {
     );
   };
 
-  function logOut() {
-    setAuthTokens();
-  }
 
-  function toggle() {
-    if(isOpen === false) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }
 
   function loadMap() {
 
