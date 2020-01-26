@@ -125,14 +125,19 @@ function HouseDetail(props) {
                   // }, 400);
 
                   console.log(authValue);
+                  
+                  let username = authValue.authTokens.username;
+                  let comment  = values.comment
+            
 
-                  // let { comment } = values
-
-                  // axios.post("/api/users/login", {
-                  //   comment,
-                  //   houseID,
-                  // })
-                  //   .then(result => {
+                  axios.post("/api/comments/", {
+                    houseID,
+                    username,
+                    comment
+                  })
+                    .then(result => {
+                      console.log('made it back')
+                    })
                   //     // if (result.status === 200) {
 
                   //     //   if (result.data.error) {
