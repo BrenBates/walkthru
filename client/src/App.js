@@ -25,6 +25,11 @@ function App(props) {
     setAuthTokens(data);
   }
 
+  
+  const logOut = () => {
+    setAuthTokens();
+  }
+
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
@@ -41,7 +46,7 @@ function App(props) {
             </li>
       
           </ul> */}
-          <NavbarComponent />
+          <NavbarComponent logOut={logOut}/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />

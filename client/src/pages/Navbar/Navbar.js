@@ -30,7 +30,8 @@ const NavbarPage = (props) => {
               <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/Login" className="text-info">Sign Out</NavLink>
+              <button onClick={props.logOut}>Log Out</button>
+              {/* <NavLink tag={Link} to="/Login" className="text-info">Sign Out</NavLink> */}
             </NavItem>
           </Nav>
           <NavbarText>walkthru-ers are saying...</NavbarText>
