@@ -26,7 +26,7 @@ function HouseDetail(props) {
               <Card>
                 <Row>
                   <Col>
-                    <CardImg top width="100%" src="https://s3-media0.fl.yelpcdn.com/bphoto/MlJLm2ycI7sghPmJbhRZjw/l.jpg" alt="Card image cap" />
+                    <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
                   </Col>
                   <Col>
                     <CardBody>
@@ -168,17 +168,15 @@ function HouseDetail(props) {
   const renderComments = () => {
     if(commentsReceived) {
 
-      
       return (
-
         comments.map(item => 
           <Comment 
           name = {item.userName} 
           image = {item.userImage} 
           text = {item.comment}
+          key = {item._id}
           />
         )
-        
       ) 
     }
   }
