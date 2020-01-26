@@ -63,9 +63,6 @@ function HouseDetail(props) {
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseURL('/api/houses/' + props.match.params.id)
-
-    console.log("houseImageURL: " + houseImageURL);
-
   }, []);
 
   useEffect(() => {
@@ -124,7 +121,15 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
-                  console.log(authValue);
+                  console.log("user: " + authValue.authTokens.username);
+
+                  let nameURL = "/api/users/comments";
+                  console.log("nameURL: " + nameURL);
+
+                  axios.get(nameURL).then(() => {
+                    console.log("/api/users/comments");
+                  })
+                  .catch(err => console.log(err));
 
                   // let { comment } = values
 

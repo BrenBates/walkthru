@@ -10,12 +10,13 @@ router.route("/")
 router
   .route("/:id")
   .get(housesController.findById);
- // .put(housesController.update)
-  //.delete(housesController.remove);
 
-  // router.get("/", async (req, res) => {
-  // const houses = await House.find({}).populate("comments");
-  // res.send(houses);
+// .put(housesController.update)
+//.delete(housesController.remove);
+
+// router.get("/", async (req, res) => {
+// const houses = await House.find({}).populate("comments");
+// res.send(houses);
 // });
 
 module.exports = router;

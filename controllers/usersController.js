@@ -15,7 +15,6 @@ module.exports = {
   },
   //Method for a new user to register to the app.
   register: function (req, res) {
-
     const userData = {
       username: req.body.username,
       email: req.body.email,
@@ -31,7 +30,6 @@ module.exports = {
           error: 'User name is unavailable'
         })
       } else {
-
         //find if the email is already taken, if not create user
         db.User.findOne({
           email: userData.email
@@ -50,7 +48,6 @@ module.exports = {
                 let token = jwt.sign(userData, process.env.REACT_APP_SECRET_KEY, {
                   expiresIn: 10000
                 })
-          
                 res.json({
                   token: token,
                   username: User.username,
@@ -60,7 +57,6 @@ module.exports = {
               }).catch(err => {
                 res.send('error: ' + err)
               })
-
           } else {
             res.json({
               error: 'A user with that email already exists'
@@ -69,25 +65,18 @@ module.exports = {
         }).catch(err => {
           res.send('error: ' + err)
         })
-
-
       }
-
     })
-
-
-
   },
   //Method for an existing user to sign in to the app.
   logIn: function (req, res) {
     let email = req.body.email.trim();
     db.User.findOne({
-        email: email
-      })
-      .then(      
+      email: email
+    })
+      .then(
         User => {
-
-          if(!User) {
+          if (!User) {
             res.json({
               error: 'There is no user with that email address'
             })
@@ -100,7 +89,6 @@ module.exports = {
               let token = jwt.sign(userData, process.env.REACT_APP_SECRET_KEY, {
                 expiresIn: 60000
               })
-            
               res.json({
                 token: token,
                 username: User.username,
@@ -111,14 +99,22 @@ module.exports = {
               res.json({
                 error: 'Password incorrect'
               })
-            
             }
           }
-           
-      })
+        })
       .catch(err => {
         res.send('error: ' + err)
       })
+  },
+  getUserByID: function (req, res) {
+    const userData = {
+      username: req.body.username
+    }
+    db.User.findOne({
+      username: userData.username
+    }).then(Username => {
+      console.log("username on back end: " + username);
+    })
   },
   //Method for validating a user token to allow access to a private route.
   validateToken: function (req, res) {
