@@ -5,17 +5,10 @@ const Schema = mongoose.Schema;
 
 // Body is the comment itself, and we have 2 references - one to the user and one to the house the comment is attached to
 const CommentSchema = new Schema({
-  body: {
-    type: String, required: true
-  },
-  userRef: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  houseRef: {
-    type: Schema.Types.ObjectId,
-    ref: 'House'
-  }
+  houseID: {type: String, required: true},
+  userName: { type: String, required: true },
+  userImage: { type: String, required: true },
+  comment: {type: String, required: true}
 });
 
 // This creates our model from the above schema, using mongoose's model method
