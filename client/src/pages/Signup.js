@@ -135,7 +135,6 @@ function Signup(props) {
             <button type="submit">Submit</button>
       </Form>
       </Formik>
-      <Link to="/login">Already have an account?</Link>
         {/* { mismatchError &&<Error>The two password fields must be the same!</Error>} */}
         { isError &&<Error>{errorText}</Error>}
     </Card>
