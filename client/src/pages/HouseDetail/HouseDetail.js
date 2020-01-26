@@ -20,26 +20,7 @@ function HouseDetail(props) {
     const [field, meta] = useField(props);
     return (
       <>
-        <Row>
-          <Col>
-            <Container>
-              <Card>
-                <Row>
-                  <Col>
-                    <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
-                  </Col>
-                  <Col>
-                    <CardBody>
-                      <CardTitle>{houseHeadline}</CardTitle>
-                      <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
-                      <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
-                    </CardBody>
-                  </Col>
-                </Row>
-              </Card>
-            </Container>
-          </Col>
-        </Row>
+       
         <label htmlFor={props.id || props.name}>{label}</label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
@@ -109,6 +90,29 @@ function HouseDetail(props) {
     if (houseInfoReceived) {
       return (
         <div>
+
+        <Row>
+                  <Col>
+                    <Container>
+                      <Card>
+                        <Row>
+                          <Col>
+                            <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
+                          </Col>
+                          <Col>
+                            <CardBody>
+                              <CardTitle>{houseHeadline}</CardTitle>
+                              <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                              <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                            </CardBody>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </Container>
+                  </Col>
+                </Row>
+
+
           <AuthContext.Consumer>
             {authValue => (
 
