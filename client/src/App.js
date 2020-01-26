@@ -6,6 +6,7 @@ import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import NavbarComponent from "./pages/Navbar/Navbar"
 
 import NewHouseForm from './pages/NewHouseForm';
 
@@ -28,7 +29,7 @@ function App(props) {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
-          <ul>
+          {/* <ul>
             <li>
               <Link to="/">Home Page</Link>
             </li>
@@ -39,14 +40,15 @@ function App(props) {
               <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
             </li>
       
-          </ul>
+          </ul> */}
+          <NavbarComponent />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/house/:id" component={HouseDetail} />
-            <PrivateRoute path="/landing" component={Landing} />
-            <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
+            <Route path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
+            <Route path="/landing" component={Landing} /* Change back to PrivateRoute *//>
+            <Route path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
             <Route component={NoMatch} />
           </Switch>
         </div>

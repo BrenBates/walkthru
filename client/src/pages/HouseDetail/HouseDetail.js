@@ -6,17 +6,7 @@ import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
 // import { useAuth } from "../../context/auth";
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  Container,
-  Row,
-  Col,
-  Button
+  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button
 } from 'reactstrap';
 import { AuthContext } from "../../context/auth";
 
@@ -41,39 +31,40 @@ function HouseDetail(props) {
   const [houseURL, setHouseURL] = useState('')
   const [houseInfoReceived, setHouseInfoReceived] = useState(false)
   const [houseID, setHouseID] = useState('')
-  const [houseImageURL, setHouseImageURL] = useState('');
+  const [houseImageURL, setHouseImageURL] = useState('')
   const [houseHeadline, setHouseHeadline] = useState('')
   const [houseStreet, setHouseStreet] = useState('')
   const [houseCity, setHouseCity] = useState('')
   const [houseState, setHouseState] = useState('')
   const [houseZip, setHouseZip] = useState('')
-  const [houseForRent, setHouseForRent] = useState('')
-  const [houseForSale, setHouseForSale] = useState('')
-  
-  
-  
+  const [houseForRent, setHouseForRent] = useState(false)
+  const [houseForSale, setHouseForSale] = useState(true)
+
+
+
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseURL('/api/houses/' + props.match.params.id)
-    
-    
+
+    console.log("houseImageURL: " + houseImageURL);
+
   }, []);
 
   useEffect(() => {
     populateHouseInfo()
-    
+
   }, [houseURL])
 
   const populateHouseInfo = () => {
-    
+
     axios.get(houseURL).then((res) => {
-    
+
       const data = res.data;
 
       setHouseID(data._id);
-      setHouseImageURL(data.houseImageURL);
       setHouseHeadline(data.headline);
+      setHouseImageURL(data.houseImageURL);
       setHouseStreet(data.street);
       setHouseCity(data.city);
       setHouseState(data.state);
@@ -89,87 +80,102 @@ function HouseDetail(props) {
   // const AuthButton = () => (
 
   //   return (
-     
+
   //   )
 
   //   )
- 
+
+  // Collapse,
+  // Navbar,
+  // NavbarToggler,
+  // NavbarBrand,
+  // Nav,
+  // NavItem,
+  // NavLink,
+  // Container,
+  // Row,
+  // Col,
+  // Button
 
   const renderPage = () => {
     if (houseInfoReceived) {
       return (
         <div>
-          <p>{houseHeadline}</p>
-          <p>{houseStreet}</p>
-          <p>{houseCity}</p>
-          <p>{houseState}</p>
-          <p>{houseZip}</p>
-          <p>{houseForRent}</p>
-          <p>{houseForSale}</p>
+          <Row>
+            <Col>
+              <Container>
+                <Card>
+                  <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
+                  <CardBody>
+                    <CardTitle>{houseHeadline}</CardTitle>
+                    <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                    <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                  </CardBody>
+                </Card>
+              </Container>
+            </Col>
+          </Row>
 
           <AuthContext.Consumer>
             {authValue => (
 
-          <Formik
-            initialValues={{
-              comment: ""
-            }}
-            validationSchema={Yup.object({
-              comment: Yup.string()
-                .min(1, "Must have at least one character")
-                .required("Required")
-            })}
-            onSubmit={(values, { setSubmitting }) => {
-              // setTimeout(() => {
-              //   alert(JSON.stringify(values, null, 2));
-              //   setSubmitting(false);  
-              // }, 400);
+              <Formik
+                initialValues={{
+                  comment: ""
+                }}
+                validationSchema={Yup.object({
+                  comment: Yup.string()
+                    .min(1, "Must have at least one character")
+                    .required("Required")
+                })}
+                onSubmit={(values, { setSubmitting }) => {
+                  // setTimeout(() => {
+                  //   alert(JSON.stringify(values, null, 2));
+                  //   setSubmitting(false);  
+                  // }, 400);
 
-              console.log(authValue.authTokens.username)
+                  console.log("authValue.authTokens.username: " + authValue.authTokens.username);
 
-              // let { comment } = values
+                  // let { comment } = values
 
-              // axios.post("/api/users/login", {
-              //   comment,
-              //   houseID,
-              // })
-              //   .then(result => {
-              //     // if (result.status === 200) {
+                  // axios.post("/api/users/login", {
+                  //   comment,
+                  //   houseID,
+                  // })
+                  //   .then(result => {
+                  //     // if (result.status === 200) {
 
-              //     //   if (result.data.error) {
-              //     //     setErrorText(result.data.error)
-              //     //     setIsError(true)
-              //     //   } else {
-              //     //     //Set the auth token along with the user data into the context
-              //     //     setAuthTokens(result.data)
-              //     //     setLoggedIn(true);
-              //     //   }
-              //     // } else {
-              //     //   setIsError(true);
-              //     // }
-              //   })
-                // .catch(e => {
-                //   setIsError(true);
-                // });
+                  //     //   if (result.data.error) {
+                  //     //     setErrorText(result.data.error)
+                  //     //     setIsError(true)
+                  //     //   } else {
+                  //     //     //Set the auth token along with the user data into the context
+                  //     //     setAuthTokens(result.data)
+                  //     //     setLoggedIn(true);
+                  //     //   }
+                  //     // } else {
+                  //     //   setIsError(true);
+                  //     // }
+                  //   })
+                  // .catch(e => {
+                  //   setIsError(true);
+                  // });
 
-            }
-          }
-          >
-            <Form>
-              <MyTextInput
-                label="New Comment"
-                name="comment"
-                type="text"
-                placeholder="Enter new comment..."
-              />
+                }
+                }
+              >
+                <Form>
+                  <MyTextInput
+                    label="New Comment"
+                    name="comment"
+                    type="text"
+                    placeholder="Enter new comment..."
+                  />
 
-            <button type="submit">Submit</button>
-         
-            
-            </Form>
-          </Formik>
-
-          )}         
+                  <button type="submit">Add Comment</button>
+                </Form>
+              </Formik>
+            )}
           </AuthContext.Consumer>
         </div>
       )
@@ -177,12 +183,12 @@ function HouseDetail(props) {
   }
 
 
- 
-  
+
+
   return (
 
     <div>{renderPage()}</div>
-    
+
 
   )
 
