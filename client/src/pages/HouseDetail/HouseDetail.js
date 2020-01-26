@@ -8,6 +8,7 @@ import '../HouseDetail/housedetail.css'
 import {
   Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button
 } from 'reactstrap';
+import Comment from "../../components/Comment"
 import { AuthContext } from "../../context/auth";
 
 function HouseDetail(props) {
@@ -59,13 +60,18 @@ function HouseDetail(props) {
   const [houseZip, setHouseZip] = useState('')
   const [houseForRent, setHouseForRent] = useState(false)
   const [houseForSale, setHouseForSale] = useState(true)
+  const [comments, setComments] = useState([])
+  const [commentsReceived, setCommentsReceived] = useState(false)
 
   useEffect(() => {
-    // When component mounts, load the house id from the props.params into the state
+    // When component mounts, load the house id from the props.params into the state.
     setHouseURL('/api/houses/' + props.match.params.id)
+<<<<<<< HEAD
+=======
+    // Also, when the component mounts, send an axios get call with the house ID to get the comments.
+    loadComments(props.match.params.id)
 
-    console.log("houseImageURL: " + houseImageURL);
-
+>>>>>>> 4043bfdca3becd53a311a1bc40eef02cdbeec7d4
   }, []);
 
   useEffect(() => {
@@ -73,12 +79,21 @@ function HouseDetail(props) {
 
   }, [houseURL])
 
+  const loadComments = (id) => {
+
+    let queryURL = "/api/comments/byhouse/" + id;
+    axios.get(queryURL).then( res => {
+      setComments(res.data)
+      setCommentsReceived(true)
+    })
+
+  }
+
   const populateHouseInfo = () => {
 
     axios.get(houseURL).then((res) => {
 
       const data = res.data;
-      console.log(data)
       setHouseID(data._id);
       setHouseHeadline(data.headline);
       setHouseImageURL(data.houseImageURL);
@@ -92,17 +107,8 @@ function HouseDetail(props) {
     })
   }
 
-  //create a button with an id of the userid from the context.
 
-  // const AuthButton = () => (
-
-  //   return (
-
-  //   )
-
-  //   )
-
-  const renderPage = () => {
+  const renderHouseInfo = () => {
     if (houseInfoReceived) {
       return (
         <div>
@@ -124,7 +130,16 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
-                  console.log(authValue);
+<<<<<<< HEAD
+                  console.log("user: " + authValue.authTokens.username);
+
+                  let nameURL = "/api/users/comments";
+                  console.log("nameURL: " + nameURL);
+
+                  axios.get(nameURL).then(() => {
+                    console.log("/api/users/comments");
+                  })
+                  .catch(err => console.log(err));
 
                   // let { comment } = values
 
@@ -150,6 +165,24 @@ function HouseDetail(props) {
                   // .catch(e => {
                   //   setIsError(true);
                   // });
+=======
+                  
+                  let userName = authValue.authTokens.username;
+                  let userImage = authValue.authTokens.userImage;
+                  let comment  = values.comment
+            
+
+                  axios.post("/api/comments/byhouse", {
+                    houseID,
+                    userName,
+                    userImage,
+                    comment
+                  })
+                    .then(result => {
+                      console.log('made it back')
+                      console.log(result)
+                    })
+>>>>>>> 4043bfdca3becd53a311a1bc40eef02cdbeec7d4
 
                 }
                 }
@@ -172,8 +205,32 @@ function HouseDetail(props) {
     }
   }
 
+  const renderComments = () => {
+    if(commentsReceived) {
+
+      
+      return (
+
+        comments.map(item => 
+          <Comment 
+          name = {item.userName} 
+          image = {item.userImage} 
+          text = {item.comment}
+          />
+        )
+        
+      ) 
+    }
+  }
+
   return (
-    <div>{renderPage()}</div>
+    <div>
+
+      {renderHouseInfo()}
+      {renderComments()}
+    
+    </div>
+    
   )
 }
 

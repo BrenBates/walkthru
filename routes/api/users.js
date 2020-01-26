@@ -10,6 +10,11 @@ router.route("/")
 router.route("/register")
     .post(usersController.register);
 
+// Matches with "/api/users/:id"
+router
+  .route("/:id")
+  .get(usersController.getUserByID);
+
 // router.get("/houses", async (req, res) => {
 //   console.log("req.user: ", req.user);
 //   //const loggedInUserId = req.user;
