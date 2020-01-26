@@ -28,6 +28,9 @@ const NavbarPage = (props) => {
             <NavItem>
               <NavLink href="/Landing">Landing</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/Login">Sign Out</NavLink>
+            </NavItem>
           </Nav>
           <NavbarText>walkthru-ers are saying...</NavbarText>
         </Collapse>

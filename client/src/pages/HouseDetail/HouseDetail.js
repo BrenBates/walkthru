@@ -19,6 +19,26 @@ function HouseDetail(props) {
     const [field, meta] = useField(props);
     return (
       <>
+        <Row>
+          <Col>
+            <Container>
+              <Card>
+                <Row>
+                  <Col>
+                    <CardImg top width="100%" src="https://s3-media0.fl.yelpcdn.com/bphoto/MlJLm2ycI7sghPmJbhRZjw/l.jpg" alt="Card image cap" />
+                  </Col>
+                  <Col>
+                    <CardBody>
+                      <CardTitle>{houseHeadline}</CardTitle>
+                      <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                      <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                    </CardBody>
+                  </Col>
+                </Row>
+              </Card>
+            </Container>
+          </Col>
+        </Row>
         <label htmlFor={props.id || props.name}>{label}</label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
@@ -40,9 +60,6 @@ function HouseDetail(props) {
   const [houseForRent, setHouseForRent] = useState(false)
   const [houseForSale, setHouseForSale] = useState(true)
 
-
-
-
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseURL('/api/houses/' + props.match.params.id)
@@ -61,7 +78,7 @@ function HouseDetail(props) {
     axios.get(houseURL).then((res) => {
 
       const data = res.data;
-
+      console.log(data)
       setHouseID(data._id);
       setHouseHeadline(data.headline);
       setHouseImageURL(data.houseImageURL);
@@ -85,37 +102,10 @@ function HouseDetail(props) {
 
   //   )
 
-  // Collapse,
-  // Navbar,
-  // NavbarToggler,
-  // NavbarBrand,
-  // Nav,
-  // NavItem,
-  // NavLink,
-  // Container,
-  // Row,
-  // Col,
-  // Button
-
   const renderPage = () => {
     if (houseInfoReceived) {
       return (
         <div>
-          <Row>
-            <Col>
-              <Container>
-                <Card>
-                  <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
-                  <CardBody>
-                    <CardTitle>{houseHeadline}</CardTitle>
-                    <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
-                    <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
-                  </CardBody>
-                </Card>
-              </Container>
-            </Col>
-          </Row>
-
           <AuthContext.Consumer>
             {authValue => (
 
@@ -134,7 +124,7 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
-                  console.log("authValue.authTokens.username: " + authValue.authTokens.username);
+                  console.log(authValue);
 
                   // let { comment } = values
 
@@ -182,17 +172,9 @@ function HouseDetail(props) {
     }
   }
 
-
-
-
   return (
-
     <div>{renderPage()}</div>
-
-
   )
-
 }
-
 
 export default HouseDetail;

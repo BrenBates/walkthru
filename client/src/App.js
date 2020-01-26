@@ -46,9 +46,9 @@ function App(props) {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
-            <Route path="/landing" component={Landing} /* Change back to PrivateRoute *//>
-            <Route path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/landing" component={Landing} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
             <Route component={NoMatch} />
           </Switch>
         </div>
