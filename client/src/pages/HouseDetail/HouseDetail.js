@@ -24,7 +24,7 @@ function HouseDetail(props) {
           <Col>
             <Container>
               <Card>
-                <Row>
+                <Row> 
                   <Col>
                     <CardImg top width="100%" src="https://s3-media0.fl.yelpcdn.com/bphoto/MlJLm2ycI7sghPmJbhRZjw/l.jpg" alt="Card image cap" />
                   </Col>
@@ -58,41 +58,40 @@ function HouseDetail(props) {
   const [houseCity, setHouseCity] = useState('')
   const [houseState, setHouseState] = useState('')
   const [houseZip, setHouseZip] = useState('')
-  const [houseForRent, setHouseForRent] = useState(false)
   const [houseForSale, setHouseForSale] = useState(true)
   const [comments, setComments] = useState([])
   const [commentsReceived, setCommentsReceived] = useState(false)
+  const [newCommentSubmitted, setNewCommentSubmitted] = useState(0)
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseURL('/api/houses/' + props.match.params.id)
     
-
     // Also, when the component mounts, send an axios get call withthe house ID to get the comments
     loadComments(props.match.params.id);
-
-
   }, []);
 
+  // Get all the data related to the current house to the user
   useEffect(() => {
     populateHouseInfo()
+  }, [houseURL]);
 
-  }, [houseURL])
+  // Get the latest comments loaded to the page
+  useEffect(() => {
+    loadComments(props.match.params.id)
+  }, [newCommentSubmitted]);
 
   const loadComments = (id) => {
-    
     let queryURL = "/api/comments/byhouse/" + id;
     axios.get(queryURL).then( res => {
       setComments(res.data)
       setCommentsReceived(true)
     })
-
   }
 
   const populateHouseInfo = () => {
 
     axios.get(houseURL).then((res) => {
-
       const data = res.data;
       setHouseID(data._id);
       setHouseHeadline(data.headline);
@@ -101,12 +100,10 @@ function HouseDetail(props) {
       setHouseCity(data.city);
       setHouseState(data.state);
       setHouseZip(data.zip);
-      setHouseForRent(data.forRent);
       setHouseForSale(data.forSale);
       setHouseInfoReceived(true);
     })
   }
-
 
   const renderHouseInfo = () => {
     if (houseInfoReceived) {
@@ -114,7 +111,6 @@ function HouseDetail(props) {
         <div>
           <AuthContext.Consumer>
             {authValue => (
-
               <Formik
                 initialValues={{
                   comment: ""
@@ -130,16 +126,15 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
+                  // console.log("user: " + authValue.authTokens.username);
 
-                  console.log("user: " + authValue.authTokens.username);
+                  // let nameURL = "/api/users/comments";
+                  // console.log("nameURL: " + nameURL);
 
-                  let nameURL = "/api/users/comments";
-                  console.log("nameURL: " + nameURL);
-
-                  axios.get(nameURL).then(() => {
-                    console.log("/api/users/comments");
-                  })
-                  .catch(err => console.log(err));
+                  // axios.get(nameURL).then(() => {
+                  //   console.log("/api/users/comments");
+                  // })
+                  // .catch(err => console.log(err));
 
                   // let { comment } = values
 
@@ -165,13 +160,10 @@ function HouseDetail(props) {
                   // .catch(e => {
                   //   setIsError(true);
                   // });
-
-
                   let userName = authValue.authTokens.username;
                   let userImage = authValue.authTokens.userImage;
                   let comment  = values.comment
           
-                  
                   axios.post("/api/comments/byhouse", {
                     houseID,
                     userName,
@@ -179,12 +171,14 @@ function HouseDetail(props) {
                     comment
                   })
                     .then(result => {
-                      console.log('made it back')
-                      console.log(result)
+                      console.log('made it back');
+                      console.log(result);
+                      //Increment the new comment submitted state value by one to trigger a re-render of the comments 
+                      setNewCommentSubmitted(newCommentSubmitted+1);
+                      //Reset the value of the input field
+                      values.comment='';
                     })
-
-
-                }
+                  }
                 }
               >
                 <Form>
@@ -194,7 +188,6 @@ function HouseDetail(props) {
                     type="text"
                     placeholder="Enter new comment..."
                   />
-
                   <button type="submit">Add Comment</button>
                 </Form>
               </Formik>
@@ -204,13 +197,9 @@ function HouseDetail(props) {
       )
     }
   }
-
   const renderComments = () => {
     if(commentsReceived) {
-
-
       return (
-
         comments.map(item => 
           <Comment 
           name = {item.userName} 
@@ -218,19 +207,14 @@ function HouseDetail(props) {
           text = {item.comment}
           />
         )
-        
       ) 
     }
   }
-
   return (
     <div>
-
       {renderHouseInfo()}
       {renderComments()}
-      
     </div>
-
   )
 }
 

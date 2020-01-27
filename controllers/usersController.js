@@ -106,16 +106,6 @@ module.exports = {
         res.send('error: ' + err)
       })
   },
-  getUserByID: function (req, res) {
-    const userData = {
-      username: req.body.username
-    }
-    db.User.findOne({
-      username: userData.username
-    }).then(Username => {
-      console.log("username on back end: " + username);
-    })
-  },
   //Method for validating a user token to allow access to a private route.
   validateToken: function (req, res) {
     console.log('Meow')
