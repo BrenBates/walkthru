@@ -1,5 +1,5 @@
 import React from "react";
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
 
 const mapStyles = {
   width: '90%',
@@ -7,9 +7,6 @@ const mapStyles = {
 };
 
 export class MapContainer extends React.Component {
-    constructor(props) {
-      super(props);
-    }
 
     displayMarkers = () => {
       return this.props.mapInfo.map((store, index) => {
