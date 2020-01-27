@@ -81,6 +81,10 @@ function HouseDetail(props) {
     loadComments(props.match.params.id)
   }, [newCommentSubmitted]);
 
+  useEffect(() => {
+    loadComments(props.match.params.id)
+  }, [newCommentSubmitted])
+
   const loadComments = (id) => {
     let queryURL = "/api/comments/byhouse/" + id;
     axios.get(queryURL).then( res => {
@@ -109,6 +113,29 @@ function HouseDetail(props) {
     if (houseInfoReceived) {
       return (
         <div>
+
+        <Row>
+                  <Col>
+                    <Container>
+                      <Card>
+                        <Row>
+                          <Col>
+                            <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
+                          </Col>
+                          <Col>
+                            <CardBody>
+                              <CardTitle>{houseHeadline}</CardTitle>
+                              <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                              <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                            </CardBody>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </Container>
+                  </Col>
+                </Row>
+
+
           <AuthContext.Consumer>
             {authValue => (
               <Formik
@@ -205,6 +232,7 @@ function HouseDetail(props) {
           name = {item.userName} 
           image = {item.userImage} 
           text = {item.comment}
+          key = {item._id}
           />
         )
       ) 
