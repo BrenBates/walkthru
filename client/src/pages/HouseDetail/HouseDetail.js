@@ -49,12 +49,9 @@ function HouseDetail(props) {
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state.
     setHouseURL('/api/houses/' + props.match.params.id)
-<<<<<<< HEAD
-=======
     // Also, when the component mounts, send an axios get call with the house ID to get the comments.
     loadComments(props.match.params.id)
 
->>>>>>> 4043bfdca3becd53a311a1bc40eef02cdbeec7d4
   }, []);
 
   useEffect(() => {
@@ -140,42 +137,6 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
-<<<<<<< HEAD
-                  console.log("user: " + authValue.authTokens.username);
-
-                  let nameURL = "/api/users/comments";
-                  console.log("nameURL: " + nameURL);
-
-                  axios.get(nameURL).then(() => {
-                    console.log("/api/users/comments");
-                  })
-                  .catch(err => console.log(err));
-
-                  // let { comment } = values
-
-                  // axios.post("/api/users/login", {
-                  //   comment,
-                  //   houseID,
-                  // })
-                  //   .then(result => {
-                  //     // if (result.status === 200) {
-
-                  //     //   if (result.data.error) {
-                  //     //     setErrorText(result.data.error)
-                  //     //     setIsError(true)
-                  //     //   } else {
-                  //     //     //Set the auth token along with the user data into the context
-                  //     //     setAuthTokens(result.data)
-                  //     //     setLoggedIn(true);
-                  //     //   }
-                  //     // } else {
-                  //     //   setIsError(true);
-                  //     // }
-                  //   })
-                  // .catch(e => {
-                  //   setIsError(true);
-                  // });
-=======
                   
                   let userName = authValue.authTokens.username;
                   let userImage = authValue.authTokens.userImage;
@@ -196,7 +157,6 @@ function HouseDetail(props) {
                       //Set the value of the input field back to blank
                       values.comment=''
                     })
->>>>>>> 4043bfdca3becd53a311a1bc40eef02cdbeec7d4
 
                 }
                 }
