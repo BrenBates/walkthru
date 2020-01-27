@@ -52,7 +52,7 @@ function App(props) {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/house/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/api/houses/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/user" component={UserProfile} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/landing" component={Landing} /* Change back to PrivateRoute *//>
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>

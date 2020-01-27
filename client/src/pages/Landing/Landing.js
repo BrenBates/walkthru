@@ -86,7 +86,7 @@ function Landing(props) {
   if (houseSelected) { 
     return ( 
       <div>
-        <Link to={"/house/"+currentHouse._id}>Go to House</Link>
+        <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link>
         <p>{currentHouse.headline}</p>
         <p>{currentHouse.street}</p>
         <p>{currentHouse.city}</p>
