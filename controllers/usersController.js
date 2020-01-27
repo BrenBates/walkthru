@@ -106,15 +106,22 @@ module.exports = {
         res.send('error: ' + err)
       })
   },
-  getUserByID: function (req, res) {
-    const userData = {
-      username: req.body.username
-    }
-    db.User.findOne({
-      username: userData.username
-    }).then(Username => {
-      console.log("username on back end: " + username);
-    })
+
+  //Method for updating a users profile picture
+  updateProfilePic: function(req,res) {
+    console.log('updating profile picture')
+    console.log(req.body.imgURL)
+
+    db.User.findOneAndUpdate(
+      {"username": req.body.user},
+      {"userImage": req.body.imgURL}
+      ).then(dbModel => {
+        console.log(dbModel)
+        res.json(dbModel)
+      })
+      .catch(err => res.status(422).json(err));
+
+
   },
   //Method for validating a user token to allow access to a private route.
   validateToken: function (req, res) {
