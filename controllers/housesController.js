@@ -8,7 +8,7 @@ module.exports = {
   //     console.log('element ', element);    }
   // });
   findAll: function(req, res) {
-    console.log('findAll');
+    console.log('houses findAll');
     db.House
       .find(req.query)
       .sort({ date: -1 })
@@ -16,7 +16,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    console.log('findById');
+    console.log('houses findById');
     
     db.House
       .findById(req.params.id)

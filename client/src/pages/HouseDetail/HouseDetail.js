@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect} from "react";
 import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
 // import { useAuth } from "../../context/auth";
 import {
-  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button
+  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle
 } from 'reactstrap';
 import Comment from "../../components/Comment"
 import { AuthContext } from "../../context/auth";
@@ -45,26 +44,43 @@ function HouseDetail(props) {
   const [commentsReceived, setCommentsReceived] = useState(false)
   const [newCommentSubmitted, setNewCommentSubmitted] = useState(0)
 
+ 
 
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state.
     setHouseURL('/api/houses/' + props.match.params.id)
-<<<<<<< HEAD
-=======
     // Also, when the component mounts, send an axios get call with the house ID to get the comments.
     loadComments(props.match.params.id)
 
->>>>>>> 4043bfdca3becd53a311a1bc40eef02cdbeec7d4
-  }, []);
+  }, [props.match.params.id]);
 
   useEffect(() => {
+
+    const populateHouseInfo = () => {
+
+      axios.get(houseURL).then((res) => {
+  
+        const data = res.data;
+        setHouseID(data._id);
+        setHouseHeadline(data.headline);
+        setHouseImageURL(data.houseImageURL);
+        setHouseStreet(data.street);
+        setHouseCity(data.city);
+        setHouseState(data.state);
+        setHouseZip(data.zip);
+        setHouseForRent(data.forRent);
+        setHouseForSale(data.forSale);
+        setHouseInfoReceived(true);
+      })
+    }
+
     populateHouseInfo()
 
-  }, [houseURL])
+  }, [houseURL]);
 
   useEffect(() => {
     loadComments(props.match.params.id)
-  }, [newCommentSubmitted])
+  }, [newCommentSubmitted, props.match.params.id])
 
   const loadComments = (id) => {
 
@@ -76,23 +92,7 @@ function HouseDetail(props) {
 
   }
 
-  const populateHouseInfo = () => {
-
-    axios.get(houseURL).then((res) => {
-
-      const data = res.data;
-      setHouseID(data._id);
-      setHouseHeadline(data.headline);
-      setHouseImageURL(data.houseImageURL);
-      setHouseStreet(data.street);
-      setHouseCity(data.city);
-      setHouseState(data.state);
-      setHouseZip(data.zip);
-      setHouseForRent(data.forRent);
-      setHouseForSale(data.forSale);
-      setHouseInfoReceived(true);
-    })
-  }
+  
 
 
   const renderHouseInfo = () => {
@@ -111,7 +111,7 @@ function HouseDetail(props) {
                           <Col>
                             <CardBody>
                               <CardTitle>{houseHeadline}</CardTitle>
-                              <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                              <CardSubtitle>{(houseForSale ? "This property is for sale" :  houseForRent ? "This property is for rent" : "")}</CardSubtitle>
                               <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
                             </CardBody>
                           </Col>
@@ -140,42 +140,6 @@ function HouseDetail(props) {
                   //   setSubmitting(false);  
                   // }, 400);
 
-<<<<<<< HEAD
-                  console.log("user: " + authValue.authTokens.username);
-
-                  let nameURL = "/api/users/comments";
-                  console.log("nameURL: " + nameURL);
-
-                  axios.get(nameURL).then(() => {
-                    console.log("/api/users/comments");
-                  })
-                  .catch(err => console.log(err));
-
-                  // let { comment } = values
-
-                  // axios.post("/api/users/login", {
-                  //   comment,
-                  //   houseID,
-                  // })
-                  //   .then(result => {
-                  //     // if (result.status === 200) {
-
-                  //     //   if (result.data.error) {
-                  //     //     setErrorText(result.data.error)
-                  //     //     setIsError(true)
-                  //     //   } else {
-                  //     //     //Set the auth token along with the user data into the context
-                  //     //     setAuthTokens(result.data)
-                  //     //     setLoggedIn(true);
-                  //     //   }
-                  //     // } else {
-                  //     //   setIsError(true);
-                  //     // }
-                  //   })
-                  // .catch(e => {
-                  //   setIsError(true);
-                  // });
-=======
                   
                   let userName = authValue.authTokens.username;
                   let userImage = authValue.authTokens.userImage;
@@ -196,7 +160,6 @@ function HouseDetail(props) {
                       //Set the value of the input field back to blank
                       values.comment=''
                     })
->>>>>>> 4043bfdca3becd53a311a1bc40eef02cdbeec7d4
 
                 }
                 }

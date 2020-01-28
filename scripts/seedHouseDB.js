@@ -5,7 +5,7 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/walkthru"
+  "mongodb://user:password1@ds213529.mlab.com:13529/heroku_m9wjw5ll"
 );
 
 const houseSeed = [
