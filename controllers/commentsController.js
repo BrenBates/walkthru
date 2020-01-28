@@ -6,7 +6,6 @@ module.exports = {
   create: function(req, res) {
  
     console.log('creating new comment.')
-    console.log(req.body)
 
      db.Comment
        .create(req.body)

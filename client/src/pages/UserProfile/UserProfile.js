@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import React from "react";
 import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
@@ -34,7 +33,7 @@ function UserProfile(props) {
 
           <div>     
             <h4>{`welcome ${authValue.authTokens.username}`}</h4>
-            <img className = "userProfileImg" src={authValue.authTokens.userImage}></img>
+            <img className = "userProfileImg" alt="profile pic" src={authValue.authTokens.userImage}></img>
     
 
             <Formik

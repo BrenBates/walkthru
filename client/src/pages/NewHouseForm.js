@@ -5,7 +5,7 @@ import { Card, Logo } from '../components/AuthForm';
 import logoImg from "../img/walkthru.JPG";
 import "../styles.css";
 import "../styles-custom.css";
-import Axios from 'axios';
+
 
 const NewHouseForm = () => {
 

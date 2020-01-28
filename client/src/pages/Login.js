@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from "yup";
-import styled from "@emotion/styled";
 import "../styles.css";
 import "../styles-custom.css";
 import logoImg from "../img/walkthru.JPG";
