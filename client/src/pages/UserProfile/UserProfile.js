@@ -60,6 +60,14 @@ function UserProfile(props) {
       .then(result => {
           console.log('result')
           console.log(result);
+
+          console.log(authValue)
+
+        //call for the auth tokens to be zeroed out to force user to log back in so their pic change is completed.
+        authValue.setAuthTokens()
+        
+      
+
       })
 
       }}
@@ -75,6 +83,7 @@ function UserProfile(props) {
         
             <button type="submit">Submit</button>
             <p>You must log out and back in for your pic to change</p>
+            
         </Form>
     </Formik>
 
