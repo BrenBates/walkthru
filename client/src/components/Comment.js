@@ -1,12 +1,9 @@
 import React from "react";
 import {
-  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button
+  Row, Col, Card
 } from 'reactstrap';
 
 export class Comment extends React.Component {
-    constructor(props) {
-      super(props);
-    }
 
 render() {
     return (
@@ -21,7 +18,7 @@ render() {
                     {this.props.name}
                   </Col>
                   <Col xs="6">
-                    <img src={this.props.image}></img>
+                    <img alt="user" src={this.props.image}></img>
                   </Col>
               </Row>
             </Col>

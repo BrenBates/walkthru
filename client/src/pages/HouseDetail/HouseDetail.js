@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect} from "react";
 import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
 // import { useAuth } from "../../context/auth";
 import {
-  Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button
+  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle
 } from 'reactstrap';
 import Comment from "../../components/Comment"
 import { AuthContext } from "../../context/auth";
@@ -66,13 +65,32 @@ function HouseDetail(props) {
   useEffect(() => {
     // When component mounts, load the house id from the props.params into the state
     setHouseURL('/api/houses/' + props.match.params.id)
-    
-    // Also, when the component mounts, send an axios get call withthe house ID to get the comments
-    loadComments(props.match.params.id);
-  }, []);
+    // Also, when the component mounts, send an axios get call with the house ID to get the comments.
+    loadComments(props.match.params.id)
+
+  }, [props.match.params.id]);
 
   // Get all the data related to the current house to the user
   useEffect(() => {
+
+    const populateHouseInfo = () => {
+
+      axios.get(houseURL).then((res) => {
+  
+        const data = res.data;
+        setHouseID(data._id);
+        setHouseHeadline(data.headline);
+        setHouseImageURL(data.houseImageURL);
+        setHouseStreet(data.street);
+        setHouseCity(data.city);
+        setHouseState(data.state);
+        setHouseZip(data.zip);
+        setHouseForRent(data.forRent);
+        setHouseForSale(data.forSale);
+        setHouseInfoReceived(true);
+      })
+    }
+
     populateHouseInfo()
   }, [houseURL]);
 
@@ -83,7 +101,7 @@ function HouseDetail(props) {
 
   useEffect(() => {
     loadComments(props.match.params.id)
-  }, [newCommentSubmitted])
+  }, [newCommentSubmitted, props.match.params.id])
 
   const loadComments = (id) => {
     let queryURL = "/api/comments/byhouse/" + id;
@@ -125,7 +143,7 @@ function HouseDetail(props) {
                           <Col>
                             <CardBody>
                               <CardTitle>{houseHeadline}</CardTitle>
-                              <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                              <CardSubtitle>{(houseForSale ? "This property is for sale" :  houseForRent ? "This property is for rent" : "")}</CardSubtitle>
                               <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
                             </CardBody>
                           </Col>

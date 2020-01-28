@@ -4,19 +4,11 @@ import axios from 'axios';
 import '../Landing/landing.css'
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
-import { useAuth } from "../../context/auth";
+
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
   Container,
   Row,
-  Col,
-  Button
+  Col
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer"
 
@@ -24,8 +16,7 @@ import MapContainer from "../../components/MapContainer"
 
 
 function Landing(props) {
-  const { setAuthTokens } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
+  
   const [mapInfo, setMapInfo] = useState([]);
   const [currentHouse, setCurrentHouse] = useState({});
   const [houseSelected, setHouseSelected] = useState(false);
@@ -69,7 +60,10 @@ function Landing(props) {
     let house = mapInfo.filter(item => {
       if(item._id === houseID) {
         return true;
+      } else {
+        return false;
       }
+
     })
 
 
@@ -92,12 +86,12 @@ function Landing(props) {
   if (houseSelected) { 
     return ( 
       <div>
-        <Link to={"/house/"+currentHouse._id}>Go to House</Link>
+        <Link to={"/api/houses/"+currentHouse._id}>Go to House</Link>
         <p>{currentHouse.headline}</p>
         <p>{currentHouse.street}</p>
         <p>{currentHouse.city}</p>
         <p>{currentHouse.state}</p>
-        <img className="landingImg" src={currentHouse.houseImageURL} alt="house image"></img>
+        <img className="landingImg" src={currentHouse.houseImageURL} alt="house"></img>
       </div>
       ) 
   } else {
@@ -136,8 +130,7 @@ function Landing(props) {
         //   alert(JSON.stringify(values, null, 2));
         //   setSubmitting(false);  
         // }, 400);
-
-        let {street,city,st} = values
+            console.log('submit button hit')
 
 
       }}

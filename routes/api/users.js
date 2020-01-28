@@ -12,8 +12,6 @@ router.route("/")
 router.route("/register")
     .post(usersController.register);
 
-<<<<<<< HEAD
-
 // router.get("/houses", async (req, res) => {
 //   console.log("req.user: ", req.user);
 //   //const loggedInUserId = req.user;
@@ -34,8 +32,6 @@ router.route("/register")
 //   res.send(result);
 // });
 
-=======
->>>>>>> 87a74e30b65d43ddfc2e287acfaa56ee289af774
     //Matches with /api/users/login
 router.route("/login")
 .post(usersController.logIn);
