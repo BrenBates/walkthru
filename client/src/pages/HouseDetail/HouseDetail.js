@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
@@ -19,26 +19,6 @@ function HouseDetail(props) {
     const [field, meta] = useField(props);
     return (
       <>
-        <Row>
-          <Col>
-            <Container>
-              <Card>
-                <Row> 
-                  <Col>
-                    <CardImg top width="100%" src="https://s3-media0.fl.yelpcdn.com/bphoto/MlJLm2ycI7sghPmJbhRZjw/l.jpg" alt="Card image cap" />
-                  </Col>
-                  <Col>
-                    <CardBody>
-                      <CardTitle>{houseHeadline}</CardTitle>
-                      <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
-                      <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
-                    </CardBody>
-                  </Col>
-                </Row>
-              </Card>
-            </Container>
-          </Col>
-        </Row>
         <label htmlFor={props.id || props.name}>{label}</label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
@@ -76,7 +56,7 @@ function HouseDetail(props) {
     const populateHouseInfo = () => {
 
       axios.get(houseURL).then((res) => {
-  
+
         const data = res.data;
         setHouseID(data._id);
         setHouseHeadline(data.headline);
@@ -85,7 +65,6 @@ function HouseDetail(props) {
         setHouseCity(data.city);
         setHouseState(data.state);
         setHouseZip(data.zip);
-        setHouseForRent(data.forRent);
         setHouseForSale(data.forSale);
         setHouseInfoReceived(true);
       })
@@ -105,7 +84,7 @@ function HouseDetail(props) {
 
   const loadComments = (id) => {
     let queryURL = "/api/comments/byhouse/" + id;
-    axios.get(queryURL).then( res => {
+    axios.get(queryURL).then(res => {
       setComments(res.data)
       setCommentsReceived(true)
     })
@@ -132,26 +111,26 @@ function HouseDetail(props) {
       return (
         <div>
 
-        <Row>
-                  <Col>
-                    <Container>
-                      <Card>
-                        <Row>
-                          <Col>
-                            <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
-                          </Col>
-                          <Col>
-                            <CardBody>
-                              <CardTitle>{houseHeadline}</CardTitle>
-                              <CardSubtitle>{(houseForSale ? "This property is for sale" :  houseForRent ? "This property is for rent" : "")}</CardSubtitle>
-                              <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
-                            </CardBody>
-                          </Col>
-                        </Row>
-                      </Card>
-                    </Container>
-                  </Col>
-                </Row>
+          <Row>
+            <Col>
+              <Container>
+                <Card>
+                  <Row>
+                    <Col>
+                      <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
+                    </Col>
+                    <Col>
+                      <CardBody>
+                        <CardTitle>{houseHeadline}</CardTitle>
+                        <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                        <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                      </CardBody>
+                    </Col>
+                  </Row>
+                </Card>
+              </Container>
+            </Col>
+          </Row>
 
 
           <AuthContext.Consumer>
@@ -207,8 +186,8 @@ function HouseDetail(props) {
                   // });
                   let userName = authValue.authTokens.username;
                   let userImage = authValue.authTokens.userImage;
-                  let comment  = values.comment
-          
+                  let comment = values.comment
+
                   axios.post("/api/comments/byhouse", {
                     houseID,
                     userName,
@@ -219,11 +198,11 @@ function HouseDetail(props) {
                       console.log('made it back');
                       console.log(result);
                       //Increment the new comment submitted state value by one to trigger a re-render of the comments 
-                      setNewCommentSubmitted(newCommentSubmitted+1);
+                      setNewCommentSubmitted(newCommentSubmitted + 1);
                       //Reset the value of the input field
-                      values.comment='';
+                      values.comment = '';
                     })
-                  }
+                }
                 }
               >
                 <Form>
@@ -243,17 +222,17 @@ function HouseDetail(props) {
     }
   }
   const renderComments = () => {
-    if(commentsReceived) {
+    if (commentsReceived) {
       return (
-        comments.map(item => 
-          <Comment 
-          name = {item.userName} 
-          image = {item.userImage} 
-          text = {item.comment}
-          key = {item._id}
+        comments.map(item =>
+          <Comment
+            name={item.userName}
+            image={item.userImage}
+            text={item.comment}
+            key={item._id}
           />
         )
-      ) 
+      )
     }
   }
   return (

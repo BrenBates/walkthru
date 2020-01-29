@@ -8,14 +8,14 @@ import { AuthContext } from "../../context/auth";
 
 function UserProfile(props) {
 
-   //Text input for Formik form.
-   const MyTextInput = ({ label, ...props }) => {
+  //Text input for Formik form.
+  const MyTextInput = ({ label, ...props }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const [field, meta] = useField(props);
     return (
       <>
-       
+
         <label htmlFor={props.id || props.name}>{label}</label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
@@ -27,64 +27,65 @@ function UserProfile(props) {
 
 
   return (
-    
-      <AuthContext.Consumer>
-        {authValue => (
 
-          <div>     
-            <h4>{`welcome ${authValue.authTokens.username}`}</h4>
-            <img className = "userProfileImg" alt="profile pic" src={authValue.authTokens.userImage}></img>
-    
+    <AuthContext.Consumer>
+      {authValue => (
 
-            <Formik
-      initialValues={{
-        picURL: "",
-      }}
-      validationSchema={Yup.object({
-        picURL: Yup.string()
-          .url("Must enter a URL")
-          .required("Required")
-      })}
-      onSubmit={(values, { setSubmitting }) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);  
-        // }, 400);
+        <div>
+          <h4>{`welcome ${authValue.authTokens.username}`}</h4>
+          <img className="userProfileImg" alt="profile pic" src={authValue.authTokens.userImage}></img>
 
-        let imgURL = values.picURL
 
-        axios.put("/api/users/", {
-          user: authValue.authTokens.username,
-          imgURL: imgURL
-      })
-      .then(result => {
-          console.log('result')
-          console.log(result);
-      })
+          <Formik
+            initialValues={{
+              picURL: "",
+            }}
+            validationSchema={Yup.object({
+              picURL: Yup.string()
+                .url("Must enter a URL")
+                .required("Required")
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+              // setTimeout(() => {
+              //   alert(JSON.stringify(values, null, 2));
+              //   setSubmitting(false);  
+              // }, 400);
 
-      }}
-      >
-        <Form>
-            <MyTextInput
+              let imgURL = values.picURL
+
+              axios.put("/api/users/", {
+                user: authValue.authTokens.username,
+                imgURL: imgURL
+              })
+                .then(result => {
+                  console.log('result')
+                  console.log(result);
+                })
+
+            }}
+          >
+            <Form>
+              <MyTextInput
+                onChangeText="{handleChange(picURL)}"
                 label="Change your profile picture:"
                 name="picURL"
                 type="text"
                 placeholder="http://yourimagehere.com"
-            />
-          
-        
-            <button type="submit">Submit</button>
-            <p>You must log out and back in for your pic to change</p>
-        </Form>
-    </Formik>
+              />
 
 
-          </div>
+              <button type="submit">Submit</button>
+              <p>You must log out and back in for your pic to change</p>
+            </Form>
+          </Formik>
 
-        )}
-      </AuthContext.Consumer>
 
-  
+        </div>
+
+      )}
+    </AuthContext.Consumer>
+
+
   )
 
 }
