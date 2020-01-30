@@ -107,15 +107,16 @@ module.exports = {
       })
   },
   //Method for updating a users profile picture
-  updateProfilePic: function(req,res) {
+  updateProfilePic: function (req, res) {
     console.log('updating profile picture')
 
     db.User.findOneAndUpdate(
-      {"username": req.body.user},
-      {"userImage": req.body.imgURL}
-      ).then(dbModel => {
-        res.json(dbModel)
-      })
+      { "username": req.body.user },
+      { "userImage": req.body.imgURL },
+      { useFindAndModify: true }
+    ).then(dbModel => {
+      res.json(dbModel)
+    })
       .catch(err => res.status(422).json(err));
 
   },
