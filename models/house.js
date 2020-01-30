@@ -7,7 +7,7 @@ const schemaHouse = new Schema(
     houseImageURL: { type: String },
     street: { type: String, required: true },
     city: { type: String, required: true },
-    state: { type: String, required: true },
+    st: { type: String, required: true },
     zip: { type: Number, required: true },
     lat: { type: Number },
     long: { type: Number },

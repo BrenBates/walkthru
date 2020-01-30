@@ -11,6 +11,7 @@ import {
   Col
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer"
+// import API from "../../utils/API";
 
 
 
@@ -37,7 +38,18 @@ function Landing(props) {
     );
   };
 
-
+  // function handleFormSubmit() {
+  //   if (this.props.street && this.props.zip) {
+  //     API.saveHouse({
+  //       street: formik.values.street,
+  //       city: formik.values.city,
+  //       st: formik.values.st,
+  //       zip: formik.values.zip
+  //     })
+  //     .then(res => this.loadMap())
+  //     .catch(err => console.log(err));
+  //   }
+  // };
 
   function loadMap() {
 
@@ -123,17 +135,34 @@ function Landing(props) {
           .max(20,"Must be 20 characters or less")
           .required("Required"),
         st: Yup.string()
-          .max(15, "Must be 15 characters or less")
+          .max(15, "Must be 15 characters or less"),
+        zip: Yup.string()
+          .min(5, "Zip Must be 5 digits.")
+          .max(5, "Zip Must be 5 digits.")
+          .required('Required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
-        // setTimeout(() => {
-        //   alert(JSON.stringify(values, null, 2));
-        //   setSubmitting(false);  
-        // }, 400);
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);  
+        }, 400);
             console.log('submit button hit')
+        let {street, city, st, zip} = values;
 
-
+        axios.post("/api/houses", {
+          street,
+          city, 
+          st,
+          zip
+        })
+        .then(result => {
+          loadMap();
+        })
+        .catch(err => {
+          console.log(err);
+        });
       }}
+       
       >
         {/* splitting the form up into sub columns so it doesn't take up too much vertical space. */}
             <Form className="landSrchHouseFrm">
@@ -146,7 +175,7 @@ function Landing(props) {
                 </div>
               </Col> */}
 
-                <Col xs="5">
+                <Col xs="4">
                   <MyTextInput
                       className="landSrchInput"
                       // label="Street"
@@ -156,7 +185,7 @@ function Landing(props) {
                   />
                </Col>
 
-               <Col xs="4">
+               <Col xs="3">
                 <MyTextInput
                     className="landSrchInput"
                     // label="City"
@@ -166,13 +195,22 @@ function Landing(props) {
                 />
               </Col>
               
-              <Col xs="3">
+              <Col xs="2">
                 <MyTextInput
                     className="landSrchInput"
                     // label="State"
                     name="st"
                     type="text"
                     placeholder="State"
+                />
+              </Col>
+              <Col xs="2">
+                <MyTextInput
+                    className="landSrchInput"
+                    // label="Zip"
+                    name="zip"
+                    type="number"
+                    placeholder="Zip"
                 />
               </Col>
 
