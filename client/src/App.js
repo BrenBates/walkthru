@@ -32,7 +32,7 @@ function App(props) {
   }
 
   return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens} }>
       <Router>
         <div>
           {/* <ul>
@@ -52,10 +52,10 @@ function App(props) {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <PrivateRoute path="/api/houses/:id" component={HouseDetail} /* Change back to PrivateRoute *//>
-            <PrivateRoute path="/user" component={UserProfile} /* Change back to PrivateRoute *//>
-            <PrivateRoute path="/landing" component={Landing} /* Change back to PrivateRoute *//>
-            <PrivateRoute path="/newHouseForm" component={NewHouseForm} /* Change back to PrivateRoute *//>
+            <PrivateRoute path="/api/houses/:id" component={HouseDetail} />
+            <PrivateRoute path="/user" component={UserProfile}/>
+            <PrivateRoute path="/landing" component={Landing} />
+            <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />
           </Switch>
         </div>
