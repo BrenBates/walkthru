@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import '../UserProfile/userprofile.css'
 import { AuthContext } from "../../context/auth";
+import { useAuth } from "../../context/auth";
 
 
 function UserProfile(props) {
