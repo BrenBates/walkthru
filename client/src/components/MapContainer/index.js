@@ -16,7 +16,9 @@ export class MapContainer extends React.Component {
        }}
        onClick={() => {
         //Run the click function back on the landing page to load the clicked house information
+
         this.props.clickHouse(store._id)
+        
       }
       
       } />
@@ -41,7 +43,7 @@ export class MapContainer extends React.Component {
   }
     
     export default GoogleApiWrapper({
-        apiKey: 'AIzaSyAMNknoCxB5QgbbRHfRWwB05nWZgRkjwp4'
+        apiKey: process.env.REACT_APP_GOOGLE_API 
       })(MapContainer);
 
    
