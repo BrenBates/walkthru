@@ -5,6 +5,8 @@ import { Card, Logo } from '../components/AuthForm';
 import logoImg from "../img/walkthru.JPG";
 import "../styles.css";
 import "../styles-custom.css";
+import axios from 'axios';
+// import Geocode from "react-geocode";
 
 
 const NewHouseForm = () => {
@@ -39,7 +41,7 @@ const NewHouseForm = () => {
                     st: Yup.string()
                         .max(2, "Please use the states abbreviation.")
                         .required('Required'),
-                    ZIP: Yup.string()
+                    zip: Yup.string()
                         .min(5, "Zip Must be 5 digits.")
                         .max(5, "Zip Must be 5 digits.")
                         .required('Required'),
@@ -49,8 +51,22 @@ const NewHouseForm = () => {
                         alert(JSON.stringify(values, null, 2));
                         setSubmitting(false);
                     }, 400);
-                 }
-                }
+
+                    let {street, city, st, zip} = values;
+
+                    axios.post("/api/houses", {
+                        street,
+                        city,
+                        st,
+                        zip
+                    })
+                    .then(result => {
+                        console.log(result);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                 }}
             >
                 <Form>
                     <MyTextInput
