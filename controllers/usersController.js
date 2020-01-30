@@ -110,10 +110,12 @@ module.exports = {
   //Method for updating a users profile picture
   updateProfilePic: function(req,res) {
     console.log('updating profile picture')
-
+    console.log('req.body', req.body)
+    console.log('req.body', req.body.imgURL)
     db.User.findOneAndUpdate(
       {"username": req.body.user},
-      {"userImage": req.body.imgURL}
+      {"userImage": req.body.imgURL},
+      {useFindAndModify: true}
       ).then(dbModel => {
         res.json(dbModel)
       })
