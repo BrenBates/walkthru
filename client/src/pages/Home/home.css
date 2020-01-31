@@ -1,0 +1,45 @@
+body, html {
+    height: 100%;
+    background: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}   
+
+body {
+    margin: 0 !important;
+}
+
+.logo-container {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.logo {
+    height: 10em;
+    width: 10em;
+    display: inline-block;
+    background-color: ivory;
+}
+
+.login-form {
+    height: 25em;
+    width: 20em;
+    margin: 0 auto;
+    margin-top: -85px;
+    background-color: firebrick;
+}
+
+.parallax-demo {
+    height: 100em;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20%;
+    background-color: firebrick;
+}

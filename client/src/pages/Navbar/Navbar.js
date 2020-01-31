@@ -1,5 +1,6 @@
 import React, { useState, Component } from 'react';
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "../Navbar/navbar.css";
 import {
   Collapse,
   Navbar,
@@ -18,8 +19,8 @@ const NavbarPage = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">walkthru</NavbarBrand>
+      <Navbar scrolling dark expand="md" fixed='top'>
+        <NavbarBrand className="brand" href="/">walkthru</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -36,7 +37,7 @@ const NavbarPage = (props) => {
               <NavLink tag={Link} onClick={props.logOut} to="/User" className="text-info">Log Out</NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>walkthru-ers are saying...</NavbarText>
+          <NavbarText />
         </Collapse>
       </Navbar>
     </div>
