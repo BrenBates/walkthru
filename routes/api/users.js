@@ -12,6 +12,25 @@ router.route("/")
 router.route("/register")
     .post(usersController.register);
 
+// router.get("/houses", async (req, res) => {
+//   console.log("req.user: ", req.user);
+//   //const loggedInUserId = req.user;
+
+//   const houses = await House.find({}).populate("comments");
+
+//   const result = houses.map(house => {
+//     return {
+//       id: house._id,
+//       name: house.name,
+//       isCommentedByMe:
+//         house.comments.filter(c => c.userRef.toString() === loggedInUserId)
+//           .length > 0,
+//       commentCount: house.comments.length
+//     };
+//   });
+
+//   res.send(result);
+// });
 
     //Matches with /api/users/login
 router.route("/login")

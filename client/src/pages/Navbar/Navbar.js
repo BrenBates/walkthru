@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import {  Link } from "react-router-dom";
+import React, { useState, Component } from 'react';
+import { Link } from "react-router-dom";
+import "../Navbar/navbar.css";
 import {
   Collapse,
   Navbar,
@@ -18,8 +19,8 @@ const NavbarPage = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">walkthru</NavbarBrand>
+      <Navbar scrolling dark expand="md" fixed='top'>
+        <NavbarBrand className="brand" href="/">walkthru</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
@@ -33,11 +34,10 @@ const NavbarPage = (props) => {
               <NavLink tag={Link} to="/User" className="text-info">Your Profile</NavLink>
             </NavItem>
             <NavItem>
-              <button onClick={props.logOut}>Log Out</button>
-              {/* <NavLink tag={Link} to="/Login" className="text-info">Sign Out</NavLink> */}
+              <NavLink tag={Link} onClick={props.logOut} to="/User" className="text-info">Log Out</NavLink>
             </NavItem>
           </Nav>
-          <NavbarText>walkthru-ers are saying...</NavbarText>
+          <NavbarText />
         </Collapse>
       </Navbar>
     </div>
@@ -45,3 +45,31 @@ const NavbarPage = (props) => {
 }
 
 export default NavbarPage;
+
+
+// import React, { Component } from "react"
+// import styled from "styled-components"
+
+// const NavbarEl = styled.nav`
+//   margin: auto;
+// `
+
+// const NavbarList = styled.ul`
+//   display: flex;
+//   justify-content: center;
+//   list-style: none;
+//   margin: 0;
+// `
+
+// class Navbar extends Component {
+//   render() {
+//     const { children, onMouseLeave } = this.props
+//     return (
+//       <NavbarEl onMouseLeave={onMouseLeave}>
+//         <NavbarList>{children}</NavbarList>
+//       </NavbarEl>
+//     )
+//   }
+// }
+
+// export default Navbar
