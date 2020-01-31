@@ -11,7 +11,6 @@ const schemaHouse = new Schema(
     zip: { type: Number, required: true },
     lat: { type: Number },
     long: { type: Number },
-    forRent: { type: Boolean },
     forSale: { type: Boolean }
   }
 );

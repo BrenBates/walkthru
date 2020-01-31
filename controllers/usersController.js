@@ -106,21 +106,19 @@ module.exports = {
         res.send('error: ' + err)
       })
   },
-
   //Method for updating a users profile picture
-  updateProfilePic: function(req,res) {
+  updateProfilePic: function (req, res) {
     console.log('updating profile picture')
     console.log('req.body', req.body)
     console.log('req.body', req.body.imgURL)
     db.User.findOneAndUpdate(
-      {"username": req.body.user},
-      {"userImage": req.body.imgURL},
-      {useFindAndModify: true}
-      ).then(dbModel => {
-        res.json(dbModel)
-      })
+      { "username": req.body.user },
+      { "userImage": req.body.imgURL },
+      { useFindAndModify: true }
+    ).then(dbModel => {
+      res.json(dbModel)
+    })
       .catch(err => res.status(422).json(err));
-
 
   },
   //Method for validating a user token to allow access to a private route.
