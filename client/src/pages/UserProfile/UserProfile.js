@@ -61,8 +61,9 @@ function UserProfile(props) {
               })
                 .then(result => {
                   console.log('result')
-                   //call for the auth tokens to be zeroed out to force user to log back in so their pic change is completed.
+                   //Change the auth tokens to be the new result data.
                 setAuthTokens(result.data)
+                console.log(authValue)
                 })
 
             }}
