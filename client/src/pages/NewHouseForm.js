@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from "yup";
-import { Card, Logo } from '../components/AuthForm';
+import { Card, Logo, Error } from '../components/AuthForm';
 import logoImg from "../img/walkthru.JPG";
 import "../styles.css";
 import "../styles-custom.css";
 import axios from 'axios';
-// import Geocode from "react-geocode";
+import Geocode from "react-geocode";
+
+Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+// RJ's GOOGLE API KEY
+Geocode.setLanguage("en");
+Geocode.enableDebug();
 
 
 const NewHouseForm = () => {
-
+    const [isError,setIsError] = useState(false);
+    const [errorText, setErrorText] = useState('');
     const MyTextInput = ({ label, ...props }) => {
         // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
         // which we can spread on <input> and also replace ErrorMessage entirely.
@@ -47,26 +53,39 @@ const NewHouseForm = () => {
                         .required('Required'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
+                    // setTimeout(() => {
+                    //     // alert(JSON.stringify(values, null, 2));
+                    //     setSubmitting(false);
+                    // }, 400);
 
                     let {street, city, st, zip} = values;
+                    console.log(values);
 
-                    axios.post("/api/houses", {
-                        street,
-                        city,
-                        st,
-                        zip
-                    })
-                    .then(result => {
-                        console.log(result);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-                 }}
+                    Geocode.fromAddress(street + ", " + city + ", " + st + " " + zip).then(
+                        response => {
+                            let lat = response.results[0].geometry.location.lat;
+                            let long = response.results[0].geometry.location.lng;
+                        //    { lat, lng } = response.results[0].geometry.location;
+                          console.log(lat, long);
+                          axios.post("/api/houses", {
+                            street,
+                            city,
+                            st,
+                            zip,
+                            lat,
+                            long
+                        }) 
+                        .then(result => {
+                            console.log(result);
+                            if (result.data.error) {
+                                setErrorText(result.data.error);
+                                setIsError(true);
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                          })
+            }}
             >
                 <Form>
                     <MyTextInput
@@ -104,6 +123,7 @@ const NewHouseForm = () => {
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
+        { isError &&<Error>{errorText}</Error>}
         </Card>
     );
 };

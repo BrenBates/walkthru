@@ -4,16 +4,21 @@ import axios from 'axios';
 import '../Landing/landing.css'
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
-
+import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
   Col
 } from 'reactstrap';
-import MapContainer from "../../components/MapContainer"
+import MapContainer from "../../components/MapContainer";
+import Geocode from "react-geocode";
+// import { response } from "express";
 // import API from "../../utils/API";
 
-
+Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+// RJ's GOOGLE API KEY
+Geocode.setLanguage("en");
+Geocode.enableDebug();
 
 
 function Landing(props) {
@@ -21,6 +26,8 @@ function Landing(props) {
   const [mapInfo, setMapInfo] = useState([]);
   const [currentHouse, setCurrentHouse] = useState({});
   const [houseSelected, setHouseSelected] = useState(false);
+  const [isError,setIsError] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   //Text input for Formik form.
   const MyTextInput = ({ label, ...props }) => {
@@ -99,7 +106,8 @@ function Landing(props) {
               initialValues={{
                 street: "",
                 city: "",
-                st: ""
+                st: "",
+                zip: ""
               }}
               validationSchema={Yup.object({
                 street: Yup.string()
@@ -109,13 +117,42 @@ function Landing(props) {
                   .max(20, "Must be 20 characters or less")
                   .required("Required"),
                 st: Yup.string()
-                  .max(15, "Must be 15 characters or less")
+                  .max(15, "Must be 15 characters or less"),
+                zip: Yup.string()
+                  .min(5, "Zip Must be 5 digits.")
+                  .max(5, "Zip Must be 5 digits.")
+                  .required('Required'),
               })}
               onSubmit={(values, { setSubmitting }) => {
                 // setTimeout(() => {
                 //   alert(JSON.stringify(values, null, 2));
                 //   setSubmitting(false);  
                 // }, 400);
+                let {street, city, st, zip} = values;
+                console.log(values);
+                Geocode.fromAddress(street + ', ' + city + ', ' + st)
+                .then(
+                  response => {
+                    let lat = response.results[0].geometry.location.lat;
+                    let long = response.results[0].geometry.location.lat;
+                    axios.post("/api/houses", {
+                      street,
+                      city,
+                      st,
+                      zip,
+                      lat,
+                      long
+                    })
+                    .then(result => {
+                      if(result.data.error) {
+                        setErrorText(result.data.error);
+                        setIsError(true);
+                      }
+                    }).catch(err => {
+                      console.log(err);
+                    });
+                  }
+                )
                 console.log('submit button hit')
               }}
             >
@@ -146,13 +183,22 @@ function Landing(props) {
                       placeholder="City"
                     />
                   </Col>
-                  <Col xs="3">
+                  <Col xs="1">
                     <MyTextInput
                       className="landSrchInput"
                       // label="State"
                       name="st"
                       type="text"
                       placeholder="State"
+                    />
+                  </Col>
+                  <Col xs="2">
+                    <MyTextInput
+                      className="landSrchInput"
+                      // label="State"
+                      name="zip"
+                      type="number"
+                      placeholder="Zip"
                     />
                   </Col>
                 </Row>
@@ -166,6 +212,7 @@ function Landing(props) {
                 </Row>
               </Form>
             </Formik>
+            { isError &&<Error>{errorText}</Error>}
           </Col>
         </Row>
 
