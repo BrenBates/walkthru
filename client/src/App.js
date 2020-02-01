@@ -5,7 +5,7 @@ import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
 import UserProfile from './pages/UserProfile/UserProfile';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
 
