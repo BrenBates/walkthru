@@ -4,7 +4,6 @@ import axios from 'axios';
 import * as Yup from "yup";
 import "../../styles.css";
 import "../../styles-custom.css";
-import logoImg from "../../img/walkthru.JPG";
 import { Formik, Form, useField } from "formik";
 import { Card, Logo, Error } from '../../components/AuthForm';
 import { useAuth } from "../../context/auth";
@@ -23,7 +22,7 @@ function Login(props) {
     //state to the page they were trying to access.  After they login,
     //they can then be redirected back to the page they were originally
     //trying to access.
-    const referer = props.location.state.referer || '/';
+   // const referer = props.location.state.referer || '/';
 
 
     //text input for Formik form
@@ -44,13 +43,12 @@ function Login(props) {
       };
 
 
-    if (isLoggedIn) {
-        return <Redirect to={referer} />;
-    }
+    // if (isLoggedIn) {
+    //     return <Redirect to={referer} />;
+    // }
 
   return (
     <Card>
-      <Logo src={logoImg} />
       <Formik
       initialValues={{
         email: "",
@@ -101,6 +99,7 @@ function Login(props) {
       }}
       >
         <Form>
+          <div className="margin-top"/>
             <MyTextInput
                 label="Email Address"
                 name="email"
@@ -118,7 +117,7 @@ function Login(props) {
         </Form>
     </Formik>
 
-      <Link to="/signup">Don't have an account?</Link>
+      <Link className="ref-link" to="/signup">Don't have an account?</Link>
         { isError &&<Error>{errorText}</Error>}
     </Card>
   );
