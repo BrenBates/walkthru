@@ -7,10 +7,6 @@ select {
   width: 19em;
 }
 
-button[type="submit"] {
-  border-radius: none !important;
-}
-
 label {
   margin-top: 1rem;
   color: ivory;

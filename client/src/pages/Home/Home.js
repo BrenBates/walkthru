@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from 'react-router-dom';
 import Login from "../Login/Login";
 import { Logo } from '../../components/AuthForm';
 import logoImg from "../../img/walkthru.JPG";
@@ -6,17 +7,32 @@ import '../Home/home.css'
 
 function Home(props) {
 
-    function signin(props) {
-        return (
-            <div className="parallax-login">Walkthru</div>
-        )
-    }
+    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isError, setIsError] = useState(false)
+    const [errorText, setErrorText] = useState('');
+
+    const setErr = (error) => { setIsError(error) }
+    const setLog = (value) => { setLoggedIn(value) }
+    const setErrText = (text) => { setErrorText(text) }
+
+    console.log("props: ", props)
+    // Optional chaining
+    const referer = props.location?.state?.referer || '/';
+
+    if (isLoggedIn) { return <Redirect to={referer} />; }
+
     return <div>
         <div className="bgImage"></div>
         <div className="logo-container">
             <Logo className="logo" src={logoImg} />
             <div className="login-form">
-                <Login />
+                <Login
+                    setLogIn={setLog}
+                    setErr={setErr}
+                    setErrText={setErrText}
+                    isError={isError}
+                    errorText={errorText}
+                />
             </div>
         </div>
         <div className="parallax-demo">LOGIN</div>
