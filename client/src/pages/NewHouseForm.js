@@ -15,7 +15,7 @@ Geocode.enableDebug();
 
 
 const NewHouseForm = () => {
-    const [isError,setIsError] = useState(false)
+    const [isError,setIsError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const MyTextInput = ({ label, ...props }) => {
         // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -78,8 +78,8 @@ const NewHouseForm = () => {
                         .then(result => {
                             console.log(result);
                             if (result.data.error) {
-                                setErrorText(result.data.error)
-                                setIsError(true)
+                                setErrorText(result.data.error);
+                                setIsError(true);
                             }
                         }).catch(err => {
                             console.log(err);
