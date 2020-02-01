@@ -3,11 +3,17 @@ input[type="text"],
 input[type="number"],
 textarea,
 select {
-  width: 400px;
+  height: 3em;
+  width: 19em;
 }
 
 label {
   margin-top: 1rem;
+  color: ivory;
+}
+
+.margin-top {
+  margin-top: 5rem;
 }
 
 label.checkbox {
@@ -15,7 +21,10 @@ label.checkbox {
 }
 
 button[type="submit"] {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
-/*  */
+.ref-link {
+  color: aquamarine !important;
+  text-decoration: none;
+}
