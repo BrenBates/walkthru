@@ -34,6 +34,9 @@ const NavbarPage = (props) => {
               <NavLink tag={Link} to="/User" className="text-info">Your Profile</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink tag={Link} to="/NewHouseForm" className="text-info">Add House/Property</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink tag={Link} onClick={props.logOut} to="/User" className="text-info">Log Out</NavLink>
             </NavItem>
           </Nav>

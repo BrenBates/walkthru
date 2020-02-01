@@ -11,6 +11,7 @@ const schemaHouse = new Schema(
     zip: { type: Number, required: true },
     lat: { type: Number },
     long: { type: Number },
+    date: { type: Date, default: Date.now },
     forSale: { type: Boolean }
   }
 );
