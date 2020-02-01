@@ -26,13 +26,43 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  // create: function(req, res) {
+  //   console.log("create house");
+  //   db.House
+  //     .create(req.body)
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
   create: function(req, res) {
-    console.log("create house");
-    db.House
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+    console.log("create new house but check for existing before");
+    const houseData = {
+      street: req.body.street,
+      city: req.body.city,
+      st: req.body.st,
+      zip: req.body.zip,
+      lat: req.body.lat,
+      long: req.body.long,
+      date: new Date(Date.now())
+    }
+    console.log(req.body);
+    console.log(houseData);
+    db.House.findOne({
+      long: houseData.long, lat: houseData.lat 
+    }).then(House => {
+      if (House) {
+        res.json({
+          error: 'This property/house already exists'
+        })
+      } else {
+        db.House
+          .create(req.body)
+          .then(dbModel => res.json(dbModel))
+          .catch(err => res.status(422).json(err))
+        }})
+        .catch(err => {
+          res.send('error: ' + err)
+        })
+   },
   update: function(req, res) {
     db.House
       .findOneAndUpdate({ _id: req.params.id }, req.body)
