@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
@@ -25,6 +25,8 @@ function UserProfile(props) {
       </>
     );
   };
+
+  const { setAuthTokens } = useAuth();
 
   return (
 
@@ -59,7 +61,8 @@ function UserProfile(props) {
               })
                 .then(result => {
                   console.log('result')
-                  console.log(result);
+                   //call for the auth tokens to be zeroed out to force user to log back in so their pic change is completed.
+                setAuthTokens(result.data)
                 })
 
             }}
@@ -75,7 +78,7 @@ function UserProfile(props) {
 
 
               <button type="submit">Submit</button>
-              <p>You must log out and back in for your pic to change</p>
+              
             </Form>
           </Formik>
 
