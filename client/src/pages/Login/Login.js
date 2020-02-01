@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from "yup";
-import "../styles.css";
-import "../styles-custom.css";
-import logoImg from "../img/walkthru.JPG";
+import "../../styles.css";
+import "../../styles-custom.css";
+import logoImg from "../../img/walkthru.JPG";
 import { Formik, Form, useField } from "formik";
-import { Card, Logo, Error } from '../components/AuthForm';
-import { useAuth } from "../context/auth";
+import { Card, Logo, Error } from '../../components/AuthForm';
+import { useAuth } from "../../context/auth";
 
 
 
