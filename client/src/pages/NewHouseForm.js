@@ -6,7 +6,12 @@ import logoImg from "../img/walkthru.JPG";
 import "../styles.css";
 import "../styles-custom.css";
 import axios from 'axios';
-// import Geocode from "react-geocode";
+import Geocode from "react-geocode";
+
+Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+// RJ's GOOGLE API KEY
+Geocode.setLanguage("en");
+Geocode.enableDebug();
 
 
 const NewHouseForm = () => {
@@ -53,6 +58,7 @@ const NewHouseForm = () => {
                     }, 400);
 
                     let {street, city, st, zip} = values;
+                    console.log(values);
 
                     axios.post("/api/houses", {
                         street,
@@ -63,6 +69,18 @@ const NewHouseForm = () => {
                     .then(result => {
                         console.log(result);
                     })
+                    .then(
+                        Geocode.fromAddress("11800 South 300 East, Draper, UT 84020").then(
+                            response => {
+                            //   const { lat, lng } = response.results[0].geometry.location;
+                            //   console.log(lat, lng);
+                            console.log(response);
+                            },
+                            error => {
+                              console.error(error);
+                            }
+                          )
+                    )
                     .catch(err => {
                         console.log(err);
                     });
