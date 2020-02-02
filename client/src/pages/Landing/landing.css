@@ -1,16 +1,15 @@
- .landingImg {
+  .landingImg {
     height: 300px;
     width: 300px;
 }
 
-
 .landSrchHouseBtn {
     margin: 0 !important;
-    
 }
 
 .landSrchHouseFrm {
     border: 1px solid black;
+    background-color: blueviolet;
 }
 
 .landSrchInput {
