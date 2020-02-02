@@ -54,7 +54,7 @@
   }
   
   body {
-    padding: 0;
+    padding-top: 8%;
     margin: calc((100vh / 25) * 1.563) calc((100vw / 25) * 1.563);
     background-color: white;
     font-weight: 400;
