@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import './house.css'
 import { Link } from "react-router-dom";
+import { FiDelete } from "react-icons/fi";
 
 export class SavedHouse extends React.Component {
 
@@ -16,7 +17,7 @@ render() {
           <Row>
               <Col xs="5"><p>{this.props.street}</p></Col>
               <Col xs="5"><p>{this.props.city}</p></Col>       
-              <Col xs="2"><span>X</span></Col>
+              <Col xs="2"><button onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}><FiDelete/></button></Col>
           </Row>
           <Row> 
               <Col xs="6"><p>{this.props.st}</p></Col>

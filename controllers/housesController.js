@@ -26,13 +26,7 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-  // create: function(req, res) {
-  //   console.log("create house");
-  //   db.House
-  //     .create(req.body)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
+ 
   create: function(req, res) {
     console.log("create new house but check for existing before");
     const houseData = {
@@ -44,8 +38,7 @@ module.exports = {
       long: req.body.long,
       date: new Date(Date.now())
     }
-    console.log(req.body);
-    console.log(houseData);
+  
     db.House.findOne({
       long: houseData.long, lat: houseData.lat 
     }).then(House => {
@@ -75,7 +68,7 @@ module.exports = {
     
     db.SavedHouses.create(req.body)
       .then(function(dbSavedHouse) {
-        console.log('this is the saved house', dbSavedHouse )
+    
         return db.User.findOneAndUpdate(
           {username: req.params.id},
           { $push: {SavedHouses:dbSavedHouse._id}},
@@ -83,13 +76,23 @@ module.exports = {
         );
       })
       .then(function(dbUser) {
-        console.log('this is the user that got a new saved house', dbUser)
         res.json(dbUser)
       })
       .catch(function(err) {
         res.json(err);
       })
     
+  },
+  //Route to delete a saved house
+  deleteSavedHouse: function(req,res) {
+    console.log(req.params.id)
+    db.SavedHouses
+      .deleteOne({_id: req.params.id})
+      .then(dbModel => {
+        res.json(dbModel)
+        
+      })
+      .catch(err => res.status(422).json(err));
   }
 
 };
