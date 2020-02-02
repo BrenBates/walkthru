@@ -5,11 +5,13 @@ import { Formik, Form, useField } from "formik";
 import '../UserProfile/userprofile.css'
 import { AuthContext } from "../../context/auth";
 import { useAuth } from "../../context/auth";
+
 import { Redirect } from "react-router-dom";
 import House from "../../components/House/House";
 import {
   Row, Col
 } from 'reactstrap';
+
 
 
 
@@ -81,6 +83,7 @@ function UserProfile(props) {
     <AuthContext.Consumer>
       {authValue => (
 
+
         <div>
 
           <Row>
@@ -143,6 +146,7 @@ function UserProfile(props) {
           </Row>
           
         </div>
+
 
       )}
     </AuthContext.Consumer>

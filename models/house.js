@@ -13,8 +13,7 @@ const schemaHouse = new Schema(
     long: { type: Number },
     forRent: {type: Boolean},
     forSale: { type: Boolean },
-    date: { type: Date, default: Date.now },
-    
+    date: { type: Date, default: Date.now }
   }
 );
 
