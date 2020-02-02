@@ -31,7 +31,7 @@ const NavbarPage = (props) => {
                 {authValue.authTokens ? 
                 <>
                   <NavItem>
-                  <NavLink tag={Link} to={`/api/user/${authValue.authTokens.username}`} className="text-info">Your Profile</NavLink> 
+                  <NavLink tag={Link} to={`/users/${authValue.authTokens.username}`} className="text-info">Your Profile</NavLink> 
                   </NavItem>
                   <NavItem>
                   <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
@@ -52,3 +52,26 @@ const NavbarPage = (props) => {
   );
 }
 export default NavbarPage;
+       
+// import React, { Component } from "react"
+// import styled from "styled-components"
+// const NavbarEl = styled.nav`
+//   margin: auto;
+// `
+// const NavbarList = styled.ul`
+//   display: flex;
+//   justify-content: center;
+//   list-style: none;
+//   margin: 0;
+// `
+// class Navbar extends Component {
+//   render() {
+//     const { children, onMouseLeave } = this.props
+//     return (
+//       <NavbarEl onMouseLeave={onMouseLeave}>
+//         <NavbarList>{children}</NavbarList>
+//       </NavbarEl>
+//     )
+//   }
+// }
+// export default Navbar

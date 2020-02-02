@@ -26,6 +26,13 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  // create: function(req, res) {
+  //   console.log("create house");
+  //   db.House
+  //     .create(req.body)
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(422).json(err));
+  // },
   create: function(req, res) {
     console.log("create new house but check for existing before");
     const houseData = {
@@ -71,7 +78,7 @@ module.exports = {
         console.log('this is the saved house', dbSavedHouse )
         return db.User.findOneAndUpdate(
           {username: req.params.id},
-          { $push: {savedHouses:dbSavedHouse._id}},
+          { $push: {SavedHouses:dbSavedHouse._id}},
           {new:true}
         );
       })

@@ -2,3 +2,18 @@
     height: 300px;
     width: 300px;
 }
+
+h4 {
+    color: ivory;
+}
+
+input[type="text"] {
+    height: 2em;
+}
+
+button[type="submit"] {
+    height: 2em;
+    margin: 1em;
+    padding: 0;
+    width: 80px;
+}
