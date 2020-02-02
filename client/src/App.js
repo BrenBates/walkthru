@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
 import UserProfile from './pages/UserProfile/UserProfile';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
 
@@ -26,9 +26,9 @@ function App(props) {
     setAuthTokens(data);
   }
 
-  
   const logOut = () => {
-    setAuthTokens();
+    console.log('Logging out...')
+    setTokens();
   }
 
   return (
@@ -47,13 +47,14 @@ function App(props) {
             </li>
       
           </ul> */}
+          
           <NavbarComponent logOut={logOut}/>
+          
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute path="/api/houses/:id" component={HouseDetail} />
-            <PrivateRoute path="/user" component={UserProfile}/>
+            <PrivateRoute path="/users/:username" component={UserProfile}/>
             <PrivateRoute path="/landing" component={Landing} />
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />

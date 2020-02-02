@@ -13,6 +13,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  //Method for finding specific user and returning data with saved houses populated.
+  findOne: function (req,res) {
+    console.log('find one user')
+    console.log(req.params.username)
+  },
   //Method for a new user to register to the app.
   register: function (req, res) {
     const userData = {
@@ -106,21 +111,21 @@ module.exports = {
         res.send('error: ' + err)
       })
   },
-
   //Method for updating a users profile picture
-  updateProfilePic: function(req,res) {
+  updateProfilePic: function (req, res) {
     console.log('updating profile picture')
-    console.log('req.body', req.body)
-    console.log('req.body', req.body.imgURL)
+    // console.log('req.body', req.body)
+    // console.log('req.body', req.body.imgURL)
     db.User.findOneAndUpdate(
-      {"username": req.body.user},
-      {"userImage": req.body.imgURL},
-      {useFindAndModify: true}
-      ).then(dbModel => {
-        res.json(dbModel)
-      })
+      { "username": req.body.user },
+      { $set: {"userImage": req.body.imgURL }},
+      // { useFindAndModify: false },
+      {new: true}
+    ).then(dbModel => {
+      console.log(dbModel)
+      res.json(dbModel)
+    })
       .catch(err => res.status(422).json(err));
-
 
   },
   //Method for validating a user token to allow access to a private route.

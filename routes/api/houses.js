@@ -4,7 +4,11 @@ const housesController = require("../../controllers/housesController");
 
 // Matches with "/api/houses"
 router.route("/")
-  .get(housesController.findAll);
+  .get(housesController.findAll)
+  .post(housesController.create);
+
+router.route("/savehouse/:id")
+  .post(housesController.savehouse)
 
 // Matches with "/api/houses/:id"
 router

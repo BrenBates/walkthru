@@ -1,6 +1,7 @@
 module.exports = {
     House: require("./house"),
     User: require("./User"),
-    Comment: require("./Comment")
+    Comment: require("./Comment"),
+    SavedHouses: require("./SavedHouses")
   };
   

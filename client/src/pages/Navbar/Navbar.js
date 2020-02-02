@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import {  Link } from "react-router-dom";
+import React, { useState, Component } from 'react';
+import { Link } from "react-router-dom";
+import "../Navbar/navbar.css";
 import {
   Collapse,
   Navbar,
@@ -10,38 +11,44 @@ import {
   NavLink,
   NavbarText
 } from 'reactstrap';
-
+import { AuthContext } from "../../context/auth";
 const NavbarPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">walkthru</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink tag={Link} to="/" className="text-info">Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/User" className="text-info">Your Profile</NavLink>
-            </NavItem>
-            <NavItem>
-              <button onClick={props.logOut}>Log Out</button>
-              {/* <NavLink tag={Link} to="/Login" className="text-info">Sign Out</NavLink> */}
-            </NavItem>
-          </Nav>
-          <NavbarText>walkthru-ers are saying...</NavbarText>
-        </Collapse>
-      </Navbar>
+      <AuthContext.Consumer>
+      {authValue => (
+        <Navbar scrolling dark expand="md" fixed='top'>
+          <NavbarBrand className="brand" href="/">walkthru</NavbarBrand>
+          {/* {authValue.authTokens ? <h1>Authorized</h1>:<p></p>} */}
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+              {/* <NavItem>
+             <NavLink tag={Link} to="/" className="text-info">Home</NavLink>
+              </NavItem> */}
+                {authValue.authTokens ? 
+                <>
+                  <NavItem>
+                  <NavLink tag={Link} to={`/api/user/${authValue.authTokens.username}`} className="text-info">Your Profile</NavLink> 
+                  </NavItem>
+                  <NavItem>
+                  <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
+                  </NavItem>
+                  <NavItem>
+                  <NavLink tag={Link} onClick={props.logOut} to="/User" className="text-info">Log Out</NavLink>
+                  </NavItem>
+                </>
+                : ''}
+            </Nav>
+            <NavbarText />
+          </Collapse>
+        </Navbar>
+      )}
+      </AuthContext.Consumer>
+      
     </div>
   );
 }
-
 export default NavbarPage;

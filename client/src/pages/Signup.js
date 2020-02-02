@@ -56,8 +56,13 @@ function Signup(props) {
           .email("Invalid email addresss`")
           .required("Required"),
         password: Yup.string()
+          .required('Please Enter your password')
           .max(15,"Must be 15 characters or less")
-          .required("Required"),
+          .matches(
+            
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+          ),
         repassword: Yup.string()
           .max(15,"Must be 15 characters or less")
           .required("Required"),
@@ -122,13 +127,13 @@ function Signup(props) {
             <MyTextInput
                 label="Password"
                 name="password"
-                type="text"
+                type="password"
                 placeholder="password"
             />
             <MyTextInput
                 label="Password Again"
                 name="repassword"
-                type="text"
+                type="password"
                 placeholder="password again"
             />
 
