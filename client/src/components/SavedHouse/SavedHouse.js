@@ -2,10 +2,10 @@ import React from "react";
 import {
   Row, Col, Card
 } from 'reactstrap';
-import '../House/house.css'
+import './house.css'
 import { Link } from "react-router-dom";
 
-export class House extends React.Component {
+export class SavedHouse extends React.Component {
 
 render() {
     return (
@@ -14,8 +14,9 @@ render() {
 
         <Card>
           <Row>
-              <Col xs="6"><p>{this.props.street}</p></Col>
-              <Col xs="6"><p>{this.props.city}</p></Col>           
+              <Col xs="5"><p>{this.props.street}</p></Col>
+              <Col xs="5"><p>{this.props.city}</p></Col>       
+              <Col xs="2"><span>X</span></Col>
           </Row>
           <Row> 
               <Col xs="6"><p>{this.props.st}</p></Col>
@@ -43,5 +44,5 @@ render() {
 
 }
   
-  export default House;
+  export default SavedHouse;
 

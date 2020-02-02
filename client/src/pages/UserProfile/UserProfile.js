@@ -6,8 +6,7 @@ import '../UserProfile/userprofile.css'
 import { AuthContext } from "../../context/auth";
 import { useAuth } from "../../context/auth";
 
-import { Redirect } from "react-router-dom";
-import House from "../../components/House/House";
+import SavedHouse from "../../components/SavedHouse/SavedHouse";
 import {
   Row, Col
 } from 'reactstrap';
@@ -63,7 +62,7 @@ function UserProfile(props) {
     if (userHousesReceived) {
     return(
       userHouses.map(house => 
-        <House
+        <SavedHouse
           houseID = {house.houseID}
           headline = {house.headline}
           houseImage = {house.houseImageURL}
