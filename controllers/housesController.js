@@ -69,12 +69,27 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
 
+  },
+  //Route to save a house to the saved houses database
+  savehouse: function(req,res) {
+    
+    db.SavedHouses.create(req.body)
+      .then(function(dbSavedHouse) {
+        console.log('this is the saved house', dbSavedHouse )
+        return db.User.findOneAndUpdate(
+          {username: req.params.id},
+          { $push: {savedHouses:dbSavedHouse._id}},
+          {new:true}
+        );
+      })
+      .then(function(dbUser) {
+        console.log('this is the user that got a new saved house', dbUser)
+        res.json(dbUser)
+      })
+      .catch(function(err) {
+        res.json(err);
+      })
+    
   }
-//   remove: function(req, res) {
-//     db.House
-//       .findById({ _id: req.params.id })
-//       .then(dbModel => dbModel.remove())
-//       .then(dbModel => res.json(dbModel))
-//       .catch(err => res.status(422).json(err));
-//   }
+
 };

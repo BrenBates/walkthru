@@ -17,7 +17,7 @@ function Home(props) {
 
     console.log("props: ", props)
     // Optional chaining
-    const referer = props.location?.state?.referer || '/';
+    const referer = props.location?.state?.referer || '/landing';
 
     if (isLoggedIn) { return <Redirect to={referer} />; }
 

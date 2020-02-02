@@ -6,6 +6,10 @@ const housesController = require("../../controllers/housesController");
 router.route("/")
   .get(housesController.findAll)
   .post(housesController.create);
+
+router.route("/savehouse/:id")
+  .post(housesController.savehouse)
+
 // Matches with "/api/houses/:id"
 router
   .route("/:id")

@@ -4,16 +4,22 @@ import axios from 'axios';
 import '../Landing/landing.css'
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
-
+import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
   Col
 } from 'reactstrap';
-import MapContainer from "../../components/MapContainer"
+import MapContainer from "../../components/MapContainer";
+import Geocode from "react-geocode";
+import { AuthContext } from "../../context/auth";
+// import { response } from "express";
 // import API from "../../utils/API";
 
-
+Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+// RJ's GOOGLE API KEY
+Geocode.setLanguage("en");
+Geocode.enableDebug();
 
 
 function Landing(props) {
@@ -21,6 +27,8 @@ function Landing(props) {
   const [mapInfo, setMapInfo] = useState([]);
   const [currentHouse, setCurrentHouse] = useState({});
   const [houseSelected, setHouseSelected] = useState(false);
+  const [isError,setIsError] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   //Text input for Formik form.
   const MyTextInput = ({ label, ...props }) => {
@@ -64,6 +72,36 @@ function Landing(props) {
     setHouseSelected(true);
   }
 
+  //Function to save the current house into the SavedHouses database
+  const saveHouse = (username) => {
+
+    console.log(username)
+    let queryURL = "/api/houses/savehouse/" + username
+
+    let houseID = currentHouse._id;
+    let {headline, houseImageURL, street, city, st, zip, lat, long} = currentHouse;
+
+    let payload = {
+      houseID,
+      headline,
+      houseImageURL,
+      street,
+      city,
+      st,
+      zip,
+      lat,
+      long
+    }
+
+    console.log(payload)
+
+    axios.post(queryURL, payload)
+    .then(result => {
+      console.log(result)
+    })
+
+  }
+
   //Use Effect hook to load the google map upon component mount.
   useEffect(() => {
     // Update the document title using the browser API
@@ -79,8 +117,9 @@ function Landing(props) {
           <p>{currentHouse.headline}</p>
           <p>{currentHouse.street}</p>
           <p>{currentHouse.city}</p>
-          <p>{currentHouse.state}</p>
+          <p>{currentHouse.st}</p>
           <img className="landingImg" src={currentHouse.houseImageURL} alt="house"></img>
+          
         </div>
       )
     } else {
@@ -90,6 +129,8 @@ function Landing(props) {
 
   return (
     <div>
+      <AuthContext.Consumer>
+            {authValue => (
       <Container>
         <Row>
           <Col xs="12">
@@ -99,7 +140,8 @@ function Landing(props) {
               initialValues={{
                 street: "",
                 city: "",
-                st: ""
+                st: "",
+                zip: ""
               }}
               validationSchema={Yup.object({
                 street: Yup.string()
@@ -109,13 +151,42 @@ function Landing(props) {
                   .max(20, "Must be 20 characters or less")
                   .required("Required"),
                 st: Yup.string()
-                  .max(15, "Must be 15 characters or less")
+                  .max(15, "Must be 15 characters or less"),
+                zip: Yup.string()
+                  .min(5, "Zip Must be 5 digits.")
+                  .max(5, "Zip Must be 5 digits.")
+                  .required('Required'),
               })}
               onSubmit={(values, { setSubmitting }) => {
                 // setTimeout(() => {
                 //   alert(JSON.stringify(values, null, 2));
                 //   setSubmitting(false);  
                 // }, 400);
+                let {street, city, st, zip} = values;
+                console.log(values);
+                Geocode.fromAddress(street + ', ' + city + ', ' + st)
+                .then(
+                  response => {
+                    let lat = response.results[0].geometry.location.lat;
+                    let long = response.results[0].geometry.location.lat;
+                    axios.post("/api/houses", {
+                      street,
+                      city,
+                      st,
+                      zip,
+                      lat,
+                      long
+                    })
+                    .then(result => {
+                      if(result.data.error) {
+                        setErrorText(result.data.error);
+                        setIsError(true);
+                      }
+                    }).catch(err => {
+                      console.log(err);
+                    });
+                  }
+                )
                 console.log('submit button hit')
               }}
             >
@@ -146,13 +217,22 @@ function Landing(props) {
                       placeholder="City"
                     />
                   </Col>
-                  <Col xs="3">
+                  <Col xs="1">
                     <MyTextInput
                       className="landSrchInput"
                       // label="State"
                       name="st"
                       type="text"
                       placeholder="State"
+                    />
+                  </Col>
+                  <Col xs="2">
+                    <MyTextInput
+                      className="landSrchInput"
+                      // label="State"
+                      name="zip"
+                      type="number"
+                      placeholder="Zip"
                     />
                   </Col>
                 </Row>
@@ -166,6 +246,7 @@ function Landing(props) {
                 </Row>
               </Form>
             </Formik>
+            { isError &&<Error>{errorText}</Error>}
           </Col>
         </Row>
 
@@ -174,15 +255,22 @@ function Landing(props) {
             <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
           </Col>
           <Col xs="6">
-
+            <p>{authValue.authTokens.username}</p>
             <p>Selected House:</p>
+            {/* Conditionally render the house information. */}
             {renderHouse()}
+            {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
+            because it requires the auth context  */}
+            {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
+            
 
           </Col>
         </Row>
 
       </Container>
 
+            )}
+      </AuthContext.Consumer>
 
 
     </div>

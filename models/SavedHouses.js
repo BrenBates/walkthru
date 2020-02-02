@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const schemaHouse = new Schema(
+const schemaSavedHouses = new Schema(
   {
+    houseID: { type: String },
     headline: { type: String },
     houseImageURL: { type: String },
     street: { type: String, required: true },
@@ -11,12 +12,11 @@ const schemaHouse = new Schema(
     zip: { type: Number, required: true },
     lat: { type: Number },
     long: { type: Number },
-    forRent: {type: Boolean},
-    forSale: { type: Boolean },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+      
   }
 );
 
-const House = mongoose.model("House", schemaHouse);
+const SavedHouses = mongoose.model("SavedHouses", schemaSavedHouses);
 
-module.exports = House;
+module.exports = SavedHouses;

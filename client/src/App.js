@@ -26,9 +26,9 @@ function App(props) {
     setAuthTokens(data);
   }
 
-  
   const logOut = () => {
-    setAuthTokens();
+    console.log('Logging out...')
+    setTokens();
   }
 
   return (
@@ -47,12 +47,14 @@ function App(props) {
             </li>
       
           </ul> */}
+          
           <NavbarComponent logOut={logOut}/>
+          
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
             <PrivateRoute path="/api/houses/:id" component={HouseDetail} />
-            <PrivateRoute path="/user" component={UserProfile}/>
+            <PrivateRoute path="/users/:username" component={UserProfile}/>
             <PrivateRoute path="/landing" component={Landing} />
             <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
             <Route component={NoMatch} />
