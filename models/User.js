@@ -11,7 +11,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'comment'
   },
-  savedHouses: [{
+  SavedHouses: [{
     type: Schema.Types.ObjectId,
     ref: "SavedHouses"
   }]

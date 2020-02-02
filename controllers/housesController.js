@@ -71,7 +71,7 @@ module.exports = {
         console.log('this is the saved house', dbSavedHouse )
         return db.User.findOneAndUpdate(
           {username: req.params.id},
-          { $push: {savedHouses:dbSavedHouse._id}},
+          { $push: {SavedHouses:dbSavedHouse._id}},
           {new:true}
         );
       })
