@@ -5,6 +5,9 @@ import { Formik, Form, useField } from "formik";
 import '../UserProfile/userprofile.css'
 import { AuthContext } from "../../context/auth";
 import { useAuth } from "../../context/auth";
+import {
+  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle
+} from 'reactstrap';
 
 
 function UserProfile(props) {
@@ -33,7 +36,7 @@ function UserProfile(props) {
     <AuthContext.Consumer>
       {authValue => (
 
-        <div>
+        <Container>
           <h4>{`welcome ${authValue.authTokens.username}`}</h4>
           <img className="userProfileImg" alt="profile pic" src={authValue.authTokens.userImage}></img>
 
@@ -78,13 +81,13 @@ function UserProfile(props) {
               />
 
 
-              <button type="submit">Submit</button>
+              <button type="submit">Update</button>
               
             </Form>
           </Formik>
 
 
-        </div>
+        </Container>
 
       )}
     </AuthContext.Consumer>
