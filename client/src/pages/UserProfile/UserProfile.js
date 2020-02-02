@@ -6,8 +6,7 @@ import '../UserProfile/userprofile.css'
 import { AuthContext } from "../../context/auth";
 import { useAuth } from "../../context/auth";
 
-import { Redirect } from "react-router-dom";
-import House from "../../components/House/House";
+import SavedHouse from "../../components/SavedHouse/SavedHouse";
 import {
   Row, Col
 } from 'reactstrap';
@@ -49,12 +48,22 @@ function UserProfile(props) {
   },[userHouses])
 
   const pullSavedHouses = (user) => {
-    console.log('this is the current user')
-    console.log(user)
-
+  
     let queryURL = "/api/users/" + user;
     axios.get(queryURL).then(res => {
       setUserHouses(res.data.SavedHouses)
+    })
+  }
+
+  const deleteSavedHouse = (id) => {
+    
+    let queryURL = "/api/houses/savehouse/" + id
+    console.log('this is the query url')
+    console.log(queryURL)
+    axios.delete(queryURL).then(res => {
+      console.log('this is inside the delete houses')
+      console.log(props.match.params.username)
+      pullSavedHouses(props.match.params.username)
     })
   }
 
@@ -63,7 +72,8 @@ function UserProfile(props) {
     if (userHousesReceived) {
     return(
       userHouses.map(house => 
-        <House
+        <SavedHouse
+          savedHouseID = {house._id}
           houseID = {house.houseID}
           headline = {house.headline}
           houseImage = {house.houseImageURL}
@@ -71,6 +81,7 @@ function UserProfile(props) {
           city = {house.city}
           st = {house.st}
           zip = {house.zip}
+          deleteSavedHouse = {deleteSavedHouse}
         />
       )
     )
@@ -115,10 +126,10 @@ function UserProfile(props) {
                   imgURL: imgURL
                 })
                   .then(result => {
-                    console.log('result')
+                    
                     //Change the auth tokens to be the new result data.
                   setAuthTokens(result.data)
-                  console.log(authValue)
+                  
                   })
 
               }}

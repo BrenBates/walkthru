@@ -7,8 +7,10 @@ router.route("/")
   .get(housesController.findAll)
   .post(housesController.create);
 
+  //Matches with "/api/houses/savehouse/:id"
 router.route("/savehouse/:id")
   .post(housesController.savehouse)
+  .delete(housesController.deleteSavedHouse)
 
 // Matches with "/api/houses/:id"
 router
