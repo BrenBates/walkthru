@@ -13,6 +13,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  //Method for finding specific user and returning data with saved houses populated.
+  findOne: function (req,res) {
+    console.log('find one user')
+    console.log(req.params.username)
+  },
   //Method for a new user to register to the app.
   register: function (req, res) {
     const userData = {

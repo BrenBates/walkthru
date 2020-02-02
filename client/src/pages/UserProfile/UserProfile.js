@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
@@ -25,8 +25,23 @@ function UserProfile(props) {
       </>
     );
   };
-
   const { setAuthTokens } = useAuth();
+
+  useEffect(() => {
+    pullSavedHouses(props.match.params.username)
+  },[])
+
+  const pullSavedHouses = (user) => {
+    console.log('this is the current user')
+    console.log(user)
+
+    let queryURL = "/api/users/" + user;
+    axios.get(queryURL).then(res => {
+      console.log(res)
+    })
+
+
+  }
 
   return (
 
@@ -70,7 +85,7 @@ function UserProfile(props) {
           >
             <Form>
               <MyTextInput
-                onChangeText="{handleChange(picURL)}"
+                // onChangeText="{handleChange(picURL)}"
                 label="Change your profile picture:"
                 name="picURL"
                 type="text"

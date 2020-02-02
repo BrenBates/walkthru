@@ -10,7 +10,11 @@ const userSchema = new Schema({
   commentRef: {
     type: Schema.Types.ObjectId,
     ref: 'comment'
-  }
+  },
+  savedHouses: [{
+    type: Schema.Types.ObjectId,
+    ref: "SavedHouses"
+  }]
 });
 
 const User = mongoose.model("User", userSchema);

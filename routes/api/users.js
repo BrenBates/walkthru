@@ -7,6 +7,10 @@ router.route("/")
   .get(usersController.findAll)
   .put(usersController.updateProfilePic)
 
+// Matches with "/api/users/:username"
+router.route("/:username")
+  .get(usersController.findOne)
+
 
 //Matches with /api/users/register
 router.route("/register")
