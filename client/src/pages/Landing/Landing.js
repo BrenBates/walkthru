@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
+import { AuthContext } from "../../context/auth";
 // import { response } from "express";
 // import API from "../../utils/API";
 
@@ -71,6 +72,36 @@ function Landing(props) {
     setHouseSelected(true);
   }
 
+  //Function to save the current house into the SavedHouses database
+  const saveHouse = (username) => {
+
+    console.log(username)
+    let queryURL = "/api/houses/savehouse/" + username
+
+    let houseID = currentHouse._id;
+    let {headline, houseImageURL, street, city, st, zip, lat, long} = currentHouse;
+
+    let payload = {
+      houseID,
+      headline,
+      houseImageURL,
+      street,
+      city,
+      st,
+      zip,
+      lat,
+      long
+    }
+
+    console.log(payload)
+
+    axios.post(queryURL, payload)
+    .then(result => {
+      console.log(result)
+    })
+
+  }
+
   //Use Effect hook to load the google map upon component mount.
   useEffect(() => {
     // Update the document title using the browser API
@@ -86,8 +117,9 @@ function Landing(props) {
           <p>{currentHouse.headline}</p>
           <p>{currentHouse.street}</p>
           <p>{currentHouse.city}</p>
-          <p>{currentHouse.state}</p>
+          <p>{currentHouse.st}</p>
           <img className="landingImg" src={currentHouse.houseImageURL} alt="house"></img>
+          
         </div>
       )
     } else {
@@ -97,6 +129,8 @@ function Landing(props) {
 
   return (
     <div>
+      <AuthContext.Consumer>
+            {authValue => (
       <Container>
         <Row>
           <Col xs="12">
@@ -221,15 +255,22 @@ function Landing(props) {
             <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
           </Col>
           <Col xs="6">
-
+            <p>{authValue.authTokens.username}</p>
             <p>Selected House:</p>
+            {/* Conditionally render the house information. */}
             {renderHouse()}
+            {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
+            because it requires the auth context  */}
+            {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
+            
 
           </Col>
         </Row>
 
       </Container>
 
+            )}
+      </AuthContext.Consumer>
 
 
     </div>
