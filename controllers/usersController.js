@@ -17,6 +17,17 @@ module.exports = {
   findOne: function (req,res) {
     console.log('find one user')
     console.log(req.params.username)
+    db.User.findOne({
+      username: req.params.username
+    })
+      .populate("SavedHouses")
+      .then(function(dbUser) {
+        console.log(dbUser)
+        res.send(dbUser)
+      })
+        .catch(function(err) {
+          res.json(err);
+        });
   },
   //Method for a new user to register to the app.
   register: function (req, res) {

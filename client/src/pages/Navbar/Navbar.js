@@ -31,7 +31,7 @@ const NavbarPage = (props) => {
                 {authValue.authTokens ? 
                 <>
                   <NavItem>
-                  <NavLink tag={Link} to={`/api/user/${authValue.authTokens.username}`} className="text-info">Your Profile</NavLink> 
+                  <NavLink tag={Link} to={`/users/${authValue.authTokens.username}`} className="text-info">Your Profile</NavLink> 
                   </NavItem>
                   <NavItem>
                   <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
