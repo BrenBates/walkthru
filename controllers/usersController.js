@@ -16,7 +16,18 @@ module.exports = {
   //Method for finding specific user and returning data with saved houses populated.
   findOne: function (req,res) {
     console.log('find one user')
-    console.log(req.params.username)
+    
+    db.User.findOne({
+      username: req.params.username
+    })
+      .populate("SavedHouses")
+      .then(function(dbUser) {
+        
+        res.send(dbUser)
+      })
+        .catch(function(err) {
+          res.json(err);
+        });
   },
   //Method for a new user to register to the app.
   register: function (req, res) {
@@ -122,7 +133,6 @@ module.exports = {
       // { useFindAndModify: false },
       {new: true}
     ).then(dbModel => {
-      console.log(dbModel)
       res.json(dbModel)
     })
       .catch(err => res.status(422).json(err));
