@@ -3,6 +3,16 @@
     width: 300px;
 }
 
+/* Pale Gold: #C0B283
+Silk: #DCD0C0
+Paper: #F4F4F4
+Charcoal: #373737 */
+
+.userContainer {
+    background-color:  rgb(192, 178, 131,0.5);
+    padding-bottom: 5vh;
+}
+
 h4 {
     color: ivory;
 }

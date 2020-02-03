@@ -1,0 +1,23 @@
+.savedHouseImg {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1vh;
+    align-self: center;
+}
+
+.savedHouseCard {
+    /* margin-right: 1vw; */
+    margin-bottom: 1vh; 
+}
+
+.savedHouseDeleteBtn {
+    padding: 0;
+    background-color: black;
+}
+
+.deleteBtnRow {
+    align-self: flex-end;
+    margin-right: 0.1vw;
+}
+
+
