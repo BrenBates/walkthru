@@ -1,10 +1,12 @@
 import React from "react";
 import {
-  Row, Col, Card
+  Row, Col, Card, CardImg, CardText, CardBody, CardLink,
+  CardTitle, CardSubtitle
 } from 'reactstrap';
 import './house.css'
 import { Link } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
+import TextWrapper from "../TextWrapper/index";
 
 export class SavedHouse extends React.Component {
 
@@ -13,30 +15,19 @@ render() {
 
         <div>
 
-        <Card>
-          <Row>
-              <Col xs="5"><p>{this.props.street}</p></Col>
-              <Col xs="5"><p>{this.props.city}</p></Col>       
-              <Col xs="2"><button onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}><FiDelete/></button></Col>
-          </Row>
-          <Row> 
-              <Col xs="6"><p>{this.props.st}</p></Col>
-              <Col xs="6"><p>{this.props.zip}</p></Col>   
-          </Row>
-          <Row>
-              <Col xs="12"><img alt="house" src={this.props.houseImage}></img></Col>
-          </Row>
-          <Row>
-
-              <Col xs="12">
+      <Card className="savedHouseCard">
+        <CardBody>
+          <CardTitle>{`${this.props.street}`} <button className = "savedHouseDeleteBtn" onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}><FiDelete/></button></CardTitle>
+          <CardSubtitle>{`${this.props.city}`}</CardSubtitle>
+          <CardSubtitle>{`${this.props.st}, ${this.props.zip}`}</CardSubtitle>
+        </CardBody>
+        <img className="savedHouseImg" src={this.props.houseImage} alt="House" />
+        <CardBody>
                 <button>
                     <Link to={"/api/houses/" +this.props.houseID}>Go to House</Link>
                 </button>
-              </Col>
-              
-          </Row>
-
-        </Card>
+        </CardBody>
+      </Card>
 
         </div>
     )
