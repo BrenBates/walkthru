@@ -39,7 +39,7 @@ const NavbarPage = (props) => {
                       <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink tag={Link} onClick={props.logOut} to="/User" className="text-info">Log Out</NavLink>
+                      <NavLink tag={Link} onClick={props.logOut} to="/" className="text-info">Log Out</NavLink>
                     </NavItem>
                   </>
                   : ''}
