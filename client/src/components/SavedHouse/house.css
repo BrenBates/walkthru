@@ -8,6 +8,9 @@
 .savedHouseCard {
     /* margin-right: 1vw; */
     margin-bottom: 1vh; 
+    width: 250px;
+    height: 325px;
+    background-color: rgb(244, 244, 244);
 }
 
 .savedHouseDeleteBtn {
@@ -21,3 +24,18 @@
 }
 
 
+/* Pale Gold: #C0B283
+rgb(192, 178, 131)
+Silk: #DCD0C0
+rgb(220, 208, 192)
+Paper: #F4F4F4
+rgb(244, 244, 244)
+Charcoal: #373737 
+rgb(55, 55, 55)
+*/
+
+button {
+    background-color: rgb(55, 55, 55);
+    text-decoration: none;
+    align-self: center;
+}

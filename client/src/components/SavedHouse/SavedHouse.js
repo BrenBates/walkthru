@@ -18,8 +18,8 @@ render() {
       <Card className="savedHouseCard">
         <CardBody>
           <CardTitle>{`${this.props.street}`} <button className = "savedHouseDeleteBtn" onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}><FiDelete/></button></CardTitle>
-          <CardSubtitle>{`${this.props.city}`}</CardSubtitle>
-          <CardSubtitle>{`${this.props.st}, ${this.props.zip}`}</CardSubtitle>
+          <CardSubtitle>{`${this.props.city} ${this.props.st}, ${this.props.zip}`}</CardSubtitle>
+          {/* <CardSubtitle>{`$`}</CardSubtitle> */}
         </CardBody>
         <img className="savedHouseImg" src={this.props.houseImage} alt="House" />
         <CardBody>
