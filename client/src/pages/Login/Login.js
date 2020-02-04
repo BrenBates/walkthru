@@ -4,6 +4,7 @@ import axios from 'axios';
 import * as Yup from "yup";
 import "../../styles.css";
 import "../../styles-custom.css";
+import "../Login/login.css";
 import { Formik, Form, useField } from "formik";
 import { Card, Logo, Error } from '../../components/AuthForm';
 import { useAuth } from "../../context/auth";
@@ -100,7 +101,7 @@ function Login(props) {
             label="Password"
             name="password"
             type="password"
-            placeholder="passsword"
+            placeholder=" password"
           />
 
           <button type="submit">Submit</button>
