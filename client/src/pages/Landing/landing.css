@@ -1,18 +1,47 @@
- .landingImg {
-    height: 300px;
-    width: 300px;
-}
+  .selected-house-image {
+      height: 300px;
+      width: 300px;
+  }
 
+  .button-search {
+      height: 2em !important;
+      width:90% !important;
+      margin: 5px 0 0 0 !important;
+  }
 
-.landSrchHouseBtn {
-    margin: 0 !important;
-    
-}
+  .map-container {
+      width: 100%;
+      height: 100%;
+  }
 
-.landSrchHouseFrm {
-    border: 1px solid black;
-}
+  .selected-house-container,
+  .search-house-form {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    padding: 0;
+  }
 
-.landSrchInput {
-    width: 100% !important;
-}
+  .selected-house-container {
+      padding: 0 2%;
+  }
+
+  .map-selected-house-row {
+      height: 400px;
+  }
+
+  .search-house-form {
+    width: 100%;
+    height: 3em;
+    padding: 0 20px;
+    margin-top: 3%;
+  }
+
+  .input-street-field, .input-city-field, .input-state-field, .input-zip-field {
+      height: 2em !important;
+      width: 100% !important;
+      border: 1px solid cadetblue !important;
+      margin-top: 5px;
+  }

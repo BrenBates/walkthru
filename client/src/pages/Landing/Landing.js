@@ -13,6 +13,7 @@ import {
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
+import Star from "../../img/fav_star_selected.png";
 // import { response } from "express";
 // import API from "../../utils/API";
 
@@ -21,13 +22,12 @@ Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
 Geocode.setLanguage("en");
 Geocode.enableDebug();
 
-
 function Landing(props) {
 
   const [mapInfo, setMapInfo] = useState([]);
   const [currentHouse, setCurrentHouse] = useState({});
   const [houseSelected, setHouseSelected] = useState(false);
-  const [isError,setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
 
   //Text input for Formik form.
@@ -37,7 +37,7 @@ function Landing(props) {
     const [field, meta] = useField(props);
     return (
       <>
-        <label htmlFor={props.id || props.name}>{label}</label>
+        {/* <label htmlFor={props.id || props.name}>{label}</label> */}
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
@@ -79,7 +79,7 @@ function Landing(props) {
     let queryURL = "/api/houses/savehouse/" + username
 
     let houseID = currentHouse._id;
-    let {headline, houseImageURL, street, city, st, zip, lat, long} = currentHouse;
+    let { headline, houseImageURL, street, city, st, zip, lat, long } = currentHouse;
 
     let payload = {
       houseID,
@@ -96,9 +96,9 @@ function Landing(props) {
     console.log(payload)
 
     axios.post(queryURL, payload)
-    .then(result => {
-      console.log(result)
-    })
+      .then(result => {
+        console.log(result)
+      })
 
   }
 
@@ -109,167 +109,158 @@ function Landing(props) {
   }, []);
 
   //Conditional rendering for when the user clicks on a marker on the Google Maps API.
-  const renderHouse = () => {
+  const renderSelectedHouse = () => {
     if (houseSelected) {
       return (
-        <div>
-          <Link to={"/api/houses/" + currentHouse._id}>Go to House</Link>
-          <p>{currentHouse.headline}</p>
-          <p>{currentHouse.street}</p>
-          <p>{currentHouse.city}</p>
-          <p>{currentHouse.st}</p>
-          <img className="landingImg" src={currentHouse.houseImageURL} alt="house"></img>
-          
-        </div>
+        <Row>
+          <Link to={"/api/houses/" + currentHouse._id}>
+            <img className="selected-house-image" src={currentHouse.houseImageURL} alt="house" />
+          </Link>
+          <Col>
+            <h5>{currentHouse.headline}</h5>
+            <p>{currentHouse.street}</p>
+            <p>{currentHouse.city}</p>
+            <p>{currentHouse.st}</p>
+          </Col>
+        </Row>
       )
     } else {
       return <p></p>
     }
   }
 
+  const renderHouseSearch = () => {
+    return (
+      <Form className="search-house-form">
+        <Row>
+          <Col xs='4' className="text-center">
+            <MyTextInput
+              className="input-street-field"
+              // label="Street"
+              name="street"
+              type="text"
+              placeholder=" 123 N 456 W"
+            />
+          </Col>
+          <Col xs='3' className="text-center">
+            <MyTextInput
+              className="input-city-field"
+              // label="City"
+              name="city"
+              type="text"
+              placeholder=" City"
+            />
+          </Col>
+          <Col xs='1' className="text-center">
+            <MyTextInput
+              className="input-state-field"
+              // label="State"
+              name="st"
+              type="text"
+              placeholder=" State"
+            />
+          </Col>
+          <Col xs='2' className="text-center">
+            <MyTextInput
+              className="input-zip-field"
+              // label="State"
+              name="zip"
+              type="text"
+              placeholder=" Zip"
+            />
+          </Col>
+          <Col xs='2' className="text-center">
+            <button className="button-search" type="submit">Add Address</button>
+          </Col>
+        </Row>
+      </Form>
+    )
+  }
+
   return (
     <div>
       <AuthContext.Consumer>
-            {authValue => (
-      <Container>
-        <Row>
-          <Col xs="12">
-            {/* In this first row adding a search form for users to determine if a property exists yet or not. */}
+        {authValue => (
+          <Container>
+            <Row className="map-selected-house-row">
+              <Col style={{ padding: 0 }}>
+                <MapContainer className="map-container" mapInfo={mapInfo} clickHouse={handleClick} />
+              </Col>
+              <Col className="selected-house-container">
+                <h4>Selected House:</h4>
+                {/* Conditionally render the house information. */}
+                {renderSelectedHouse()}
+                {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
+          because it requires the auth context  */}
+                {/* {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>} */}
+                {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
+              </Col>
+            </Row>
+            <Row>
+              <Col style={{ padding: 0 }}>
+                {/* In this first row adding a search form for users to determine if a property exists yet or not. */}
+                <Formik
+                  initialValues={{
+                    street: "",
+                    city: "",
+                    st: "",
+                    zip: ""
+                  }}
+                  validationSchema={Yup.object({
+                    street: Yup.string()
+                      .max(25, "Must be 25 characters or less")
+                      .required(""),
+                    city: Yup.string()
+                      .max(20, "Must be 20 characters or less")
+                      .required(""),
+                    st: Yup.string()
+                      .max(15, "Must be 15 characters or less"),
+                    zip: Yup.string()
+                      .min(5, "Zip Must be 5 digits.")
+                      .max(5, "Zip Must be 5 digits.")
+                      .required(''),
+                  })}
+                  onSubmit={(values, { setSubmitting }) => {
+                    // setTimeout(() => {
+                    //   alert(JSON.stringify(values, null, 2));
+                    //   setSubmitting(false);  
+                    // }, 400);
+                    let { street, city, st, zip } = values;
+                    console.log(values);
+                    Geocode.fromAddress(street + ', ' + city + ', ' + st)
+                      .then(
+                        response => {
+                          let lat = response.results[0].geometry.location.lat;
+                          let long = response.results[0].geometry.location.lat;
+                          axios.post("/api/houses", {
+                            street,
+                            city,
+                            st,
+                            zip,
+                            lat,
+                            long
+                          })
+                            .then(result => {
+                              if (result.data.error) {
+                                setErrorText(result.data.error);
+                                setIsError(true);
+                              }
+                            }).catch(err => {
+                              console.log(err);
+                            });
+                        }
+                      )
+                    console.log('submit button hit')
+                  }}
+                >
+                  {renderHouseSearch()}
+                </Formik>
+                {isError && <Error>{errorText}</Error>}
+              </Col>
+            </Row>
+          </Container>
 
-            <Formik
-              initialValues={{
-                street: "",
-                city: "",
-                st: "",
-                zip: ""
-              }}
-              validationSchema={Yup.object({
-                street: Yup.string()
-                  .max(25, "Must be 25 characters or less")
-                  .required("Required"),
-                city: Yup.string()
-                  .max(20, "Must be 20 characters or less")
-                  .required("Required"),
-                st: Yup.string()
-                  .max(15, "Must be 15 characters or less"),
-                zip: Yup.string()
-                  .min(5, "Zip Must be 5 digits.")
-                  .max(5, "Zip Must be 5 digits.")
-                  .required('Required'),
-              })}
-              onSubmit={(values, { setSubmitting }) => {
-                // setTimeout(() => {
-                //   alert(JSON.stringify(values, null, 2));
-                //   setSubmitting(false);  
-                // }, 400);
-                let {street, city, st, zip} = values;
-                console.log(values);
-                Geocode.fromAddress(street + ', ' + city + ', ' + st)
-                .then(
-                  response => {
-                    let lat = response.results[0].geometry.location.lat;
-                    let long = response.results[0].geometry.location.lat;
-                    axios.post("/api/houses", {
-                      street,
-                      city,
-                      st,
-                      zip,
-                      lat,
-                      long
-                    })
-                    .then(result => {
-                      if(result.data.error) {
-                        setErrorText(result.data.error);
-                        setIsError(true);
-                      }
-                    }).catch(err => {
-                      console.log(err);
-                    });
-                  }
-                )
-                console.log('submit button hit')
-              }}
-            >
-              {/* splitting the form up into sub columns so it doesn't take up too much vertical space. */}
-              <Form className="landSrchHouseFrm">
-                <Row>
-                  {/* <Col xs="4">
-                <div className="landSrchHouseDiv"> 
-                <p>Search for a house:</p>
-                <button className="landSrchHouseBtn" type="submit">Submit</button>
-                </div>
-              </Col> */}
-                  <Col xs="5">
-                    <MyTextInput
-                      className="landSrchInput"
-                      // label="Street"
-                      name="street"
-                      type="text"
-                      placeholder="123 N 456 W"
-                    />
-                  </Col>
-                  <Col xs="4">
-                    <MyTextInput
-                      className="landSrchInput"
-                      // label="City"
-                      name="city"
-                      type="text"
-                      placeholder="City"
-                    />
-                  </Col>
-                  <Col xs="1">
-                    <MyTextInput
-                      className="landSrchInput"
-                      // label="State"
-                      name="st"
-                      type="text"
-                      placeholder="State"
-                    />
-                  </Col>
-                  <Col xs="2">
-                    <MyTextInput
-                      className="landSrchInput"
-                      // label="State"
-                      name="zip"
-                      type="number"
-                      placeholder="Zip"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs="6" md="3">
-                    <p>Search for a house:</p>
-                  </Col>
-                  <Col xs="2">
-                    <button className="landSrchHouseBtn" type="submit">Submit</button>
-                  </Col>
-                </Row>
-              </Form>
-            </Formik>
-            { isError &&<Error>{errorText}</Error>}
-          </Col>
-        </Row>
-
-        <Row>
-          <Col xs="6">
-            <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
-          </Col>
-          <Col xs="6">
-            <p>{authValue.authTokens.username}</p>
-            <p>Selected House:</p>
-            {/* Conditionally render the house information. */}
-            {renderHouse()}
-            {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
-            because it requires the auth context  */}
-            {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
-            
-
-          </Col>
-        </Row>
-
-      </Container>
-
-            )}
+        )}
       </AuthContext.Consumer>
 
 
