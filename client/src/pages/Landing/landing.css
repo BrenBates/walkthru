@@ -45,3 +45,7 @@
       border: 1px solid cadetblue !important;
       margin-top: 5px;
   }
+
+  .saved-house-star {
+      width: 20px;
+  }

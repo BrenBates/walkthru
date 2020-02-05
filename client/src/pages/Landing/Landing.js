@@ -8,7 +8,8 @@ import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
-  Col
+  Col,
+  Tooltip
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
@@ -29,6 +30,8 @@ function Landing(props) {
   const [houseSelected, setHouseSelected] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
+  const [housesExist, setHousesExist] = useState(false);
+  const [allHouses, setAllHouses] = useState({});
 
   //Text input for Formik form.
   const MyTextInput = ({ label, ...props }) => {
@@ -51,6 +54,9 @@ function Landing(props) {
     })
       .then(result => {
         setMapInfo(result.data)
+        if (result.data) {
+          setHousesExist(true);
+        }
       });
   }
 
@@ -93,11 +99,11 @@ function Landing(props) {
       long
     }
 
-    console.log(payload)
+    console.log("payload:  ", payload)
 
     axios.post(queryURL, payload)
       .then(result => {
-        console.log(result)
+        console.log("result:  ", result)
       })
 
   }
@@ -113,14 +119,13 @@ function Landing(props) {
     if (houseSelected) {
       return (
         <Row>
-          <Link to={"/api/houses/" + currentHouse._id}>
-            <img className="selected-house-image" src={currentHouse.houseImageURL} alt="house" />
-          </Link>
+          <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
           <Col>
             <h5>{currentHouse.headline}</h5>
             <p>{currentHouse.street}</p>
             <p>{currentHouse.city}</p>
             <p>{currentHouse.st}</p>
+            <p>{currentHouse.zip}</p>
           </Col>
         </Row>
       )
@@ -177,6 +182,48 @@ function Landing(props) {
     )
   }
 
+  const allHousesTable = () => {
+    if (housesExist) {
+      return (
+        <Container>
+          <Row>
+            <Col>
+              <Headline />
+            </Col>
+            <Col>
+              <Address />
+            </Col>
+            <Col>
+              <Rating />
+            </Col>
+          </Row>
+        </Container>
+      )
+    }
+  }
+
+  const Headline = () => {
+    return (
+      <>
+        <h4>{currentHouse.headline}</h4>
+      </>
+    )
+  }
+
+  const Address = () => {
+    return (
+      <>
+        <span><h5>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</h5></span>
+      </>
+    )
+  }
+
+  const Rating = () => {
+    return (
+      <></>
+    )
+  }
+
   return (
     <div>
       <AuthContext.Consumer>
@@ -192,8 +239,19 @@ function Landing(props) {
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
-                {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>}
-                
+                <Row>
+                  <Col>
+                    {houseSelected ?
+                      <p><img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" />
+                        Add to Favorites</p> : <></>}
+                  </Col>
+                  <Col>
+                  {houseSelected ?
+                    <Link to={"/api/houses/" + currentHouse._id}>
+                      <button>Visit House</button>
+                    </Link> : <></>}
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <Row>
@@ -258,13 +316,16 @@ function Landing(props) {
                 {isError && <Error>{errorText}</Error>}
               </Col>
             </Row>
+            <Row>
+              {allHousesTable()}
+            </Row>
           </Container>
 
         )}
       </AuthContext.Consumer>
 
 
-    </div>
+    </div >
   );
 }
 
