@@ -192,8 +192,8 @@ function Landing(props) {
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
-                {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>}
-                
+                {/* {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>} */}
+                {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
               </Col>
             </Row>
             <Row>
