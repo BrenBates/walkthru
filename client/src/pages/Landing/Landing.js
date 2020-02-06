@@ -15,7 +15,8 @@ import {
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
-import Star from "../../img/fav_star_selected.png";
+import HouseListContainer from "../../components/HouseListContainer";
+// import Star from "../../img/fav_star_selected.png";
 // import { response } from "express";
 // import API from "../../utils/API";
 
@@ -193,6 +194,23 @@ function Landing(props) {
     )
   }
 
+  const renderHouseList = () => {
+    if (mapInfo) {
+      return (
+        mapInfo.map(item =>
+          <HouseListContainer
+            key={item._id}
+            houseID={item._id}
+            headline={item.headline}
+            street={item.street}
+            city={item.city}
+            st={item.st}
+            zip={item.zip}
+            />
+          )
+      )
+    }
+  }
   return (
     <div>
       <AuthContext.Consumer>
@@ -287,13 +305,7 @@ function Landing(props) {
       </AuthContext.Consumer>
       <Container>
       <Row className="list-of-houses">
-        <ListGroup>
-          <h4>This container should hold the list of houses on the map</h4>
-          <ListGroupItem>
-          {/* render a list of all the houses on the map */}
-          <button className="button-detail" type="submit">Details</button>
-          </ListGroupItem>
-        </ListGroup>
+        {renderHouseList()}
       </Row>>  
     </Container>
     </div>
