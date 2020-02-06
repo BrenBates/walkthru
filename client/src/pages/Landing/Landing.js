@@ -8,7 +8,9 @@ import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
-  Col
+  Col,
+  ListGroup,
+  ListGroupItem
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
@@ -17,7 +19,10 @@ import Star from "../../img/fav_star_selected.png";
 // import { response } from "express";
 // import API from "../../utils/API";
 
-Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+
+
+Geocode.setApiKey(process.env.REACT_APP_GEOCODEAPI);
+
 // RJ's GOOGLE API KEY
 Geocode.setLanguage("en");
 Geocode.enableDebug();
@@ -133,6 +138,16 @@ function Landing(props) {
     return (
       <Form className="search-house-form">
         <Row>
+          <Col xs='10' className="text-center">
+            <MyTextInput
+              className="input-headline-field"
+              name="headline"
+              type="text"
+              placeholder="Enter Headline here...."
+              />
+          </Col>
+        </Row>
+        <Row>
           <Col xs='4' className="text-center">
             <MyTextInput
               className="input-street-field"
@@ -201,12 +216,16 @@ function Landing(props) {
                 {/* In this first row adding a search form for users to determine if a property exists yet or not. */}
                 <Formik
                   initialValues={{
+                    headline: "",
                     street: "",
                     city: "",
                     st: "",
                     zip: ""
                   }}
                   validationSchema={Yup.object({
+                    headline: Yup.string()
+                      .max(75, "Headline must be 30 characters or less")
+                      .required(""),
                     street: Yup.string()
                       .max(25, "Must be 25 characters or less")
                       .required(""),
@@ -220,19 +239,20 @@ function Landing(props) {
                       .max(5, "Zip Must be 5 digits.")
                       .required(''),
                   })}
-                  onSubmit={(values, { setSubmitting }) => {
+                  onSubmit={(values, { setSubmitting, resetForm }) => {
                     // setTimeout(() => {
                     //   alert(JSON.stringify(values, null, 2));
                     //   setSubmitting(false);  
                     // }, 400);
-                    let { street, city, st, zip } = values;
+                    let { headline, street, city, st, zip } = values;
                     console.log(values);
                     Geocode.fromAddress(street + ', ' + city + ', ' + st)
                       .then(
                         response => {
                           let lat = response.results[0].geometry.location.lat;
-                          let long = response.results[0].geometry.location.lat;
+                          let long = response.results[0].geometry.location.lng;
                           axios.post("/api/houses", {
+                            headline,
                             street,
                             city,
                             st,
@@ -250,6 +270,8 @@ function Landing(props) {
                             });
                         }
                       )
+                    resetForm();
+                    loadMap();
                     console.log('submit button hit')
                   }}
                 >
@@ -262,8 +284,17 @@ function Landing(props) {
 
         )}
       </AuthContext.Consumer>
-
-
+      <Container>
+      <Row className="list-of-houses">
+        <ListGroup>
+          <h4>This container should hold the list of houses on the map</h4>
+          <ListGroupItem>
+          {/* render a list of all the houses on the map */}
+          <button className="button-detail" type="submit">Details</button>
+          </ListGroupItem>
+        </ListGroup>
+      </Row>>  
+    </Container>
     </div>
   );
 }

@@ -14,6 +14,10 @@ const schemaHouse = new Schema(
     forRent: {type: Boolean},
     forSale: { type: Boolean },
     date: { type: Date, default: Date.now }
+    // rating
+    // zillow url
+    // rentler.com url
+    // 
   }
 );
 
