@@ -35,6 +35,7 @@ function Landing(props) {
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
 
+
   //Text input for Formik form.
   const MyTextInput = ({ label, ...props }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -261,6 +262,7 @@ function Landing(props) {
                             long
                           })
                             .then(result => {
+                              loadMap();
                               if (result.data.error) {
                                 setErrorText(result.data.error);
                                 setIsError(true);
@@ -271,7 +273,6 @@ function Landing(props) {
                         }
                       )
                     resetForm();
-                    loadMap();
                     console.log('submit button hit')
                   }}
                 >
