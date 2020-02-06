@@ -84,7 +84,8 @@ const NewHouseForm = () => {
                         }).catch(err => {
                             console.log(err);
                         });
-                          })
+                    }
+                )
             }}
             >
                 <Form>
