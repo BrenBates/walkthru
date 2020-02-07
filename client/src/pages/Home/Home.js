@@ -23,7 +23,7 @@ function Home(props) {
 
     return <div>
         <div className="bgImage"></div>
-        <div className="logo-container">
+        <div className="logo-container-login">
             <Logo className="logo" src={logoImg} />
             <div className="login-form">
                 <Login

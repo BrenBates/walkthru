@@ -5,7 +5,7 @@ import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
 // import { useAuth } from "../../context/auth";
 import {
-  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle
+  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, InputGroupAddon, InputGroupText
 } from 'reactstrap';
 import Comment from "../../components/Comment"
 import { AuthContext } from "../../context/auth";
@@ -19,8 +19,14 @@ function HouseDetail(props) {
     const [field, meta] = useField(props);
     return (
       <>
-        <label htmlFor={props.id || props.name}>{label}</label>
-        <input className="text-input" {...field} {...props} />
+        <InputGroup>
+        <InputGroupAddon addonType="prepend">
+          <InputGroupText htmlFor={props.id || props.name}>Add Comment</InputGroupText>
+        </InputGroupAddon>
+        <Input  {...field} {...props}/>
+          {/* <Label htmlFor={props.id || props.name}>{label}</Label> */}
+          {/* <input className="text-input" {...field} {...props} /> */}
+        </InputGroup>
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
@@ -110,113 +116,116 @@ function HouseDetail(props) {
     if (houseInfoReceived) {
       return (
         <div>
+          <Jumbotron className="jumbo-container">
+            <Row>
+              <Col>
+                <Container>
+                  <Card>
+                    <Row>
+                      <Col>
+                        <CardImg top width="100%" src={houseImageURL} alt="Comment on this house!" />
+                      </Col>
+                      <Col>
+                        <CardBody>
+                          <CardTitle>{houseHeadline}</CardTitle>
+                          <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
+                          <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                        </CardBody>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Container>
+              </Col>
+            </Row>
+            <AuthContext.Consumer>
+              {authValue => (
+                <Formik
+                  initialValues={{
+                    comment: ""
+                  }}
+                  validationSchema={Yup.object({
+                    comment: Yup.string()
+                      .min(1, "Must have at least one character")
+                      .required("Required")
+                  })}
+                  onSubmit={(values, { setSubmitting }) => {
+                    // setTimeout(() => {
+                    //   alert(JSON.stringify(values, null, 2));
+                    //   setSubmitting(false);  
+                    // }, 400);
 
-          <Row>
-            <Col>
-              <Container>
-                <Card>
-                  <Row>
-                    <Col>
-                      <CardImg top width="100%" src={houseImageURL} alt="Card image cap" />
-                    </Col>
-                    <Col>
-                      <CardBody>
-                        <CardTitle>{houseHeadline}</CardTitle>
-                        <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
-                        <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
-                      </CardBody>
-                    </Col>
-                  </Row>
-                </Card>
-              </Container>
-            </Col>
-          </Row>
+                    // console.log("user: " + authValue.authTokens.username);
 
+                    // let nameURL = "/api/users/comments";
+                    // console.log("nameURL: " + nameURL);
 
-          <AuthContext.Consumer>
-            {authValue => (
-              <Formik
-                initialValues={{
-                  comment: ""
-                }}
-                validationSchema={Yup.object({
-                  comment: Yup.string()
-                    .min(1, "Must have at least one character")
-                    .required("Required")
-                })}
-                onSubmit={(values, { setSubmitting }) => {
-                  // setTimeout(() => {
-                  //   alert(JSON.stringify(values, null, 2));
-                  //   setSubmitting(false);  
-                  // }, 400);
+                    // axios.get(nameURL).then(() => {
+                    //   console.log("/api/users/comments");
+                    // })
+                    // .catch(err => console.log(err));
 
-                  // console.log("user: " + authValue.authTokens.username);
+                    // let { comment } = values
 
-                  // let nameURL = "/api/users/comments";
-                  // console.log("nameURL: " + nameURL);
+                    // axios.post("/api/users/login", {
+                    //   comment,
+                    //   houseID,
+                    // })
+                    //   .then(result => {
+                    //     // if (result.status === 200) {
 
-                  // axios.get(nameURL).then(() => {
-                  //   console.log("/api/users/comments");
-                  // })
-                  // .catch(err => console.log(err));
+                    //     //   if (result.data.error) {
+                    //     //     setErrorText(result.data.error)
+                    //     //     setIsError(true)
+                    //     //   } else {
+                    //     //     //Set the auth token along with the user data into the context
+                    //     //     setAuthTokens(result.data)
+                    //     //     setLoggedIn(true);
+                    //     //   }
+                    //     // } else {
+                    //     //   setIsError(true);
+                    //     // }
+                    //   })
+                    // .catch(e => {
+                    //   setIsError(true);
+                    // });
+                    let userName = authValue.authTokens.username;
+                    let userImage = authValue.authTokens.userImage;
+                    let comment = values.comment
 
-                  // let { comment } = values
-
-                  // axios.post("/api/users/login", {
-                  //   comment,
-                  //   houseID,
-                  // })
-                  //   .then(result => {
-                  //     // if (result.status === 200) {
-
-                  //     //   if (result.data.error) {
-                  //     //     setErrorText(result.data.error)
-                  //     //     setIsError(true)
-                  //     //   } else {
-                  //     //     //Set the auth token along with the user data into the context
-                  //     //     setAuthTokens(result.data)
-                  //     //     setLoggedIn(true);
-                  //     //   }
-                  //     // } else {
-                  //     //   setIsError(true);
-                  //     // }
-                  //   })
-                  // .catch(e => {
-                  //   setIsError(true);
-                  // });
-                  let userName = authValue.authTokens.username;
-                  let userImage = authValue.authTokens.userImage;
-                  let comment = values.comment
-
-                  axios.post("/api/comments/byhouse", {
-                    houseID,
-                    userName,
-                    userImage,
-                    comment
-                  })
-                    .then(result => {
-                      console.log('made it back');
-                      console.log(result);
-                      //Increment the new comment submitted state value by one to trigger a re-render of the comments 
-                      setNewCommentSubmitted(newCommentSubmitted + 1);
-                      //Reset the value of the input field
-                      values.comment = '';
+                    axios.post("/api/comments/byhouse", {
+                      houseID,
+                      userName,
+                      userImage,
+                      comment
                     })
-                }
-                }
-              >
-                <Form>
-                  <MyTextInput
-                    label="New Comment"
-                    name="comment"
-                    type="text"
-                    placeholder="Enter new comment..."
-                  />
-                  <button type="submit">Add Comment</button>
-                </Form>
-              </Formik>
-            )}
-          </AuthContext.Consumer>
+                      .then(result => {
+                        console.log(result);
+                        //Increment the new comment submitted state value by one to trigger a re-render of the comments 
+                        setNewCommentSubmitted(newCommentSubmitted + 1);
+                        //Reset the value of the input field
+                        values.comment = '';
+                      })
+                  }
+                  }
+                >
+                  <Form>
+                    <MyTextInput
+                      label="New Comment"
+                      name="comment"
+                      type="text"
+                      placeholder="Enter new comment..."
+                      onKeyPress={event => {
+                        if (event.key === "Enter") {
+                          onSubmit(event.values);
+                        }
+                      }}
+                    />
+                    {/* <button type="submit">Add Comment</button> */}
+                  </Form>
+                </Formik>
+              )}
+            </AuthContext.Consumer>
+          </Jumbotron>
         </div>
       )
     }

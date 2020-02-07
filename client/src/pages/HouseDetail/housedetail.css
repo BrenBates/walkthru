@@ -1,6 +1,38 @@
+body {
+    padding-top: 8%;
+}
+
 .filler {
     background-color: blue;
 }
+
 img {
     width: 80%;
+}
+
+.jumbo-container {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    padding: 1em 0;
+    margin: 0 5%;
+    height: 450px;
+}
+
+.input-group-text,
+.form-control {
+    margin-top: 1em;
+}
+.input-group-text {
+    margin-left: 1em;
+    height: 32px;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: ivory;
+}
+
+.form-control {
+    margin-right: 1em;
 }

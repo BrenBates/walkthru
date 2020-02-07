@@ -6,7 +6,7 @@ import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
 import UserProfile from './pages/UserProfile/UserProfile';
 import Login from './pages/Login/Login';
-import Signup from './pages/Signup';
+import Signup from './pages/SignUp/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
 
 import NewHouseForm from './pages/NewHouseForm';
@@ -34,22 +34,8 @@ function App(props) {
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens} }>
       <Router>
-        <div>
-          {/* <ul>
-            <li>
-              <Link to="/">Home Page</Link>
-            </li>
-            <li>
-              <Link to="/landing">Landing Page</Link>
-            </li>
-            <li>
-              <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
-            </li>
-      
-          </ul> */}
-          
+        <div>          
           <NavbarComponent logOut={logOut}/>
-          
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
