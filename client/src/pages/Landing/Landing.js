@@ -15,7 +15,7 @@ import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
 import HouseListContainer from "../../components/HouseListContainer";
-// import Star from "../../img/fav_star_selected.png";
+import Star from "../../img/fav_star_selected.png";
 // import { response } from "express";
 // import API from "../../utils/API";
 
@@ -312,9 +312,6 @@ function Landing(props) {
                 </Formik>
                 {isError && <Error>{errorText}</Error>}
               </Col>
-            </Row>
-            <Row>
-              {allHousesTable()}
             </Row>
           </Container>
 

@@ -1,12 +1,10 @@
 .profile-image-lg {
-    height: 300px;
-    width: 300px;
+    height: 60px;
+    width: 60px;
     border-radius: 3px;
 }
 
 .profile-row {
-    align-items: center;
-    justify-content: center;
 }
 
 .profile-col {
@@ -21,6 +19,7 @@
     border: 3px solid #f1f1f1;
     padding: 1em;
     flex: 1;
+    overflow: auto;
 }
 
 h4 {
@@ -30,7 +29,6 @@ h4 {
 .user-input {
     width: 400px;
 }
-
 
 input[type="text"] {
     height: 2em;

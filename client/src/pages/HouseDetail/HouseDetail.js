@@ -5,7 +5,9 @@ import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
 // import { useAuth } from "../../context/auth";
 import {
-  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, InputGroupAddon, InputGroupText
+  Container, Row, Col, Card, CardImg, CardText, CardBody, 
+  CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, 
+  InputGroupAddon, InputGroupText
 } from 'reactstrap';
 import Comment from "../../Comment/Comment"
 import { AuthContext } from "../../context/auth";
@@ -58,32 +60,10 @@ function HouseDetail(props) {
 
   // Get all the data related to the current house to the user
   useEffect(() => {
-
-    const populateHouseInfo = () => {
-
-      axios.get(houseURL).then((res) => {
-
-        const data = res.data;
-        setHouseID(data._id);
-        setHouseHeadline(data.headline);
-        setHouseImageURL(data.houseImageURL);
-        setHouseStreet(data.street);
-        setHouseCity(data.city);
-        setHouseState(data.st);
-        setHouseZip(data.zip);
-        setHouseForSale(data.forSale);
-        setHouseInfoReceived(true);
-      })
-    }
-
     populateHouseInfo()
   }, [houseURL]);
 
   // Get the latest comments loaded to the page
-  useEffect(() => {
-    loadComments(props.match.params.id)
-  }, [newCommentSubmitted]);
-
   useEffect(() => {
     loadComments(props.match.params.id)
   }, [newCommentSubmitted, props.match.params.id])
