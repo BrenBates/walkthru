@@ -1,12 +1,10 @@
 import React from "react";
 import {
-  Row, Col, Card, CardImg, CardText, CardBody, CardLink,
-  CardTitle, CardSubtitle
+  Card, CardBody, CardTitle, CardSubtitle
 } from 'reactstrap';
 import './savedhouse.css'
 import { Link } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
-import TextWrapper from "../TextWrapper/index";
 
 export class SavedHouse extends React.Component {
 

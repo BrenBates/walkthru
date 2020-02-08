@@ -8,14 +8,13 @@ import "../styles-custom.css";
 import axios from 'axios';
 import Geocode from "react-geocode";
 
-Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
-// RJ's GOOGLE API KEY
+Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API);
 Geocode.setLanguage("en");
 Geocode.enableDebug();
 
 
 const NewHouseForm = () => {
-    const [isError,setIsError] = useState(false);
+    const [isError, setIsError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const MyTextInput = ({ label, ...props }) => {
         // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -53,40 +52,35 @@ const NewHouseForm = () => {
                         .required('Required'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
-                    // setTimeout(() => {
-                    //     // alert(JSON.stringify(values, null, 2));
-                    //     setSubmitting(false);
-                    // }, 400);
 
-                    let {street, city, st, zip} = values;
+                    let { street, city, st, zip } = values;
                     console.log(values);
 
                     Geocode.fromAddress(street + ", " + city + ", " + st + " " + zip).then(
                         response => {
                             let lat = response.results[0].geometry.location.lat;
                             let long = response.results[0].geometry.location.lng;
-                        //    { lat, lng } = response.results[0].geometry.location;
-                          console.log(lat, long);
-                          axios.post("/api/houses", {
-                            street,
-                            city,
-                            st,
-                            zip,
-                            lat,
-                            long
-                        }) 
-                        .then(result => {
-                            console.log(result);
-                            if (result.data.error) {
-                                setErrorText(result.data.error);
-                                setIsError(true);
-                            }
-                        }).catch(err => {
-                            console.log(err);
-                        });
-                    }
-                )
-            }}
+
+                            axios.post("/api/houses", {
+                                street,
+                                city,
+                                st,
+                                zip,
+                                lat,
+                                long
+                            })
+                                .then(result => {
+                                    console.log(result);
+                                    if (result.data.error) {
+                                        setErrorText(result.data.error);
+                                        setIsError(true);
+                                    }
+                                }).catch(err => {
+                                    console.log(err);
+                                });
+                        }
+                    )
+                }}
             >
                 <Form>
                     <MyTextInput
@@ -101,14 +95,7 @@ const NewHouseForm = () => {
                         type="text"
                         placeholder="City"
                     />
-                    {/* Option drop down menu for the State field */}
-                    {/* <MySelect label="State" name="st">
-                        <option value="">Select a State</option>
-                        <option value="AK">AK</option>
-                        <option value="AR">AR</option>
-                        <option value="AZ">AZ</option>
-                        <option value="CA">CA</option>
-                    </MySelect> */}
+
                     <MyTextInput
                         label="St"
                         name="st"
@@ -124,7 +111,7 @@ const NewHouseForm = () => {
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
-        { isError &&<Error>{errorText}</Error>}
+            {isError && <Error>{errorText}</Error>}
         </Card>
     );
 };

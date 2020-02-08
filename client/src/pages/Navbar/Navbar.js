@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components'
 import { Link } from "react-router-dom";
 import "../Navbar/navbar.css";
 import {
@@ -27,9 +26,7 @@ const NavbarPage = (props) => {
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
-                {/* <NavItem>
-             <NavLink tag={Link} to="/" className="text-info">Home</NavLink>
-              </NavItem> */}
+
                 {authValue.authTokens ?
                   <>
                   <NavItem>
@@ -54,25 +51,3 @@ const NavbarPage = (props) => {
   );
 }
 export default NavbarPage;
-// import React, { Component } from "react"
-// import styled from "styled-components"
-// const NavbarEl = styled.nav`
-//   margin: auto;
-// `
-// const NavbarList = styled.ul`
-//   display: flex;
-//   justify-content: center;
-//   list-style: none;
-//   margin: 0;
-// `
-// class Navbar extends Component {
-//   render() {
-//     const { children, onMouseLeave } = this.props
-//     return (
-//       <NavbarEl onMouseLeave={onMouseLeave}>
-//         <NavbarList>{children}</NavbarList>
-//       </NavbarEl>
-//     )
-//   }
-// }
-// export default Navbar

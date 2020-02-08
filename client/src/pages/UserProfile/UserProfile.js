@@ -83,7 +83,9 @@ function UserProfile(props) {
         )
       )
     }
+
   }
+
   return (
     <AuthContext.Consumer>
       {authValue => (
