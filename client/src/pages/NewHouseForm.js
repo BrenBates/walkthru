@@ -8,7 +8,7 @@ import "../styles-custom.css";
 import axios from 'axios';
 import Geocode from "react-geocode";
 
-Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+Geocode.setApiKey(process.env.REACT_APP_GEOCODE_API);
 // RJ's GOOGLE API KEY
 Geocode.setLanguage("en");
 Geocode.enableDebug();
