@@ -5,22 +5,16 @@ import { Formik, Form, useField } from "formik";
 import '../UserProfile/userprofile.css'
 import { AuthContext } from "../../context/auth";
 import { useAuth } from "../../context/auth";
-
 import SavedHouse from "../../components/SavedHouse/SavedHouse";
 import Wrapper from "../../components/Wrapper/index";
 import {
-  Row, Col, Container
+  Row, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText
 } from 'reactstrap';
 
-
-
-
 function UserProfile(props) {
-
   //Hooks
   const [userHouses, setUserHouses] = useState([]);
   const [userHousesReceived, setUserHousesReceived] = useState(false);
-
 
   //Text input for Formik form.
   const MyTextInput = ({ label, ...props }) => {
@@ -29,9 +23,14 @@ function UserProfile(props) {
     const [field, meta] = useField(props);
     return (
       <>
-
-        <label htmlFor={props.id || props.name}>{label}</label>
-        <input className="text-input" {...field} {...props} />
+      <InputGroup className="user-input" >
+      <InputGroupAddon addonType="prepend">
+        <InputGroupText htmlFor={props.id || props.name}>{label}</InputGroupText>
+      </InputGroupAddon>
+      <Input  {...field} {...props}/>
+        {/* <Label htmlFor={props.id || props.name}>{label}</Label> */}
+        {/* <input className="text-input" {...field} {...props} /> */}
+      </InputGroup>
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
@@ -49,7 +48,6 @@ function UserProfile(props) {
   },[userHouses])
 
   const pullSavedHouses = (user) => {
-  
     let queryURL = "/api/users/" + user;
     axios.get(queryURL).then(res => {
       setUserHouses(res.data.SavedHouses)
@@ -57,7 +55,6 @@ function UserProfile(props) {
   }
 
   const deleteSavedHouse = (id) => {
-    
     let queryURL = "/api/houses/savehouse/" + id
     console.log('this is the query url')
     console.log(queryURL)
@@ -69,7 +66,6 @@ function UserProfile(props) {
   }
 
   const renderSavedHouses = () => {
-
     if (userHousesReceived) {
     return(
       userHouses.map(house => 
@@ -87,30 +83,19 @@ function UserProfile(props) {
       )
     )
   }
-
   }
-
   return (
-
     <AuthContext.Consumer>
       {authValue => (
-        <Container className="userContainer">
+        <Container className="user-container">
           <Row>
-            <Col sm="12" md="6">
-              
-              <Row>
-                <h4>{`welcome ${authValue.authTokens.username}`}</h4>
+            <Col className="profile-col" sm="12" md="6">
+              <Row className="profile-row">
+                <h4>{`Welcome ${authValue.authTokens.username}!`}</h4>
               </Row>
-
-              <Row>
-              <img className="userProfileImg" alt="profile pic" src={authValue.authTokens.userImage}></img>
+              <Row className="profile-row">
+              <img className="profile-image-lg" alt="profile pic" src={authValue.authTokens.userImage}></img>
               </Row>
-              
-                
-              
-              
-
-
             <Formik
               initialValues={{
                 picURL: "",
@@ -118,7 +103,7 @@ function UserProfile(props) {
               validationSchema={Yup.object({
                 picURL: Yup.string()
                   .url("Must enter a URL")
-                  .required("Required")
+                  .required("")
               })}
               onSubmit={(values, { setSubmitting }) => {
                 // setTimeout(() => {
@@ -133,32 +118,24 @@ function UserProfile(props) {
                   imgURL: imgURL
                 })
                   .then(result => {
-                    
                     //Change the auth tokens to be the new result data.
                   setAuthTokens(result.data)
-                  
                   })
-
               }}
             >
               <Form>
                 <MyTextInput
                   // onChangeText="{handleChange(picURL)}"
-                  label="Change your profile picture:"
+                  label="Image"
                   name="picURL"
                   type="text"
                   placeholder="http://yourimagehere.com"
                 />
-
-
-                <button type="submit">Submit</button>
-                
+                {/* <button type="submit">Submit</button> */}
               </Form>
             </Formik>
-      
             </Col>
-
-            <Col sm="12" md="6">
+            <Col className="profile-col" sm="12" md="6">
                 <Row>
                  <h4>Your Saved Houses</h4>
                 </Row>
@@ -167,17 +144,9 @@ function UserProfile(props) {
                </Wrapper>
             </Col>
           </Row>
-          
         </Container>
-
-
       )}
     </AuthContext.Consumer>
-
-
   )
-
 }
-
-
 export default UserProfile;

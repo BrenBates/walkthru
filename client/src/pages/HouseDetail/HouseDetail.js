@@ -7,7 +7,7 @@ import '../HouseDetail/housedetail.css'
 import {
   Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, InputGroupAddon, InputGroupText
 } from 'reactstrap';
-import Comment from "../../components/Comment"
+import Comment from "../../Comment/Comment"
 import { AuthContext } from "../../context/auth";
 
 function HouseDetail(props) {
@@ -21,7 +21,7 @@ function HouseDetail(props) {
       <>
         <InputGroup>
         <InputGroupAddon addonType="prepend">
-          <InputGroupText htmlFor={props.id || props.name}>Add Comment</InputGroupText>
+          <InputGroupText htmlFor={props.id || props.name}>{label}</InputGroupText>
         </InputGroupAddon>
         <Input  {...field} {...props}/>
           {/* <Label htmlFor={props.id || props.name}>{label}</Label> */}
@@ -69,7 +69,7 @@ function HouseDetail(props) {
         setHouseImageURL(data.houseImageURL);
         setHouseStreet(data.street);
         setHouseCity(data.city);
-        setHouseState(data.state);
+        setHouseState(data.st);
         setHouseZip(data.zip);
         setHouseForSale(data.forSale);
         setHouseInfoReceived(true);
@@ -126,10 +126,10 @@ function HouseDetail(props) {
                         <CardImg top width="100%" src={houseImageURL} alt="Comment on this house!" />
                       </Col>
                       <Col>
-                        <CardBody>
-                          <CardTitle>{houseHeadline}</CardTitle>
-                          <CardSubtitle>{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardSubtitle>
-                          <CardText>{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardText>
+                        <CardBody className="dark-text-color">
+                          <CardTitle className="card-title-font">{houseHeadline}</CardTitle>
+                          <CardSubtitle className="card-text-font">{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardSubtitle>
+                          <CardText className="card-subtitle-font">{(houseForSale ? "This property is for sale" : "This property is for rent")}</CardText>
                         </CardBody>
                       </Col>
                     </Row>
@@ -146,7 +146,7 @@ function HouseDetail(props) {
                   validationSchema={Yup.object({
                     comment: Yup.string()
                       .min(1, "Must have at least one character")
-                      .required("Required")
+                      .required("")
                   })}
                   onSubmit={(values, { setSubmitting }) => {
                     // setTimeout(() => {
@@ -210,15 +210,10 @@ function HouseDetail(props) {
                 >
                   <Form>
                     <MyTextInput
-                      label="New Comment"
+                      label="Add Comment"
                       name="comment"
                       type="text"
                       placeholder="Enter new comment..."
-                      onKeyPress={event => {
-                        if (event.key === "Enter") {
-                          onSubmit(event.values);
-                        }
-                      }}
                     />
                     {/* <button type="submit">Add Comment</button> */}
                   </Form>

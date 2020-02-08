@@ -1,22 +1,40 @@
-.userProfileImg {
+.profile-image-lg {
     height: 300px;
     width: 300px;
+    border-radius: 3px;
 }
 
-/* Pale Gold: #C0B283
-Silk: #DCD0C0
-Paper: #F4F4F4
-Charcoal: #373737 */
+.profile-row {
+    align-items: center;
+    justify-content: center;
+}
 
-.userContainer {
-    background-color:  rgb(192, 178, 131,0.5);
-    padding-bottom: 5vh;
+.profile-col {
+    height: 100%;
+}
+
+.user-container {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
     border: 3px solid #f1f1f1;
-    padding: 0 2%;
+    padding: 1em;
+    flex: 1;
 }
 
 h4 {
     color: ivory;
+}
+
+.user-input {
+    width: 400px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 input[type="text"] {

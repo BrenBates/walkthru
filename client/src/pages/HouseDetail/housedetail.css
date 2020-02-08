@@ -2,10 +2,6 @@ body {
     padding-top: 8%;
 }
 
-.filler {
-    background-color: blue;
-}
-
 img {
     width: 80%;
 }
@@ -18,7 +14,11 @@ img {
     border: 3px solid #f1f1f1;
     padding: 1em 0;
     margin: 0 5%;
-    height: 450px;
+    flex: 1;
+}
+
+.input-group {
+    width: 100%;
 }
 
 .input-group-text,
@@ -35,4 +35,20 @@ img {
 
 .form-control {
     margin-right: 1em;
+}
+
+.dark-text-color {
+    color: #373737;
+}
+
+.card-title-font {
+    font-size: xx-large;
+}
+
+.card-subtitle-font {
+    font-size: large;
+}
+
+.card-text-font {
+    font-size: x-large;
 }
