@@ -1,15 +1,21 @@
+/* Pale Gold: #C0B283
+rgb(192, 178, 131)
+Silk: #DCD0C0
+rgb(220, 208, 192)
+Paper: #F4F4F4
+rgb(244, 244, 244)
+Charcoal: #373737 
+rgb(55, 55, 55)
+*/
+
 .userProfileImg {
     height: 300px;
     width: 300px;
 }
 
-/* Pale Gold: #C0B283
-Silk: #DCD0C0
-Paper: #F4F4F4
-Charcoal: #373737 */
 
 .userContainer {
-    background-color:  rgb(192, 178, 131,0.5);
+    background-color: rgb(192, 178, 131, 0.5);
     padding-bottom: 5vh;
 }
 
@@ -26,4 +32,6 @@ button[type="submit"] {
     margin: 1em;
     padding: 0;
     width: 80px;
+    background-color: rgb(55, 55, 55);
+    text-decoration: none;
 }

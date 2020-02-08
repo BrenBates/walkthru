@@ -2,11 +2,7 @@ const db = require("../models");
 
 // Defining methods for the housesController
 module.exports = {
-  // House.findOne().populate('comments').exec(function(error, user) {
-  //   for (let i = 0; i < user.comments.length; i++) {
-  //     const element = user.comments[i];
-  //     console.log('element ', element);    }
-  // });
+
   findAll: function(req, res) {
     console.log('houses findAll');
     db.House
@@ -17,10 +13,12 @@ module.exports = {
   },
   findById: function(req, res) {
     console.log('houses findById');
+    console.log(req.params.id)
     
     db.House
       .findById(req.params.id)
       .then(dbModel => {
+        console.log(dbModel)
         res.json(dbModel)
         
       })
