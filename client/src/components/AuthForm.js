@@ -37,7 +37,8 @@ const Button = styled.button`
 `;
 
 const Logo = styled.img`
-  width: 50%;
+  width: 200px;
+  height: 200px;
   margin-bottom: 1rem;
 `;
 

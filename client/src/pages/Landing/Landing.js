@@ -8,16 +8,22 @@ import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
-  Col
+  Col,
+  ListGroup,
+  ListGroupItem
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
-import Star from "../../img/fav_star_selected.png";
+import HouseListContainer from "../../components/HouseListContainer";
+// import Star from "../../img/fav_star_selected.png";
 // import { response } from "express";
 // import API from "../../utils/API";
 
-Geocode.setApiKey('AIzaSyCSybu-E2Hs97g9Wwo8XmqTVtA-4y9h9co');
+
+
+Geocode.setApiKey(process.env.REACT_APP_GEOCODEAPI);
+
 // RJ's GOOGLE API KEY
 Geocode.setLanguage("en");
 Geocode.enableDebug();
@@ -29,6 +35,7 @@ function Landing(props) {
   const [houseSelected, setHouseSelected] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
+
 
   //Text input for Formik form.
   const MyTextInput = ({ label, ...props }) => {
@@ -133,6 +140,16 @@ function Landing(props) {
     return (
       <Form className="search-house-form">
         <Row>
+          <Col xs='10' className="text-center">
+            <MyTextInput
+              className="input-headline-field"
+              name="headline"
+              type="text"
+              placeholder="Enter Headline here...."
+              />
+          </Col>
+        </Row>
+        <Row>
           <Col xs='4' className="text-center">
             <MyTextInput
               className="input-street-field"
@@ -177,6 +194,23 @@ function Landing(props) {
     )
   }
 
+  const renderHouseList = () => {
+    if (mapInfo) {
+      return (
+        mapInfo.map(item =>
+          <HouseListContainer
+            key={item._id}
+            houseID={item._id}
+            headline={item.headline}
+            street={item.street}
+            city={item.city}
+            st={item.st}
+            zip={item.zip}
+            />
+          )
+      )
+    }
+  }
   return (
     <div>
       <AuthContext.Consumer>
@@ -192,8 +226,8 @@ function Landing(props) {
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
-                {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>}
-                
+                {/* {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>} */}
+                {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
               </Col>
             </Row>
             <Row>
@@ -201,12 +235,16 @@ function Landing(props) {
                 {/* In this first row adding a search form for users to determine if a property exists yet or not. */}
                 <Formik
                   initialValues={{
+                    headline: "",
                     street: "",
                     city: "",
                     st: "",
                     zip: ""
                   }}
                   validationSchema={Yup.object({
+                    headline: Yup.string()
+                      .max(75, "Headline must be 30 characters or less")
+                      .required(""),
                     street: Yup.string()
                       .max(25, "Must be 25 characters or less")
                       .required(""),
@@ -220,19 +258,20 @@ function Landing(props) {
                       .max(5, "Zip Must be 5 digits.")
                       .required(''),
                   })}
-                  onSubmit={(values, { setSubmitting }) => {
+                  onSubmit={(values, { setSubmitting, resetForm }) => {
                     // setTimeout(() => {
                     //   alert(JSON.stringify(values, null, 2));
                     //   setSubmitting(false);  
                     // }, 400);
-                    let { street, city, st, zip } = values;
+                    let { headline, street, city, st, zip } = values;
                     console.log(values);
                     Geocode.fromAddress(street + ', ' + city + ', ' + st)
                       .then(
                         response => {
                           let lat = response.results[0].geometry.location.lat;
-                          let long = response.results[0].geometry.location.lat;
+                          let long = response.results[0].geometry.location.lng;
                           axios.post("/api/houses", {
+                            headline,
                             street,
                             city,
                             st,
@@ -241,6 +280,7 @@ function Landing(props) {
                             long
                           })
                             .then(result => {
+                              loadMap();
                               if (result.data.error) {
                                 setErrorText(result.data.error);
                                 setIsError(true);
@@ -250,6 +290,7 @@ function Landing(props) {
                             });
                         }
                       )
+                    resetForm();
                     console.log('submit button hit')
                   }}
                 >
@@ -262,8 +303,11 @@ function Landing(props) {
 
         )}
       </AuthContext.Consumer>
-
-
+      <Container>
+      <Row className="list-of-houses">
+        {renderHouseList()}
+      </Row>>  
+    </Container>
     </div>
   );
 }
