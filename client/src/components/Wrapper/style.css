@@ -1,9 +1,8 @@
 .wrapper {
-    height: 100%;
-    display: flex;
-    flex-flow: row wrap;
-    padding: 0vh 1vw 0vh 1vw;
-    justify-content: space-around;
-    overflow: auto;
-  }
-  
+  height: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0vh 1vw 0vh 1vw;
+  justify-content: space-around;
+  overflow: auto;
+}

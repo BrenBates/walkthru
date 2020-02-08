@@ -1,8 +1,3 @@
-.userProfileImg {
-    height: 300px;
-    width: 300px;
-}
-
 /* Pale Gold: #C0B283
 rgb(192, 178, 131)
 Silk: #DCD0C0
@@ -13,8 +8,14 @@ Charcoal: #373737
 rgb(55, 55, 55)
 */
 
+.userProfileImg {
+    height: 300px;
+    width: 300px;
+}
+
+
 .userContainer {
-    background-color:  rgb(192, 178, 131,0.5);
+    background-color: rgb(192, 178, 131, 0.5);
     padding-bottom: 5vh;
 }
 

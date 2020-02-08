@@ -5,35 +5,35 @@ import {
 
 export class Comment extends React.Component {
 
-render() {
+  render() {
     return (
 
-        <div>
+      <div>
 
         <Card>
           <Row>
             <Col xs="6">
               <Row>
-                  <Col xs="6">
-                    {this.props.name}
-                  </Col>
-                  <Col xs="6">
-                    <img alt="user" src={this.props.image}></img>
-                  </Col>
+                <Col xs="6">
+                  {this.props.name}
+                </Col>
+                <Col xs="6">
+                  <img alt="user" src={this.props.image}></img>
+                </Col>
               </Row>
             </Col>
             <Col xs="6">
-                <p className="commentText">{this.props.text}</p>
+              <p className="commentText">{this.props.text}</p>
             </Col>
           </Row>
         </Card>
 
-        </div>
+      </div>
     )
 
-}
+  }
 
 }
-  
-  export default Comment;
+
+export default Comment;
 
