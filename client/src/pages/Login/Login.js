@@ -12,15 +12,6 @@ import { useAuth } from "../../context/auth";
 function Login(props) {
   const { setAuthTokens } = useAuth();
 
-  //referer state will be used in the event that a user
-  //that is not yet logged in tries to log in.  The private route 
-  //will first redirect them to the login page, but will set the referer
-  //state to the page they were trying to access.  After they login,
-  //they can then be redirected back to the page they were originally
-  //trying to access.
-  //  const referer = props.location.state.referer || '/landing';
-  // console.log("props.location:  ", props);
-
   //text input for Formik form
   const MyTextInput = ({ label, ...props }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -50,18 +41,14 @@ function Login(props) {
             .required("Required"),
           password: Yup.string()
             .required('Please Enter your password')
-            .max(15,"Must be 15 characters or less")
+            .max(15, "Must be 15 characters or less")
             .matches(
-              
+
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
               "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
             ),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);  
-          // }, 400);
 
           let { email, password } = values;
 
