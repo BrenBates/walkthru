@@ -1,16 +1,21 @@
   .selected-house-image {
-      height: 300px;
-      width: 300px;
+    height: 300px;
+    width: 300px;
   }
 
   .button-search {
-      height: 2em !important;
-      width:90% !important;
-      margin: 5px 0 0 0 !important;
+    height: 2em !important;
+    width: 90% !important;
+    margin: 5px 0 0 0 !important;
   }
+
   .button-detail {
     height: 2em !important;
+<<<<<<< HEAD
     width:50% !important;
+=======
+    width: 90% !important;
+>>>>>>> origin/dev
     margin: 5px 0 0 0 !important;
   }
 
@@ -24,22 +29,39 @@
   }
 
   .map-container {
-      width: 100%;
-      height: 100%;
+    width: 100%;
+    height: 100%;
   }
 
+<<<<<<< HEAD
   .selected-house-container {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+=======
+  .selected-house-container,
+  .search-house-form {
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/opacity/see-through */
+>>>>>>> origin/dev
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
     padding: 0;
   }
 
+<<<<<<< HEAD
   .search-house-form {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+=======
+  .list-of-houses {
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/opacity/see-through */
+>>>>>>> origin/dev
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
@@ -84,11 +106,11 @@
   }
 
   .selected-house-container {
-      padding: 0 2%;
+    padding: 0 2%;
   }
 
   .map-selected-house-row {
-      height: 400px;
+    height: 400px;
   }
 
   .search-house-form {
@@ -98,9 +120,13 @@
     margin-top: 1.5%;
   }
 
-  .input-headline-field, .input-street-field, .input-city-field, .input-state-field, .input-zip-field {
-      height: 2em !important;
-      width: 100% !important;
-      border: 1px solid cadetblue !important;
-      margin-top: 5px;
+  .input-headline-field,
+  .input-street-field,
+  .input-city-field,
+  .input-state-field,
+  .input-zip-field {
+    height: 2em !important;
+    width: 100% !important;
+    border: 1px solid cadetblue !important;
+    margin-top: 5px;
   }
