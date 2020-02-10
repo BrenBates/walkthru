@@ -1,5 +1,6 @@
 import React from "react";
 import { CardImg, CardGroup, Card } from "reactstrap";
+import { Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../styles.css";
 import "../HouseListContainer/houselistcontainer.css";

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
 import UserProfile from './pages/UserProfile/UserProfile';
-import Login from './pages/Login/Login';
-import Signup from './pages/SignUp/Signup';
+// import Login from './pages/Login/Login';
+import Signup from './pages/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
-
-import NewHouseForm from './pages/NewHouseForm';
+import NewHouseForm from './pages/NewHousePage/NewHouseForm';
+// import ProjectPage from './pages/ProjectPage/ProjectPage';
 
 
 import NoMatch from './pages/NoMatch';
@@ -34,7 +34,20 @@ function App(props) {
   return (
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens} }>
       <Router>
-        <div>          
+        <div>
+          {/* <ul>
+            <li>
+              <Link to="/">Home Page</Link>
+            </li>
+            <li>
+              <Link to="/landing">Landing Page</Link>
+            </li>
+            <li>
+              <Link to="/ProjectPage">ProjectPage</Link>
+            </li>
+      
+          </ul> */}
+          
           <NavbarComponent logOut={logOut}/>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -42,7 +55,8 @@ function App(props) {
             <PrivateRoute path="/api/houses/:id" component={HouseDetail} />
             <PrivateRoute path="/users/:username" component={UserProfile}/>
             <PrivateRoute path="/landing" component={Landing} />
-            <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
+            <PrivateRoute path="./NewHousePage/newHouseForm" component={NewHouseForm} />
+            {/* <Route path="/ProjectPage" component={ProjectPage} /> */}
             <Route component={NoMatch} />
           </Switch>
         </div>
