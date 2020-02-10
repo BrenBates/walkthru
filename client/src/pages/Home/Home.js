@@ -15,7 +15,6 @@ function Home(props) {
     const setLog = (value) => { setLoggedIn(value) }
     const setErrText = (text) => { setErrorText(text) }
 
-    console.log("props: ", props)
     // Optional chaining
     const referer = props.location?.state?.referer || '/landing';
 

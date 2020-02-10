@@ -1,40 +1,37 @@
 import React from "react";
 import {
-  Row, Col, Card, CardImg, CardText, CardBody, CardLink,
-  CardTitle, CardSubtitle
+  Card, CardBody, CardTitle, CardSubtitle
 } from 'reactstrap';
-import './house.css'
+import './savedhouse.css'
 import { Link } from "react-router-dom";
 import { FiDelete } from "react-icons/fi";
-import TextWrapper from "../TextWrapper/index";
 
 export class SavedHouse extends React.Component {
 
-render() {
+  render() {
     return (
 
-        <div>
+      <div>
 
-      <Card className="savedHouseCard">
-        <CardBody>
-          <CardTitle>{`${this.props.street}`} <button className = "savedHouseDeleteBtn" onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}><FiDelete/></button></CardTitle>
-          <CardSubtitle>{`${this.props.city}`}</CardSubtitle>
-          <CardSubtitle>{`${this.props.st}, ${this.props.zip}`}</CardSubtitle>
-        </CardBody>
-        <img className="savedHouseImg" src={this.props.houseImage} alt="House" />
-        <CardBody>
-                <button>
-                    <Link to={"/api/houses/" +this.props.houseID}>Go to House</Link>
-                </button>
-        </CardBody>
-      </Card>
+        <Card className="saved-house-card">
+          <CardTitle className="saved-house-card-title">{`${this.props.headline}`}</CardTitle>
+          <img className="saved-house-image" src={this.props.houseImage} alt="House" />
+          <CardBody className="saved-house-card-body">
+            <CardSubtitle className="saved-house-card-subtitle">{`${this.props.street}`} {`${this.props.city}`} {`${this.props.st}, ${this.props.zip}`}</CardSubtitle>
+            <button>
+              <Link to={"/api/houses/" + this.props.houseID}>Go to House</Link>
+            </button>
+            <button className="saved-house-delete-button" onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}>X
+            </button>
+          </CardBody>
+        </Card>
 
-        </div>
+      </div>
     )
 
-}
+  }
 
 }
-  
-  export default SavedHouse;
+
+export default SavedHouse;
 

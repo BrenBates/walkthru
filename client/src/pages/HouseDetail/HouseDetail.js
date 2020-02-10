@@ -3,9 +3,10 @@ import axios from 'axios';
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
-// import { useAuth } from "../../context/auth";
 import {
-  Container, Row, Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, InputGroupAddon, InputGroupText
+  Container, Row, Col, Card, CardImg, CardText, CardBody, 
+  CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, 
+  InputGroupAddon, InputGroupText
 } from 'reactstrap';
 import Comment from "../../Comment/Comment"
 import { AuthContext } from "../../context/auth";
@@ -34,7 +35,6 @@ function HouseDetail(props) {
     );
   };
 
-  const [houseURL, setHouseURL] = useState('')
   const [houseInfoReceived, setHouseInfoReceived] = useState(false)
   const [houseID, setHouseID] = useState('')
   const [houseImageURL, setHouseImageURL] = useState('')
@@ -48,67 +48,46 @@ function HouseDetail(props) {
   const [commentsReceived, setCommentsReceived] = useState(false)
   const [newCommentSubmitted, setNewCommentSubmitted] = useState(0)
 
-  useEffect(() => {
-    // When component mounts, load the house id from the props.params into the state
-    setHouseURL('/api/houses/' + props.match.params.id)
-    // Also, when the component mounts, send an axios get call with the house ID to get the comments.
-    loadComments(props.match.params.id)
-
-  }, [props.match.params.id]);
 
   // Get all the data related to the current house to the user
   useEffect(() => {
 
+    let houseURL = '/api/houses/' + props.match.params.id
+
     const populateHouseInfo = () => {
 
-      axios.get(houseURL).then((res) => {
+      axios.get(houseURL)
+        .then((res) => {
 
-        const data = res.data;
-        setHouseID(data._id);
-        setHouseHeadline(data.headline);
-        setHouseImageURL(data.houseImageURL);
-        setHouseStreet(data.street);
-        setHouseCity(data.city);
-        setHouseState(data.st);
-        setHouseZip(data.zip);
-        setHouseForSale(data.forSale);
-        setHouseInfoReceived(true);
-      })
+          const data = res.data;
+          setHouseID(data._id);
+          setHouseHeadline(data.headline);
+          setHouseImageURL(data.houseImageURL);
+          setHouseStreet(data.street);
+          setHouseCity(data.city);
+          setHouseState(data.state);
+          setHouseZip(data.zip);
+          setHouseForSale(data.forSale);
+          setHouseInfoReceived(true);
+        })
     }
 
     populateHouseInfo()
-  }, [houseURL]);
+  }, [props.match.params.id]);
 
   // Get the latest comments loaded to the page
   useEffect(() => {
-    loadComments(props.match.params.id)
-  }, [newCommentSubmitted]);
 
-  useEffect(() => {
     loadComments(props.match.params.id)
-  }, [newCommentSubmitted, props.match.params.id])
+
+  }, [newCommentSubmitted, props.match.params.id]);
+
 
   const loadComments = (id) => {
     let queryURL = "/api/comments/byhouse/" + id;
     axios.get(queryURL).then(res => {
       setComments(res.data)
       setCommentsReceived(true)
-    })
-  }
-
-  const populateHouseInfo = () => {
-
-    axios.get(houseURL).then((res) => {
-      const data = res.data;
-      setHouseID(data._id);
-      setHouseHeadline(data.headline);
-      setHouseImageURL(data.houseImageURL);
-      setHouseStreet(data.street);
-      setHouseCity(data.city);
-      setHouseState(data.state);
-      setHouseZip(data.zip);
-      setHouseForSale(data.forSale);
-      setHouseInfoReceived(true);
     })
   }
 

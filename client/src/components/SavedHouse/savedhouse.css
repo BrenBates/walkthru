@@ -1,0 +1,39 @@
+.saved-house-image {
+    width: 100%;
+    align-self: center;
+}
+
+.saved-house-card-title {
+    margin: 0;
+}
+
+.saved-house-card-subtitle {
+    margin: 0 0 0 3px;
+}
+
+.saved-house-card-body {
+    padding: 0;
+}
+
+.saved-house-card {
+    /* margin-right: 1vw; */
+    margin-bottom: 1vh; 
+    color: #373737;
+    font-size: small;
+    background-color: #C0B283;
+    width: 150px;
+    height: 300px;
+}
+
+.saved-house-delete-button {
+    padding: 0;
+    background-color: #373737;
+    margin: 0 1em;
+}
+
+.delete-row-button {
+    align-self: flex-end;
+    margin-right: 0.1vw;
+}
+
+

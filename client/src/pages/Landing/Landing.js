@@ -8,22 +8,15 @@ import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
-  Col,
-  Tooltip
+  Col
 } from 'reactstrap';
+import Star from "../../img/fav_star_selected.png";
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
 import HouseListContainer from "../../components/HouseListContainer";
-// import Star from "../../img/fav_star_selected.png";
-// import { response } from "express";
-// import API from "../../utils/API";
-
-
 
 Geocode.setApiKey(process.env.REACT_APP_GEOCODEAPI);
-
-// RJ's GOOGLE API KEY
 Geocode.setLanguage("en");
 Geocode.enableDebug();
 
@@ -149,7 +142,7 @@ function Landing(props) {
               name="headline"
               type="text"
               placeholder="Enter Headline here...."
-              />
+            />
           </Col>
         </Row>
         <Row>
@@ -209,8 +202,8 @@ function Landing(props) {
             city={item.city}
             st={item.st}
             zip={item.zip}
-            />
-          )
+          />
+        )
       )
     }
   }
@@ -313,17 +306,14 @@ function Landing(props) {
                 {isError && <Error>{errorText}</Error>}
               </Col>
             </Row>
-            <Row>
-              {allHousesTable()}
-            </Row>
           </Container>
 
         )}
       </AuthContext.Consumer>
       <Container>
-      <Row className="list-of-houses">
-        {renderHouseList()}
-      </Row>>  
+        <Row className="list-of-houses">
+          {renderHouseList()}
+        </Row>>
     </Container>
     </div>
   );
