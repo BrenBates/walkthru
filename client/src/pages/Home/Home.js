@@ -35,7 +35,7 @@ function Home(props) {
                 />
             </div>
         </div>
-        <div className="parallax-demo">LOGIN</div>
+        {/* <div className="parallax-demo">LOGIN</div> */}
     </div>;
 }
 

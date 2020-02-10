@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from "yup";
-import { Card, Logo, Error } from '../components/AuthForm';
-import logoImg from "../img/walkthru.JPG";
-import "../styles.css";
-import "../styles-custom.css";
+import { Card, Logo, Error } from '../../components/AuthForm';
+import logoImg from "../../img/walkthru.JPG";
+// import "styles.css";
+// import "style-custom.css";
 import axios from 'axios';
 import Geocode from "react-geocode";
 
