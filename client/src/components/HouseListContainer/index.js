@@ -1,5 +1,5 @@
 import React from "react";
-import { CardImg, CardGroup, Card } from "reactstrap";
+import {  Row, Col, Button, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from "reactstrap";
 import { Link } from "react-router-dom";
 import "../../styles.css";
 import "../HouseListContainer/houselistcontainer.css";
@@ -8,35 +8,42 @@ import "../HouseListContainer/houselistcontainer.css";
 export class HouseListContainer extends React.Component {
 
 
-    render() {
-        return (
-            // <div>
-            //     <Row className="house-list-row">
-            //       <Col className="col-centered" md="2">
-            //         <Button color="dark" className="float-right">
-            //             <Link to={"/api/houses/" + this.props.houseID}>Details</Link>
-            //         </Button>
-            //       </Col>
-            //       <Col className="house-list-col" md="4">
-            //         <strong>{this.props.headline}</strong>
-            //         </Col>
-            //       <Col className="house-list-col" md="6">
-            //         <p className="house-list-text">{this.props.street} {this.props.city}, {this.props.st} {this.props.zip}</p>
-            //       </Col>
-            //     </Row>
-            // </div>
-
-            <div>
-                <CardGroup>
-                    <Link to={"/api/houses/" + this.props.houseID}>
-                        <Card className="house-list-card">
-                            <CardImg top width="100%" src={this.props.houseImageURL} />
-                        {this.props.headline} {this.props.street} {this.props.city} {this.props.st}, {this.props.zip}</Card>
-                    </Link>
-                </CardGroup>
-            </div>
-        )
-    }
+render () {
+    return (
+        <div>
+            <ListGroupItem className="list-item">
+                <ListGroupItemHeading className="list-item-heading">
+                    <Row>
+                        <Col xs="8">
+                            {this.props.headline}
+                        </Col>
+                    </Row>
+                </ListGroupItemHeading>
+                <ListGroupItemText className="list-item-text">
+                    <Row text="center">
+                        <Col xs="3">
+                            {this.props.street}
+                        </Col>
+                        <Col xs="3">
+                            {this.props.city}
+                        </Col>
+                        <Col xs="1">
+                            {this.props.st}
+                        </Col>
+                        <Col xs="2">
+                            {this.props.zip}
+                        </Col>
+                        <Col xs="3">
+                            <button className="button-house-detail">
+                                <Link to={"/api/houses/" + this.props.houseID}>Details</Link>
+                            </button>
+                        </Col>
+                    </Row>
+                </ListGroupItemText>
+            </ListGroupItem>
+        </div>
+    )
+} 
 }
 
 export default HouseListContainer;
