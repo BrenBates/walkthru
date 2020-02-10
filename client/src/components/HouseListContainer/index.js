@@ -1,6 +1,8 @@
 import React from "react";
-import { Row, Col, Button } from "reactstrap";
+import { CardImg, CardGroup, Card } from "reactstrap";
 import { Link } from "react-router-dom";
+import "../../styles.css";
+import "../HouseListContainer/houselistcontainer.css";
 
 
 export class HouseListContainer extends React.Component {
@@ -8,31 +10,30 @@ export class HouseListContainer extends React.Component {
 
     render() {
         return (
+            // <div>
+            //     <Row className="house-list-row">
+            //       <Col className="col-centered" md="2">
+            //         <Button color="dark" className="float-right">
+            //             <Link to={"/api/houses/" + this.props.houseID}>Details</Link>
+            //         </Button>
+            //       </Col>
+            //       <Col className="house-list-col" md="4">
+            //         <strong>{this.props.headline}</strong>
+            //         </Col>
+            //       <Col className="house-list-col" md="6">
+            //         <p className="house-list-text">{this.props.street} {this.props.city}, {this.props.st} {this.props.zip}</p>
+            //       </Col>
+            //     </Row>
+            // </div>
+
             <div>
-                <Row>
-                    <Col xs="10">
-                        {this.props.headline}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="4">
-                        {this.props.street}
-                    </Col>
-                    <Col xs="3">
-                        {this.props.city}
-                    </Col>
-                    <Col xs="1">
-                        {this.props.st}
-                    </Col>
-                    <Col xs="2">
-                        {this.props.zip}
-                    </Col>
-                    <Col xs="2">
-                        <Button color="dark" className="float-right">
-                            <Link to={"/api/houses/" + this.props.houseID}>Details</Link>
-                        </Button>
-                    </Col>
-                </Row>
+                <CardGroup>
+                    <Link to={"/api/houses/" + this.props.houseID}>
+                        <Card className="house-list-card">
+                            <CardImg top width="100%" src={this.props.houseImageURL} />
+                        {this.props.headline} {this.props.street} {this.props.city} {this.props.st}, {this.props.zip}</Card>
+                    </Link>
+                </CardGroup>
             </div>
         )
     }

@@ -10,6 +10,7 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import Star from "../../img/fav_star_selected.png";
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
