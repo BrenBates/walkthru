@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PrivateRoute from './PrivateRoute';
 import Home from './pages/Home/Home';
 import Landing from './pages/Landing/Landing';
 import HouseDetail from './pages/HouseDetail/HouseDetail';
 import UserProfile from './pages/UserProfile/UserProfile';
-import Login from './pages/Login/Login';
+// import Login from './pages/Login/Login';
 import Signup from './pages/Signup';
 import NavbarComponent from "./pages/Navbar/Navbar"
-
-import NewHouseForm from './pages/NewHouseForm';
+import NewHouseForm from './pages/NewHousePage/NewHouseForm';
+// import ProjectPage from './pages/ProjectPage/ProjectPage';
 
 
 import NoMatch from './pages/NoMatch';
@@ -43,7 +43,7 @@ function App(props) {
               <Link to="/landing">Landing Page</Link>
             </li>
             <li>
-              <Link to="/NewHouseForm">Add House Form/Page Mockup</Link>
+              <Link to="/ProjectPage">ProjectPage</Link>
             </li>
       
           </ul> */}
@@ -56,7 +56,8 @@ function App(props) {
             <PrivateRoute path="/api/houses/:id" component={HouseDetail} />
             <PrivateRoute path="/users/:username" component={UserProfile}/>
             <PrivateRoute path="/landing" component={Landing} />
-            <PrivateRoute path="/newHouseForm" component={NewHouseForm} />
+            <PrivateRoute path="./NewHousePage/newHouseForm" component={NewHouseForm} />
+            {/* <Route path="/ProjectPage" component={ProjectPage} /> */}
             <Route component={NoMatch} />
           </Switch>
         </div>

@@ -1,0 +1,30 @@
+input[type="email"],
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  height: 3em;
+  width: 19em;
+}
+
+label {
+  margin-top: 1rem;
+  color: ivory;
+}
+
+.margin-top {
+  margin-top: 5rem;
+}
+
+label.checkbox {
+  font-weight: normal;
+}
+
+button[type="submit"] {
+  margin-top: 2rem;
+}
+
+.ref-link {
+  color: aquamarine !important;
+  text-decoration: none;
+}

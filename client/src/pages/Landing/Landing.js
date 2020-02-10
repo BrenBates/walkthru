@@ -185,6 +185,8 @@ function Landing(props) {
     )
   }
 
+
+
   const renderHouseList = () => {
     if (mapInfo) {
       return (
@@ -290,15 +292,26 @@ function Landing(props) {
                 {isError && <Error>{errorText}</Error>}
               </Col>
             </Row>
+            {/* <Row className="list-of-houses">
+              {renderHouseList()}
+            </Row>>  */}
           </Container>
 
         )}
       </AuthContext.Consumer>
+<<<<<<< HEAD
+      <Container className="list-of-houses" >
+        <ListGroup>
+        {renderHouseList()}
+        </ListGroup>
+      </Container>
+=======
       <Container>
         <Row className="list-of-houses">
           {renderHouseList()}
         </Row>>
     </Container>
+>>>>>>> origin/dev
     </div>
   );
 }
