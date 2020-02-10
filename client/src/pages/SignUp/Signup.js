@@ -5,11 +5,12 @@ import * as Yup from "yup";
 // import styled from "@emotion/styled";
 // import "../../styles.css";
 // import "../../styles-custom.css";
-import "../SignUp/signUp.css"
+import "../SignUp/signUp.css";
 import logoImg from "../../img/walkthru.JPG";
 import { Formik, Form, useField } from "formik";
 import { Card, Logo, Error } from '../../components/AuthForm';
 import { useAuth } from "../../context/auth";
+import { Label, FormGroup } from "reactstrap";
 
 function Signup(props) {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -29,13 +30,13 @@ function Signup(props) {
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const [field, meta] = useField(props);
     return (
-      <>
-        <label className="label-signup" htmlFor={props.id || props.name}>{label}</label>
+      <FormGroup>
+        <Label className="label-signup" for={props.id || props.name}>{label}</Label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
-      </>
+      </FormGroup>
     );
   };
 

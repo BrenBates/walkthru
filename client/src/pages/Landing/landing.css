@@ -11,7 +11,7 @@
 
   .button-detail {
     height: 2em !important;
-    width: 90% !important;
+    width:50% !important;
     margin: 5px 0 0 0 !important;
   }
 
@@ -29,21 +29,18 @@
     height: 100%;
   }
 
-  .selected-house-container,
-  .search-house-form {
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+  .selected-house-container {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
     padding: 0;
   }
 
-  .list-of-houses {
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/opacity/see-through */
+  .search-house-form {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;

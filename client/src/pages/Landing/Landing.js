@@ -8,7 +8,8 @@ import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
-  Col
+  Col,
+  ListGroup
 } from 'reactstrap';
 import Star from "../../img/fav_star_selected.png";
 import MapContainer from "../../components/MapContainer";
@@ -315,11 +316,11 @@ function Landing(props) {
 
         )}
       </AuthContext.Consumer>
-      <Container>
-        <Row className="list-of-houses">
-          {renderHouseList()}
-        </Row>>
-    </Container>
+      <Container className="list-of-houses" >
+        <ListGroup>
+        {renderHouseList()}
+        </ListGroup>
+      </Container>
     </div>
   );
 }
