@@ -8,7 +8,8 @@ import { Error } from '../../components/AuthForm';
 import {
   Container,
   Row,
-  Col
+  Col,
+  ListGroup
 } from 'reactstrap';
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
@@ -185,6 +186,8 @@ function Landing(props) {
     )
   }
 
+
+
   const renderHouseList = () => {
     if (mapInfo) {
       return (
@@ -290,15 +293,18 @@ function Landing(props) {
                 {isError && <Error>{errorText}</Error>}
               </Col>
             </Row>
+            {/* <Row className="list-of-houses">
+              {renderHouseList()}
+            </Row>>  */}
           </Container>
 
         )}
       </AuthContext.Consumer>
-      <Container>
-        <Row className="list-of-houses">
-          {renderHouseList()}
-        </Row>>
-    </Container>
+      <Container className="list-of-houses" >
+        <ListGroup>
+        {renderHouseList()}
+        </ListGroup>
+      </Container>
     </div>
   );
 }
