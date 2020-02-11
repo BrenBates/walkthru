@@ -14,6 +14,7 @@ import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
 import HouseListContainer from "../../components/HouseListContainer";
+import Star from "../../img/fav_star_selected.png";
 
 Geocode.setApiKey(process.env.REACT_APP_GEOCODEAPI);
 Geocode.setLanguage("en");
