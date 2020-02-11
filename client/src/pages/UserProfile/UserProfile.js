@@ -91,7 +91,6 @@ function UserProfile(props) {
       {authValue => (
         <Container className="user-container">
           <Row className="profile-row">
-            <h4>{`${authValue.authTokens.username}`}</h4>
             <img className="profile-image-lg" alt="profile pic" src={authValue.authTokens.userImage}></img>
             <Formik
               initialValues={{
@@ -121,9 +120,10 @@ function UserProfile(props) {
               }}
             >
               <Form>
+                <h4 className="username-image-input">{`${authValue.authTokens.username}`}</h4>
                 <MyTextInput
                   // onChangeText="{handleChange(picURL)}"
-                  label="Image"
+                  label="New Image"
                   name="picURL"
                   type="text"
                   placeholder="http://yourimagehere.com"
@@ -132,8 +132,10 @@ function UserProfile(props) {
               </Form>
             </Formik>
           </Row>
-          <Row>
+          <Row className="profile-row">
             <h4>Your Saved Houses</h4>
+          </Row>
+          <Row className="profile-row">
             <Wrapper>
               {renderSavedHouses()}
             </Wrapper>
