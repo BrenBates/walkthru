@@ -309,9 +309,6 @@ function Landing(props) {
                 {isError && <Error>{errorText}</Error>}
               </Col>
             </Row>
-            {/* <Row className="list-of-houses">
-              {renderHouseList()}
-            </Row>>  */}
           </Container>
 
         )}
