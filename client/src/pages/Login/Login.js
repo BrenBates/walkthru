@@ -8,6 +8,7 @@ import "../Login/login.css";
 import { Formik, Form, useField } from "formik";
 import { Card, Logo, Error } from '../../components/AuthForm';
 import { useAuth } from "../../context/auth";
+import { Label, FormGroup } from "reactstrap";
 
 function Login(props) {
   const { setAuthTokens } = useAuth();
@@ -18,13 +19,13 @@ function Login(props) {
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const [field, meta] = useField(props);
     return (
-      <>
-        <label htmlFor={props.id || props.name}>{label}</label>
+      <FormGroup>
+        <Label className="label-login" for={props.id || props.name}>{label}</Label>
         <input className="text-input" {...field} {...props} />
         {meta.touched && meta.error ? (
           <div className="error">{meta.error}</div>
         ) : null}
-      </>
+      </FormGroup>
     );
   };
 
@@ -77,7 +78,7 @@ function Login(props) {
         }}
       >
         <Form>
-          <div className="margin-top" />
+          <div className="margin-top-login" />
           <MyTextInput
             label="Email Address"
             name="email"

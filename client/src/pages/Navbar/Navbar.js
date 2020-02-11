@@ -29,11 +29,11 @@ const NavbarPage = (props) => {
 
                 {authValue.authTokens ?
                   <>
+                  <NavItem>
+                    <NavLink tag={Link} to="/Landing" className="text-info">Home</NavLink>
+                  </NavItem>
                     <NavItem>
                       <NavLink tag={Link} to={`/users/${authValue.authTokens.username}`} className="text-info">Your Profile</NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink tag={Link} to="/Landing" className="text-info">Landing</NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink tag={Link} onClick={props.logOut} to="/" className="text-info">Log Out</NavLink>

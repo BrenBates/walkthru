@@ -1,6 +1,8 @@
 import React from "react";
 import {  Row, Col, Button, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from "reactstrap";
 import { Link } from "react-router-dom";
+import "../../styles.css";
+import "../HouseListContainer/houselistcontainer.css";
 
 
 export class HouseListContainer extends React.Component {

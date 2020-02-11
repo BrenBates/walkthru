@@ -99,13 +99,13 @@
     margin-top: 1.5%;
   }
 
-  .input-headline-field,
-  .input-street-field,
-  .input-city-field,
-  .input-state-field,
-  .input-zip-field {
-    height: 2em !important;
-    width: 100% !important;
-    border: 1px solid cadetblue !important;
-    margin-top: 5px;
+  .input-headline-field, .input-street-field, .input-city-field, .input-state-field, .input-zip-field {
+      height: 2em !important;
+      width: 100% !important;
+      border: 1px solid cadetblue !important;
+      margin-top: 5px;
+  }
+
+  .saved-house-star {
+      width: 20px;
   }

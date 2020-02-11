@@ -8,7 +8,7 @@ select {
   height: 2em;
 }
 
-label {
+.label-login {
   margin-top: 1rem;
 }
 
@@ -16,7 +16,7 @@ label.checkbox {
   font-weight: normal;
 }
 
-.margin-top {
+.margin-top-login {
   margin-top: 7em;
 }
 

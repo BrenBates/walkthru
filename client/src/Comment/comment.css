@@ -1,0 +1,28 @@
+.profile-image-sm {
+    width: 77px;
+    height: 77px;
+}
+
+.left-padding {
+    margin: 4px 1em;
+}
+
+.comment-row {
+    padding: 0;
+    height: fit-content;
+}
+
+.comment-col {
+    padding-right: 1em;
+    height: 100%;
+    width: 30%;
+}
+
+.comment-text {
+    margin: 0;
+}
+
+.comment-card-container {
+    margin: 2em 5%;
+    flex: 1;
+}

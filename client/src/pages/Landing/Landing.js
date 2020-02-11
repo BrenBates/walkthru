@@ -11,6 +11,7 @@ import {
   Col,
   ListGroup
 } from 'reactstrap';
+import Star from "../../img/fav_star_selected.png";
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
@@ -27,6 +28,8 @@ function Landing(props) {
   const [houseSelected, setHouseSelected] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState('');
+  const [housesExist, setHousesExist] = useState(false);
+  const [allHouses, setAllHouses] = useState({});
 
 
   //Text input for Formik form.
@@ -50,6 +53,9 @@ function Landing(props) {
     })
       .then(result => {
         setMapInfo(result.data)
+        if (result.data) {
+          setHousesExist(true);
+        }
       });
   }
 
@@ -92,11 +98,11 @@ function Landing(props) {
       long
     }
 
-    console.log(payload)
+    console.log("payload:  ", payload)
 
     axios.post(queryURL, payload)
       .then(result => {
-        console.log(result)
+        console.log("result:  ", result)
       })
 
   }
@@ -112,14 +118,13 @@ function Landing(props) {
     if (houseSelected) {
       return (
         <Row>
-          <Link to={"/api/houses/" + currentHouse._id}>
-            <img className="selected-house-image" src={currentHouse.houseImageURL} alt="house" />
-          </Link>
+          <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
           <Col>
             <h5>{currentHouse.headline}</h5>
             <p>{currentHouse.street}</p>
             <p>{currentHouse.city}</p>
             <p>{currentHouse.st}</p>
+            <p>{currentHouse.zip}</p>
           </Col>
         </Row>
       )
@@ -220,8 +225,19 @@ function Landing(props) {
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
-                {/* {houseSelected ? <img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" /> : <p></p>} */}
-                {houseSelected ? <button onClick={() => saveHouse(authValue.authTokens.username)}>Save House</button> : <p></p>}
+                <Row>
+                  <Col>
+                    {houseSelected ?
+                      <p><img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" />
+                        Add to Favorites</p> : <></>}
+                  </Col>
+                  <Col>
+                  {houseSelected ?
+                    <Link to={"/api/houses/" + currentHouse._id}>
+                      <button>Visit House</button>
+                    </Link> : <></>}
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <Row>
@@ -293,9 +309,6 @@ function Landing(props) {
                 {isError && <Error>{errorText}</Error>}
               </Col>
             </Row>
-            {/* <Row className="list-of-houses">
-              {renderHouseList()}
-            </Row>>  */}
           </Container>
 
         )}

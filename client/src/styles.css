@@ -131,7 +131,7 @@
   
   a {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
     text-decoration-color: var(--text-decoration-color);
     -webkit-text-decoration-color: var(--text-decoration-color);
     border-radius: 5px;

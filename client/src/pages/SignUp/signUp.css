@@ -1,0 +1,38 @@
+input[type="email"],
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+  width: 18em;
+  height: 2em;
+}
+
+.label-signup {
+  margin-top: 1rem;
+  padding-left: 1em;
+}
+
+.signup-form {
+    height: 29.5em;
+    width: 20em;
+    margin: 0 auto;
+    margin-top: -120px;
+    padding-top: 90px;
+    background-color: #373737 !important;
+}
+
+.logo-container-signup {
+    text-align: center;
+}
+
+.logo {
+    height: 10em;
+    width: 10em;
+    display: inline-block;
+    background-color: ivory;
+}
+
+.margin-top-signup {
+  margin-top: 0em;
+  background-color: red;
+}

@@ -1,0 +1,50 @@
+.saved-house-image {
+    width: 95%;
+    max-height: 100px;
+    align-self: center;
+}
+
+.saved-house-card-title {
+    margin: 0;
+}
+
+.saved-house-card-subtitle {
+    margin: 0 0 0 3px;
+}
+
+.saved-house-card-body {
+    padding: 0;
+}
+
+.saved-house-card {
+    /* margin-right: 1vw; */
+    /* margin-bottom: 1vh; 
+    color: #373737;
+    font-size: small;
+    background-color: #C0B283; */
+    width: 200px;
+    height: 200px;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.5); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    padding: 5px;
+    margin-top: 1.5%;
+}
+
+.saved-house-delete-button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: red;
+    margin: 0 1em;
+    position: fixed;
+}
+
+.delete-row-button {
+    align-self: flex-end;
+    margin-right: 0.1vw;
+}
+
+

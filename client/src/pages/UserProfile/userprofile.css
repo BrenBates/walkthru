@@ -1,26 +1,33 @@
-/* Pale Gold: #C0B283
-rgb(192, 178, 131)
-Silk: #DCD0C0
-rgb(220, 208, 192)
-Paper: #F4F4F4
-rgb(244, 244, 244)
-Charcoal: #373737 
-rgb(55, 55, 55)
-*/
-
-.userProfileImg {
-    height: 300px;
-    width: 300px;
+.profile-image-lg {
+    height: 60px;
+    width: 60px;
+    border-radius: 3px;
 }
 
+.profile-row {
+}
 
-.userContainer {
-    background-color: rgb(192, 178, 131, 0.5);
-    padding-bottom: 5vh;
+.profile-col {
+    height: 100%;
+}
+
+.user-container {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    padding: 1em;
+    flex: 1;
+    overflow: auto;
 }
 
 h4 {
     color: ivory;
+}
+
+.user-input {
+    width: 400px;
 }
 
 input[type="text"] {

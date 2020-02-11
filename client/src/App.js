@@ -49,7 +49,6 @@ function App(props) {
           </ul> */}
           
           <NavbarComponent logOut={logOut}/>
-          
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
