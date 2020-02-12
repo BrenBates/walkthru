@@ -122,18 +122,16 @@ function UserProfile(props) {
               <Form>
                 <h4 className="username-image-input">{`${authValue.authTokens.username}`}</h4>
                 <MyTextInput
-                  // onChangeText="{handleChange(picURL)}"
                   label="New Image"
                   name="picURL"
                   type="text"
                   placeholder="http://yourimagehere.com"
                 />
-                {/* <button type="submit">Submit</button> */}
               </Form>
             </Formik>
           </Row>
           <Row className="profile-row">
-            <h4>Your Saved Houses</h4>
+            <h2>Your Saved Houses</h2>
           </Row>
           <Row className="profile-row">
             <Wrapper>

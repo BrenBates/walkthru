@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Card, CardBody, CardTitle, CardSubtitle
+  Card, CardBody, CardTitle, CardSubtitle, Row
 } from 'reactstrap';
 import './savedhouse.css'
 import { Link } from "react-router-dom";
@@ -13,17 +13,22 @@ export class SavedHouse extends React.Component {
 
       <div>
 
-        <Link to={"/api/houses/" + this.props.houseID}>
-          <Card className="saved-house-card">
-            <CardTitle className="saved-house-card-title">{`${this.props.headline}`}
-              <button className="saved-house-delete-button" onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}>X
-            </button></CardTitle>
+        <Card className="saved-house-card">
+          <Link to={"/api/houses/" + this.props.houseID}>
+            <CardTitle className="saved-house-card-title">{`${this.props.headline}`}</CardTitle>
+          </Link>
+          <Link to={"/api/houses/" + this.props.houseID}>
             <img className="saved-house-image" src={this.props.houseImage} alt="House" />
-            <CardBody className="saved-house-card-body">
+          </Link>
+          <CardBody className="saved-house-card-body">
+            <Link to={"/api/houses/" + this.props.houseID}>
               <CardSubtitle className="saved-house-card-subtitle">{`${this.props.street}`} {`${this.props.city}`} {`${this.props.st}, ${this.props.zip}`}</CardSubtitle>
-            </CardBody>
-          </Card>
-        </Link>
+            </Link>
+            <Row>
+              <button className="saved-house-delete-button" onClick={() => this.props.deleteSavedHouse(this.props.savedHouseID)}>X</button>
+            </Row>
+          </CardBody>
+        </Card>
 
       </div>
     )

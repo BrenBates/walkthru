@@ -12,6 +12,7 @@ import {
   ListGroup
 } from 'reactstrap';
 import Star from "../../img/fav_star_selected.png";
+import Placeholder from "../../img/placeholder.png";
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
 import { AuthContext } from "../../context/auth";
@@ -115,10 +116,12 @@ function Landing(props) {
 
   //Conditional rendering for when the user clicks on a marker on the Google Maps API.
   const renderSelectedHouse = () => {
-    if (houseSelected) {
+    if (houseSelected && currentHouse.houseImageURL) {
       return (
         <Row>
-          <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
+          <Col>
+            <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
+          </Col>
           <Col>
             <h5>{currentHouse.headline}</h5>
             <p>{currentHouse.street}</p>
@@ -128,9 +131,23 @@ function Landing(props) {
           </Col>
         </Row>
       )
-    } else {
-      return <p></p>
-    }
+    } else if (houseSelected && currentHouse.houseImageURL === null) {
+      return (
+        <Row>
+          <Col>
+            <img className="selected-house-image" src={Placeholder} alt="Selected house" />
+          </Col>
+          <Col>
+            <h5>{currentHouse.headline}</h5>
+            <p>{currentHouse.street}</p>
+            <p>{currentHouse.city}</p>
+            <p>{currentHouse.st}</p>
+            <p>{currentHouse.zip}</p>
+          </Col>
+        </Row>
+      )
+    } else
+      return <></>
   }
 
   const renderHouseSearch = () => {
@@ -191,8 +208,6 @@ function Landing(props) {
     )
   }
 
-
-
   const renderHouseList = () => {
     if (mapInfo) {
       return (
@@ -216,10 +231,10 @@ function Landing(props) {
         {authValue => (
           <Container>
             <Row className="map-selected-house-row">
-              <Col style={{ padding: 0 }}>
-                <MapContainer className="map-container" mapInfo={mapInfo} clickHouse={handleClick} />
+              <Col className="map-container" md="6" xs="12" style={{ padding: 0 }}>
+                <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
               </Col>
-              <Col className="selected-house-container">
+              <Col className="selected-house-container" md="6" xs="12">
                 <h4>Selected House:</h4>
                 {/* Conditionally render the house information. */}
                 {renderSelectedHouse()}
@@ -232,10 +247,10 @@ function Landing(props) {
                         Add to Favorites</p> : <></>}
                   </Col>
                   <Col>
-                  {houseSelected ?
-                    <Link to={"/api/houses/" + currentHouse._id}>
-                      <button>Visit House</button>
-                    </Link> : <></>}
+                    {houseSelected ?
+                      <Link to={"/api/houses/" + currentHouse._id}>
+                        <button>Visit House</button>
+                      </Link> : <></>}
                   </Col>
                 </Row>
               </Col>
@@ -269,10 +284,6 @@ function Landing(props) {
                       .required(''),
                   })}
                   onSubmit={(values, { setSubmitting, resetForm }) => {
-                    // setTimeout(() => {
-                    //   alert(JSON.stringify(values, null, 2));
-                    //   setSubmitting(false);  
-                    // }, 400);
                     let { headline, street, city, st, zip } = values;
                     console.log(values);
                     Geocode.fromAddress(street + ', ' + city + ', ' + st)
@@ -315,7 +326,7 @@ function Landing(props) {
       </AuthContext.Consumer>
       <Container className="list-of-houses" >
         <ListGroup>
-        {renderHouseList()}
+          {renderHouseList()}
         </ListGroup>
       </Container>
     </div>
