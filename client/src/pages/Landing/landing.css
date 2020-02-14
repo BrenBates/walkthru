@@ -1,6 +1,6 @@
   .selected-house-image {
-    height: 300px;
-    width: 300px;
+    height: 100%;
+    width: 100%;
   }
 
   .button-search {
@@ -27,7 +27,6 @@
   .map-container {
     width: 100%;
     height: 100%;
-    float: left;
   }
 
   .selected-house-container {
@@ -38,6 +37,7 @@
     border: 3px solid #f1f1f1;
     max-height: 400px;
     float: left;
+    overflow: auto;
   }
 
   .search-house-form {
@@ -47,6 +47,7 @@
     font-weight: bold;
     border: 3px solid #f1f1f1;
     padding-top: 5px !important;
+    overflow: auto;
   }
 
   .list-of-houses {
@@ -105,4 +106,40 @@
 
   .saved-house-star {
     width: 20px;
+    
+  }
+
+  .favorites-visit-house-button {
+    margin-top: 1%;
+    align-content: center;
+  }
+
+  .selected-house-image-container {
+    text-align: center;
+  }
+
+  h5 {
+    margin: 0 !important;
+  }
+
+  @media only screen and (max-width:980px) {
+    .selected-house-image {
+      height: 90%;
+      width: 90%;
+    }
+    .search-house-form {
+      height: 8em;
+    }
+  }
+
+  @media only screen and (max-width:768px) {
+    .search-house-form {
+      height: 8.5em;
+    }
+  }
+
+  @media only screen and (max-width:640px) {
+    .search-house-form {
+      height: 10.5em;
+    }
   }

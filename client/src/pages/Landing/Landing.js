@@ -119,30 +119,24 @@ function Landing(props) {
     if (houseSelected && currentHouse.houseImageURL) {
       return (
         <Row>
-          <Col>
+          <Col xs={12} lg={6} className="selected-house-image-container">
             <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
           </Col>
-          <Col>
+          <Col xs={12} lg={6}>
             <h5>{currentHouse.headline}</h5>
-            <p>{currentHouse.street}</p>
-            <p>{currentHouse.city}</p>
-            <p>{currentHouse.st}</p>
-            <p>{currentHouse.zip}</p>
+            <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
           </Col>
         </Row>
       )
     } else if (houseSelected && currentHouse.houseImageURL === null) {
       return (
         <Row>
-          <Col>
+          <Col xs={12} lg={6} className="selected-house-image-container">
             <img className="selected-house-image" src={Placeholder} alt="Selected house" />
           </Col>
-          <Col>
+          <Col xs={12} lg={6}>
             <h5>{currentHouse.headline}</h5>
-            <p>{currentHouse.street}</p>
-            <p>{currentHouse.city}</p>
-            <p>{currentHouse.st}</p>
-            <p>{currentHouse.zip}</p>
+            <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
           </Col>
         </Row>
       )
@@ -154,7 +148,7 @@ function Landing(props) {
     return (
       <Form className="search-house-form">
         <Row>
-          <Col xs='10' className="text-center">
+          <Col xs={12} md={12} lg={12} xl={12} className="text-center">
             <MyTextInput
               className="input-headline-field"
               name="headline"
@@ -164,7 +158,7 @@ function Landing(props) {
           </Col>
         </Row>
         <Row>
-          <Col xs='4' className="text-center">
+          <Col xs={12} md={4} lg={4} xl={4} className="text-center">
             <MyTextInput
               className="input-street-field"
               // label="Street"
@@ -173,7 +167,7 @@ function Landing(props) {
               placeholder=" 123 N 456 W"
             />
           </Col>
-          <Col xs='3' className="text-center">
+          <Col xs={12} md={5} lg={3} xl={3} className="text-center">
             <MyTextInput
               className="input-city-field"
               // label="City"
@@ -182,7 +176,7 @@ function Landing(props) {
               placeholder=" City"
             />
           </Col>
-          <Col xs='1' className="text-center">
+          <Col xs={2} md={1} lg={1} xl={1} className="text-center">
             <MyTextInput
               className="input-state-field"
               // label="State"
@@ -191,7 +185,7 @@ function Landing(props) {
               placeholder=" State"
             />
           </Col>
-          <Col xs='2' className="text-center">
+          <Col xs={4} md={2} lg={2} xl={2} className="text-center">
             <MyTextInput
               className="input-zip-field"
               // label="State"
@@ -200,7 +194,7 @@ function Landing(props) {
               placeholder=" Zip"
             />
           </Col>
-          <Col xs='2' className="text-center">
+          <Col xs={6} md={12} lg={2} xl={2} className="text-center">
             <button className="button-search" type="submit">Add Address</button>
           </Col>
         </Row>
@@ -231,26 +225,25 @@ function Landing(props) {
         {authValue => (
           <Container>
             <Row className="map-selected-house-row">
-              <Col className="map-container" md="6" xs="12" style={{ padding: 0 }}>
+              <Col xs={12} lg={6} className="map-container" style={{ padding: 0 }}>
                 <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
               </Col>
-              <Col className="selected-house-container" md="6" xs="12">
+              <Col xs={12} lg={6} className="selected-house-container">
                 <h4>Selected House:</h4>
-                {/* Conditionally render the house information. */}
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
                 <Row>
-                  <Col>
+                  <Col className="favorites-visit-house-button">
                     {houseSelected ?
-                      <p><img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" />
-                        Add to Favorites</p> : <></>}
-                  </Col>
-                  <Col>
-                    {houseSelected ?
+                      <Row>
+                        <Col><img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" />
+                        Add to Favorites
+                        </Col>
+                        <Col>
                       <Link to={"/api/houses/" + currentHouse._id}>
-                        <button>Visit House</button>
-                      </Link> : <></>}
+                          <button>Visit House</button>
+                        </Link></Col></Row> : <></>}
                   </Col>
                 </Row>
               </Col>
