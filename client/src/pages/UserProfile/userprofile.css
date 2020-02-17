@@ -23,7 +23,6 @@
     padding: 1em;
     flex: 1;
     overflow: auto;
-    .vscrolling_container { height: 100%; overflow: auto; }
 }
 
 h4 {
@@ -31,7 +30,9 @@ h4 {
 }
 
 .user-input {
-    width: 400px;
+    display: "flex";
+    justify-content: "center";
+    align-items: "center";
 }
 
 input[type="text"] {

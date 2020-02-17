@@ -11,7 +11,6 @@ import {
   Col,
   ListGroup
 } from 'reactstrap';
-import Star from "../../img/fav_star_selected.png";
 import Placeholder from "../../img/placeholder.png";
 import MapContainer from "../../components/MapContainer";
 import Geocode from "react-geocode";
@@ -118,27 +117,31 @@ function Landing(props) {
   const renderSelectedHouse = () => {
     if (houseSelected && currentHouse.houseImageURL) {
       return (
-        <Row>
-          <Col xs={12} lg={6} className="selected-house-image-container">
+        <Col>
+          <Row>
+            <h5>{currentHouse.headline}</h5>
+          </Row>
+          <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
-          </Col>
-          <Col xs={12} lg={6}>
-            <h5>{currentHouse.headline}</h5>
+          </Row>
+          <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
-          </Col>
-        </Row>
+          </Row>
+        </Col>
       )
-    } else if (houseSelected && currentHouse.houseImageURL === null) {
+    } else if (houseSelected && !currentHouse.houseImageURL) {
       return (
-        <Row>
-          <Col xs={12} lg={6} className="selected-house-image-container">
-            <img className="selected-house-image" src={Placeholder} alt="Selected house" />
-          </Col>
-          <Col xs={12} lg={6}>
+        <Col>
+          <Row>
             <h5>{currentHouse.headline}</h5>
+          </Row>
+          <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <img className="selected-house-image" src={Placeholder} alt="Selected house" />
+          </Row>
+          <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
-          </Col>
-        </Row>
+          </Row>
+        </Col>
       )
     } else
       return <></>
@@ -225,25 +228,25 @@ function Landing(props) {
         {authValue => (
           <Container>
             <Row className="map-selected-house-row">
-              <Col xs={12} lg={6} className="map-container" style={{ padding: 0 }}>
+              <Col xs={12} md={6} lg={6} className="map-container" style={{ padding: 0 }}>
                 <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
               </Col>
-              <Col xs={12} lg={6} className="selected-house-container">
-                <h4>Selected House:</h4>
+              <Col xs={12} md={6} lg={6} className="selected-house-container">
+                {/* <h4>Selected House:</h4> */}
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
-                <Row>
+                <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                   <Col className="favorites-visit-house-button">
                     {houseSelected ?
-                      <Row>
-                        <Col><img onClick={() => saveHouse(authValue.authTokens.username)} className="saved-house-star" src={Star} alt="Add to favorites" />
-                        Add to Favorites
-                        </Col>
-                        <Col>
-                      <Link to={"/api/houses/" + currentHouse._id}>
+                      <Row style={{ marginLeft: "1em" }} >
+                        <button onClick={() => saveHouse(authValue.authTokens.username)}>
+                          Save House
+                          </button>
+                        <Link style={{ marginLeft: "1em" }} to={"/api/houses/" + currentHouse._id}>
                           <button>Visit House</button>
-                        </Link></Col></Row> : <></>}
+                        </Link>
+                      </Row> : <></>}
                   </Col>
                 </Row>
               </Col>
