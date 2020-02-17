@@ -124,9 +124,6 @@ function Landing(props) {
           <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img className="selected-house-image" src={currentHouse.houseImageURL} alt="Selected house" />
           </Row>
-          <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
-          </Row>
         </Col>
       )
     } else if (houseSelected && !currentHouse.houseImageURL) {
@@ -137,9 +134,6 @@ function Landing(props) {
           </Row>
           <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img className="selected-house-image" src={Placeholder} alt="Selected house" />
-          </Row>
-          <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
           </Row>
         </Col>
       )
@@ -228,27 +222,24 @@ function Landing(props) {
         {authValue => (
           <Container>
             <Row className="map-selected-house-row">
-              <Col xs={12} md={6} lg={6} className="map-container" style={{ padding: 0 }}>
+              <Col md={6} className="map-container">
                 <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
               </Col>
-              <Col xs={12} md={6} lg={6} className="selected-house-container">
+              <Col md={6} className="selected-house-container">
                 {/* <h4>Selected House:</h4> */}
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}
-                <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  <Col className="favorites-visit-house-button">
-                    {houseSelected ?
-                      <Row style={{ marginLeft: "1em" }} >
-                        <button onClick={() => saveHouse(authValue.authTokens.username)}>
-                          Save House
-                          </button>
-                        <Link style={{ marginLeft: "1em" }} to={"/api/houses/" + currentHouse._id}>
-                          <button>Visit House</button>
-                        </Link>
-                      </Row> : <></>}
-                  </Col>
-                </Row>
+                {houseSelected ?
+                  <Row style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "1em" }}>
+                    <p>{currentHouse.street} {currentHouse.city}, {currentHouse.st} {currentHouse.zip}</p>
+                    <button className="save-visit-house-button" onClick={() => saveHouse(authValue.authTokens.username)}>
+                      Save
+                    </button>
+                    <Link to={"/api/houses/" + currentHouse._id}>
+                      <button className="save-visit-house-button" >Visit</button>
+                    </Link>
+                  </Row> : <></>}
               </Col>
             </Row>
             <Row>
