@@ -97,14 +97,10 @@ function Landing(props) {
       lat,
       long
     }
-
-    console.log("payload:  ", payload)
-
     axios.post(queryURL, payload)
       .then(result => {
         console.log("result:  ", result)
       })
-
   }
 
   //Use Effect hook to load the google map upon component mount.
@@ -176,7 +172,6 @@ function Landing(props) {
           <Col xs={2} md={1} lg={1} xl={1} className="text-center">
             <MyTextInput
               className="input-state-field"
-              // label="State"
               name="st"
               type="text"
               placeholder=" State"
@@ -185,7 +180,6 @@ function Landing(props) {
           <Col xs={4} md={2} lg={2} xl={2} className="text-center">
             <MyTextInput
               className="input-zip-field"
-              // label="State"
               name="zip"
               type="text"
               placeholder=" Zip"
@@ -226,7 +220,6 @@ function Landing(props) {
                 <MapContainer mapInfo={mapInfo} clickHouse={handleClick} />
               </Col>
               <Col md={6} className="selected-house-container">
-                {/* <h4>Selected House:</h4> */}
                 {renderSelectedHouse()}
                 {/* Conditionally render the save house button if the house is selected.  This couldn't be in the render house function
           because it requires the auth context  */}

@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
 import '../HouseDetail/housedetail.css'
 import {
-  Container, Row, Col, Card, CardImg, CardText, CardBody, 
-  CardTitle, CardSubtitle, Jumbotron, Input, InputGroup, 
+  Container, Row, Col, Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Jumbotron, Input, InputGroup,
   InputGroupAddon, InputGroupText
 } from 'reactstrap';
 import Comment from "../../Comment/Comment"
@@ -21,10 +21,10 @@ function HouseDetail(props) {
     return (
       <>
         <InputGroup>
-        <InputGroupAddon addonType="prepend">
-          <InputGroupText htmlFor={props.id || props.name}>{label}</InputGroupText>
-        </InputGroupAddon>
-        <Input  {...field} {...props}/>
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText htmlFor={props.id || props.name}>{label}</InputGroupText>
+          </InputGroupAddon>
+          <Input  {...field} {...props} />
           {/* <Label htmlFor={props.id || props.name}>{label}</Label> */}
           {/* <input className="text-input" {...field} {...props} /> */}
         </InputGroup>
@@ -101,10 +101,10 @@ function HouseDetail(props) {
                 <Container>
                   <Card>
                     <Row>
-                      <Col>
-                        <CardImg top width="100%" src={houseImageURL} alt="Comment on this house!" />
+                      <Col xs={12} md={6} lg={6} xl={6} >
+                        <CardImg src={houseImageURL} alt="Comment on this house!" />
                       </Col>
-                      <Col>
+                      <Col xs={12} md={6} lg={6} xl={6} >
                         <CardBody className="dark-text-color">
                           <CardTitle className="card-title-font">{houseHeadline}</CardTitle>
                           <CardSubtitle className="card-text-font">{houseStreet}, {houseCity}, {houseState}, {houseZip}</CardSubtitle>
@@ -128,45 +128,6 @@ function HouseDetail(props) {
                       .required("")
                   })}
                   onSubmit={(values, { setSubmitting }) => {
-                    // setTimeout(() => {
-                    //   alert(JSON.stringify(values, null, 2));
-                    //   setSubmitting(false);  
-                    // }, 400);
-
-                    // console.log("user: " + authValue.authTokens.username);
-
-                    // let nameURL = "/api/users/comments";
-                    // console.log("nameURL: " + nameURL);
-
-                    // axios.get(nameURL).then(() => {
-                    //   console.log("/api/users/comments");
-                    // })
-                    // .catch(err => console.log(err));
-
-                    // let { comment } = values
-
-                    // axios.post("/api/users/login", {
-                    //   comment,
-                    //   houseID,
-                    // })
-                    //   .then(result => {
-                    //     // if (result.status === 200) {
-
-                    //     //   if (result.data.error) {
-                    //     //     setErrorText(result.data.error)
-                    //     //     setIsError(true)
-                    //     //   } else {
-                    //     //     //Set the auth token along with the user data into the context
-                    //     //     setAuthTokens(result.data)
-                    //     //     setLoggedIn(true);
-                    //     //   }
-                    //     // } else {
-                    //     //   setIsError(true);
-                    //     // }
-                    //   })
-                    // .catch(e => {
-                    //   setIsError(true);
-                    // });
                     let userName = authValue.authTokens.username;
                     let userImage = authValue.authTokens.userImage;
                     let comment = values.comment
@@ -194,7 +155,6 @@ function HouseDetail(props) {
                       type="text"
                       placeholder="Enter new comment..."
                     />
-                    {/* <button type="submit">Add Comment</button> */}
                   </Form>
                 </Formik>
               )}

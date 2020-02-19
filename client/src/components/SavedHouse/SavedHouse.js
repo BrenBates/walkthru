@@ -12,7 +12,6 @@ export class SavedHouse extends React.Component {
     return (
 
       <div>
-
         <Card className="saved-house-card">
           <Link to={"/api/houses/" + this.props.houseID}>
             <CardTitle className="saved-house-card-title">{`${this.props.headline}`}</CardTitle>
@@ -29,13 +28,9 @@ export class SavedHouse extends React.Component {
             </Row>
           </CardBody>
         </Card>
-
       </div>
     )
-
   }
-
 }
 
 export default SavedHouse;
-

@@ -22,7 +22,6 @@ const NavbarPage = (props) => {
         {authValue => (
           <Navbar scrolling dark expand="md" fixed='top'>
             <NavbarBrand className="brand" href="/">walkthru</NavbarBrand>
-            {/* {authValue.authTokens ? <h1>Authorized</h1>:<p></p>} */}
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
               <Nav className="mr-auto" navbar>
